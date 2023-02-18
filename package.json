@@ -1,6 +1,6 @@
 {
   "name": "@ngbracket/ngx-layout",
-  "version": "15.0.1-beta.42-c66209c",
+  "version": "15.0.1-beta.42",
   "exports": {
     "./mq": {
       "sass": "./core/sass/_layout-bp.scss"
@@ -104,17 +104,11 @@
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "type": "module",
-  "description": "Angular Flex-Layout =======",
-  "main": "index.js",
-  "author": "",
   "module": "fesm2015/ngbrackets-ngx-layout.mjs",
   "es2020": "fesm2020/ngbrackets-ngx-layout.mjs",
   "esm2020": "esm2020/ngbrackets-ngx-layout.mjs",
   "fesm2020": "fesm2020/ngbrackets-ngx-layout.mjs",
   "fesm2015": "fesm2015/ngbrackets-ngx-layout.mjs",
   "typings": "index.d.ts",
-  "sideEffects": false,
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  }
+  "sideEffects": false
 }
