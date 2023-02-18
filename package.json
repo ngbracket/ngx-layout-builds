@@ -1,5 +1,5 @@
 {
-  "name": "@ngbrackets/ngx-layout",
+  "name": "@ngbracket/ngx-layout",
   "version": "15.0.1-beta.42-c66209c",
   "exports": {
     "./mq": {
@@ -113,5 +113,8 @@
   "fesm2020": "fesm2020/ngbrackets-ngx-layout.mjs",
   "fesm2015": "fesm2015/ngbrackets-ngx-layout.mjs",
   "typings": "index.d.ts",
-  "sideEffects": false
+  "sideEffects": false,
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
 }
