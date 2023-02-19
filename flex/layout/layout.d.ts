@@ -6,7 +6,7 @@
  * found in the LICENSE file at https://angular.io/license
  */
 import { ElementRef, OnChanges } from '@angular/core';
-import { BaseDirective2, LayoutConfigOptions, MediaMarshaller, StyleBuilder, StyleUtils } from '@ngbrackets/ngx-layout/core';
+import { BaseDirective2, LayoutConfigOptions, MediaMarshaller, StyleBuilder, StyleUtils } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
 export interface LayoutStyleDisplay {
     readonly display: string;

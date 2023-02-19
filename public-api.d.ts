@@ -10,9 +10,9 @@
  * @description
  * Entry point for all public APIs of Angular Flex-Layout.
  */
-export * from '@ngbrackets/ngx-layout/core';
-export * from '@ngbrackets/ngx-layout/extended';
-export * from '@ngbrackets/ngx-layout/flex';
-export * from '@ngbrackets/ngx-layout/grid';
+export * from '@ngbracket/ngx-layout/core';
+export * from '@ngbracket/ngx-layout/extended';
+export * from '@ngbracket/ngx-layout/flex';
+export * from '@ngbracket/ngx-layout/grid';
 export * from './module';
 export * from './version';

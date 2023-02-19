@@ -1,5 +1,5 @@
 import { NgZone } from '@angular/core';
-import { BreakPoint, LayoutConfigOptions, ɵMatchMedia as MatchMedia } from '@ngbrackets/ngx-layout/core';
+import { BreakPoint, LayoutConfigOptions, ɵMatchMedia as MatchMedia } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
 /**
  * Special server-only class to simulate a MediaQueryList and

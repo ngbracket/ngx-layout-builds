@@ -1,9 +1,9 @@
 import { ModuleWithProviders } from '@angular/core';
-import { BreakPoint, LayoutConfigOptions } from '@ngbrackets/ngx-layout/core';
+import { BreakPoint, LayoutConfigOptions } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
-import * as i1 from "@ngbrackets/ngx-layout/flex";
-import * as i2 from "@ngbrackets/ngx-layout/extended";
-import * as i3 from "@ngbrackets/ngx-layout/grid";
+import * as i1 from "@ngbracket/ngx-layout/flex";
+import * as i2 from "@ngbracket/ngx-layout/extended";
+import * as i3 from "@ngbracket/ngx-layout/grid";
 /**
  * FlexLayoutModule -- the main import for all utilities in the Angular Layout library
  * * Will automatically provide Flex, Grid, and Extended modules for use in the application

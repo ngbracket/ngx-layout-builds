@@ -7,7 +7,7 @@
  */
 import { Directionality } from '@angular/cdk/bidi';
 import { AfterContentInit, ElementRef, NgZone, OnDestroy } from '@angular/core';
-import { BaseDirective2, ElementMatcher, LayoutConfigOptions, MediaMarshaller, StyleBuilder, StyleDefinition, StyleUtils } from '@ngbrackets/ngx-layout/core';
+import { BaseDirective2, ElementMatcher, LayoutConfigOptions, MediaMarshaller, StyleBuilder, StyleDefinition, StyleUtils } from '@ngbracket/ngx-layout/core';
 import { Subject } from 'rxjs';
 import * as i0 from "@angular/core";
 export interface LayoutGapParent {

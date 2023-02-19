@@ -1,5 +1,5 @@
 /**
  * Generated bundle index. Do not edit.
  */
-/// <amd-module name="@ngbrackets/ngx-layout/flex" />
+/// <amd-module name="@ngbracket/ngx-layout/flex" />
 export * from './public-api';

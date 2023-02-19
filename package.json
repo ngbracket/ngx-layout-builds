@@ -1,6 +1,6 @@
 {
   "name": "@ngbracket/ngx-layout",
-  "version": "15.0.1-beta.42",
+  "version": "15.0.1-beta.42-aa93e27",
   "exports": {
     "./mq": {
       "sass": "./core/sass/_layout-bp.scss"
@@ -13,72 +13,72 @@
     },
     ".": {
       "types": "./index.d.ts",
-      "esm2020": "./esm2020/ngbrackets-ngx-layout.mjs",
-      "es2020": "./fesm2020/ngbrackets-ngx-layout.mjs",
-      "es2015": "./fesm2015/ngbrackets-ngx-layout.mjs",
-      "node": "./fesm2015/ngbrackets-ngx-layout.mjs",
-      "default": "./fesm2020/ngbrackets-ngx-layout.mjs"
+      "esm2020": "./esm2020/ngbracket-ngx-layout.mjs",
+      "es2020": "./fesm2020/ngbracket-ngx-layout.mjs",
+      "es2015": "./fesm2015/ngbracket-ngx-layout.mjs",
+      "node": "./fesm2015/ngbracket-ngx-layout.mjs",
+      "default": "./fesm2020/ngbracket-ngx-layout.mjs"
     },
     "./_private-utils": {
       "types": "./_private-utils/index.d.ts",
-      "esm2020": "./esm2020/_private-utils/ngbrackets-ngx-layout-_private-utils.mjs",
-      "es2020": "./fesm2020/ngbrackets-ngx-layout-_private-utils.mjs",
-      "es2015": "./fesm2015/ngbrackets-ngx-layout-_private-utils.mjs",
-      "node": "./fesm2015/ngbrackets-ngx-layout-_private-utils.mjs",
-      "default": "./fesm2020/ngbrackets-ngx-layout-_private-utils.mjs"
+      "esm2020": "./esm2020/_private-utils/ngbracket-ngx-layout-_private-utils.mjs",
+      "es2020": "./fesm2020/ngbracket-ngx-layout-_private-utils.mjs",
+      "es2015": "./fesm2015/ngbracket-ngx-layout-_private-utils.mjs",
+      "node": "./fesm2015/ngbracket-ngx-layout-_private-utils.mjs",
+      "default": "./fesm2020/ngbracket-ngx-layout-_private-utils.mjs"
     },
     "./_private-utils/testing": {
       "types": "./_private-utils/testing/index.d.ts",
-      "esm2020": "./esm2020/_private-utils/testing/ngbrackets-ngx-layout-_private-utils-testing.mjs",
-      "es2020": "./fesm2020/ngbrackets-ngx-layout-_private-utils-testing.mjs",
-      "es2015": "./fesm2015/ngbrackets-ngx-layout-_private-utils-testing.mjs",
-      "node": "./fesm2015/ngbrackets-ngx-layout-_private-utils-testing.mjs",
-      "default": "./fesm2020/ngbrackets-ngx-layout-_private-utils-testing.mjs"
+      "esm2020": "./esm2020/_private-utils/testing/ngbracket-ngx-layout-_private-utils-testing.mjs",
+      "es2020": "./fesm2020/ngbracket-ngx-layout-_private-utils-testing.mjs",
+      "es2015": "./fesm2015/ngbracket-ngx-layout-_private-utils-testing.mjs",
+      "node": "./fesm2015/ngbracket-ngx-layout-_private-utils-testing.mjs",
+      "default": "./fesm2020/ngbracket-ngx-layout-_private-utils-testing.mjs"
     },
     "./core": {
       "types": "./core/index.d.ts",
-      "esm2020": "./esm2020/core/ngbrackets-ngx-layout-core.mjs",
-      "es2020": "./fesm2020/ngbrackets-ngx-layout-core.mjs",
-      "es2015": "./fesm2015/ngbrackets-ngx-layout-core.mjs",
-      "node": "./fesm2015/ngbrackets-ngx-layout-core.mjs",
-      "default": "./fesm2020/ngbrackets-ngx-layout-core.mjs"
+      "esm2020": "./esm2020/core/ngbracket-ngx-layout-core.mjs",
+      "es2020": "./fesm2020/ngbracket-ngx-layout-core.mjs",
+      "es2015": "./fesm2015/ngbracket-ngx-layout-core.mjs",
+      "node": "./fesm2015/ngbracket-ngx-layout-core.mjs",
+      "default": "./fesm2020/ngbracket-ngx-layout-core.mjs"
     },
     "./extended": {
       "types": "./extended/index.d.ts",
-      "esm2020": "./esm2020/extended/ngbrackets-ngx-layout-extended.mjs",
-      "es2020": "./fesm2020/ngbrackets-ngx-layout-extended.mjs",
-      "es2015": "./fesm2015/ngbrackets-ngx-layout-extended.mjs",
-      "node": "./fesm2015/ngbrackets-ngx-layout-extended.mjs",
-      "default": "./fesm2020/ngbrackets-ngx-layout-extended.mjs"
+      "esm2020": "./esm2020/extended/ngbracket-ngx-layout-extended.mjs",
+      "es2020": "./fesm2020/ngbracket-ngx-layout-extended.mjs",
+      "es2015": "./fesm2015/ngbracket-ngx-layout-extended.mjs",
+      "node": "./fesm2015/ngbracket-ngx-layout-extended.mjs",
+      "default": "./fesm2020/ngbracket-ngx-layout-extended.mjs"
     },
     "./flex": {
       "types": "./flex/index.d.ts",
-      "esm2020": "./esm2020/flex/ngbrackets-ngx-layout-flex.mjs",
-      "es2020": "./fesm2020/ngbrackets-ngx-layout-flex.mjs",
-      "es2015": "./fesm2015/ngbrackets-ngx-layout-flex.mjs",
-      "node": "./fesm2015/ngbrackets-ngx-layout-flex.mjs",
-      "default": "./fesm2020/ngbrackets-ngx-layout-flex.mjs"
+      "esm2020": "./esm2020/flex/ngbracket-ngx-layout-flex.mjs",
+      "es2020": "./fesm2020/ngbracket-ngx-layout-flex.mjs",
+      "es2015": "./fesm2015/ngbracket-ngx-layout-flex.mjs",
+      "node": "./fesm2015/ngbracket-ngx-layout-flex.mjs",
+      "default": "./fesm2020/ngbracket-ngx-layout-flex.mjs"
     },
     "./grid": {
       "types": "./grid/index.d.ts",
-      "esm2020": "./esm2020/grid/ngbrackets-ngx-layout-grid.mjs",
-      "es2020": "./fesm2020/ngbrackets-ngx-layout-grid.mjs",
-      "es2015": "./fesm2015/ngbrackets-ngx-layout-grid.mjs",
-      "node": "./fesm2015/ngbrackets-ngx-layout-grid.mjs",
-      "default": "./fesm2020/ngbrackets-ngx-layout-grid.mjs"
+      "esm2020": "./esm2020/grid/ngbracket-ngx-layout-grid.mjs",
+      "es2020": "./fesm2020/ngbracket-ngx-layout-grid.mjs",
+      "es2015": "./fesm2015/ngbracket-ngx-layout-grid.mjs",
+      "node": "./fesm2015/ngbracket-ngx-layout-grid.mjs",
+      "default": "./fesm2020/ngbracket-ngx-layout-grid.mjs"
     },
     "./server": {
       "types": "./server/index.d.ts",
-      "esm2020": "./esm2020/server/ngbrackets-ngx-layout-server.mjs",
-      "es2020": "./fesm2020/ngbrackets-ngx-layout-server.mjs",
-      "es2015": "./fesm2015/ngbrackets-ngx-layout-server.mjs",
-      "node": "./fesm2015/ngbrackets-ngx-layout-server.mjs",
-      "default": "./fesm2020/ngbrackets-ngx-layout-server.mjs"
+      "esm2020": "./esm2020/server/ngbracket-ngx-layout-server.mjs",
+      "es2020": "./fesm2020/ngbracket-ngx-layout-server.mjs",
+      "es2015": "./fesm2015/ngbracket-ngx-layout-server.mjs",
+      "node": "./fesm2015/ngbracket-ngx-layout-server.mjs",
+      "default": "./fesm2020/ngbracket-ngx-layout-server.mjs"
     }
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ngbrackets/ngx-layout.git"
+    "url": "git+https://github.com/ngbracket/ngx-layout.git"
   },
   "keywords": [
     "angular",
@@ -90,9 +90,9 @@
   ],
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/ngbrackets/ngx-layout/issues"
+    "url": "https://github.com/ngbracket/ngx-layout/issues"
   },
-  "homepage": "https://github.com/ngbrackets/ngx-layout#readme",
+  "homepage": "https://github.com/ngbracket/ngx-layout#readme",
   "dependencies": {
     "tslib": "^2.3.0"
   },
@@ -104,11 +104,14 @@
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "type": "module",
-  "module": "fesm2015/ngbrackets-ngx-layout.mjs",
-  "es2020": "fesm2020/ngbrackets-ngx-layout.mjs",
-  "esm2020": "esm2020/ngbrackets-ngx-layout.mjs",
-  "fesm2020": "fesm2020/ngbrackets-ngx-layout.mjs",
-  "fesm2015": "fesm2015/ngbrackets-ngx-layout.mjs",
+  "description": "Angular Flex-Layout =======",
+  "main": "index.js",
+  "author": "",
+  "module": "fesm2015/ngbracket-ngx-layout.mjs",
+  "es2020": "fesm2020/ngbracket-ngx-layout.mjs",
+  "esm2020": "esm2020/ngbracket-ngx-layout.mjs",
+  "fesm2020": "fesm2020/ngbracket-ngx-layout.mjs",
+  "fesm2015": "fesm2015/ngbracket-ngx-layout.mjs",
   "typings": "index.d.ts",
   "sideEffects": false
 }

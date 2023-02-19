@@ -3,7 +3,7 @@ import * as i1 from "./show-hide/show-hide";
 import * as i2 from "./class/class";
 import * as i3 from "./style/style";
 import * as i4 from "./img-src/img-src";
-import * as i5 from "@ngbrackets/ngx-layout/core";
+import * as i5 from "@ngbracket/ngx-layout/core";
 /**
  * *****************************************************************
  * Define module for the Extended API

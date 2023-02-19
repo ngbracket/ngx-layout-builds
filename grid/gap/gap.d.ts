@@ -1,5 +1,5 @@
 import { ElementRef } from '@angular/core';
-import { BaseDirective2, MediaMarshaller, StyleBuilder, StyleUtils } from '@ngbrackets/ngx-layout/core';
+import { BaseDirective2, MediaMarshaller, StyleBuilder, StyleUtils } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
 export interface GridGapParent {
     inline: boolean;

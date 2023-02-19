@@ -7,7 +7,7 @@
  */
 import { Directionality } from '@angular/cdk/bidi';
 import { ElementRef, OnChanges } from '@angular/core';
-import { BaseDirective2, LayoutConfigOptions, MediaMarshaller, StyleBuilder, StyleDefinition, StyleUtils } from '@ngbrackets/ngx-layout/core';
+import { BaseDirective2, LayoutConfigOptions, MediaMarshaller, StyleBuilder, StyleDefinition, StyleUtils } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
 export interface FlexOffsetParent {
     layout: string;

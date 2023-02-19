@@ -31,7 +31,7 @@ import * as i0 from "@angular/core";
  *
  *  // RxJS
  *  import { filter } from 'rxjs/operators';
- *  import { MediaObserver } from '@ngbrackets/ngx-layout';
+ *  import { MediaObserver } from '@ngbracket/ngx-layout';
  *
  *  @Component({ ... })
  *  export class AppComponent {
