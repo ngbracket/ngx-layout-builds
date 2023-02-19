@@ -7,7 +7,7 @@ import * as i5 from "./flex-offset/flex-offset";
 import * as i6 from "./flex-fill/flex-fill";
 import * as i7 from "./flex-align/flex-align";
 import * as i8 from "./flex/flex";
-import * as i9 from "@ngbrackets/ngx-layout/core";
+import * as i9 from "@ngbracket/ngx-layout/core";
 import * as i10 from "@angular/cdk/bidi";
 /**
  * *****************************************************************

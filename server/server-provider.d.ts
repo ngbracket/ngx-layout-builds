@@ -1,4 +1,4 @@
-import { BreakPoint, MediaMarshaller, StylesheetMap, ɵMatchMedia as MatchMedia } from '@ngbrackets/ngx-layout/core';
+import { BreakPoint, MediaMarshaller, StylesheetMap, ɵMatchMedia as MatchMedia } from '@ngbracket/ngx-layout/core';
 import { ServerMatchMedia } from './server-match-media';
 /**
  * Activate all the registered breakpoints in sequence, and then

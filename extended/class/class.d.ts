@@ -7,7 +7,7 @@
  */
 import { NgClass } from '@angular/common';
 import { DoCheck, ElementRef, IterableDiffers, KeyValueDiffers, Renderer2 } from '@angular/core';
-import { BaseDirective2, MediaMarshaller, StyleUtils } from '@ngbrackets/ngx-layout/core';
+import { BaseDirective2, MediaMarshaller, StyleUtils } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
 export declare class ClassDirective extends BaseDirective2 implements DoCheck {
     protected readonly ngClassInstance: NgClass;

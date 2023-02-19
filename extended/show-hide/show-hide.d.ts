@@ -1,5 +1,5 @@
 import { AfterViewInit, ElementRef, OnChanges, SimpleChanges } from '@angular/core';
-import { BaseDirective2, LayoutConfigOptions, MediaMarshaller, StyleBuilder, StyleUtils } from '@ngbrackets/ngx-layout/core';
+import { BaseDirective2, LayoutConfigOptions, MediaMarshaller, StyleBuilder, StyleUtils } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
 export interface ShowHideParent {
     display: string;

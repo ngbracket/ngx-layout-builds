@@ -10,7 +10,7 @@ import * as i8 from "./columns/columns";
 import * as i9 from "./gap/gap";
 import * as i10 from "./row/row";
 import * as i11 from "./rows/rows";
-import * as i12 from "@ngbrackets/ngx-layout/core";
+import * as i12 from "@ngbracket/ngx-layout/core";
 /**
  * *****************************************************************
  * Define module for the CSS Grid API

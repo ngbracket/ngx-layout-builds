@@ -8,7 +8,7 @@
 import { NgStyle } from '@angular/common';
 import { DoCheck, ElementRef, KeyValueDiffers, Renderer2 } from '@angular/core';
 import { DomSanitizer } from '@angular/platform-browser';
-import { BaseDirective2, MediaMarshaller, StyleUtils } from '@ngbrackets/ngx-layout/core';
+import { BaseDirective2, MediaMarshaller, StyleUtils } from '@ngbracket/ngx-layout/core';
 import { NgStyleMap, NgStyleType } from './style-transforms';
 import * as i0 from "@angular/core";
 export declare class StyleDirective extends BaseDirective2 implements DoCheck {

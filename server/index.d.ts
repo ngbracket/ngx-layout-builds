@@ -1,5 +1,5 @@
 /**
  * Generated bundle index. Do not edit.
  */
-/// <amd-module name="@ngbrackets/ngx-layout/server" />
+/// <amd-module name="@ngbracket/ngx-layout/server" />
 export * from './public-api';
