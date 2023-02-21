@@ -1,6 +1,6 @@
 {
   "name": "@ngbracket/ngx-layout",
-  "version": "15.0.1-beta.42-aa93e27",
+  "version": "15.0.1-beta.42-0352cb6",
   "exports": {
     "./mq": {
       "sass": "./core/sass/_layout-bp.scss"
