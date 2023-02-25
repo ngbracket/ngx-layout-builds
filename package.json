@@ -1,6 +1,6 @@
 {
   "name": "@ngbracket/ngx-layout",
-  "version": "15.0.1-beta.42-8d6c629",
+  "version": "15.1.1-0eda7e2",
   "exports": {
     "./mq": {
       "sass": "./core/sass/_layout-bp.scss"
@@ -104,7 +104,7 @@
     "rxjs": "^6.5.3 || ^7.4.0"
   },
   "type": "module",
-  "description": "Angular Flex-Layout =======",
+  "description": "ngbracket/ngx-layout =======",
   "main": "index.js",
   "author": "",
   "module": "fesm2015/ngbracket-ngx-layout.mjs",
