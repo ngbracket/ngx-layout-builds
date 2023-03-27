@@ -5,15 +5,15 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-export declare type NgStyleRawList = string[];
-export declare type NgStyleMap = {
+export type NgStyleRawList = string[];
+export type NgStyleMap = {
     [klass: string]: string;
 };
-export declare type NgStyleType = string | Set<string> | NgStyleRawList | NgStyleMap;
+export type NgStyleType = string | Set<string> | NgStyleRawList | NgStyleMap;
 /**
  * Callback function for SecurityContext.STYLE sanitization
  */
-export declare type NgStyleSanitizer = (val: any) => string;
+export type NgStyleSanitizer = (val: any) => string;
 /** NgStyle allowed inputs */
 export declare class NgStyleKeyValue {
     key: string;

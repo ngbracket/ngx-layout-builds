@@ -86,5 +86,5 @@ export declare const MockMatchMediaProvider: {
     provide: typeof MatchMedia;
     useClass: typeof MockMatchMedia;
 };
-declare type MediaQueryListListener = ((this: MediaQueryList, ev: MediaQueryListEvent) => any) | null;
+type MediaQueryListListener = ((this: MediaQueryList, ev: MediaQueryListEvent) => any) | null;
 export {};

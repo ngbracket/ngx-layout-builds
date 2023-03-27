@@ -7,7 +7,7 @@
  */
 import { DebugElement, Type } from '@angular/core';
 import { ComponentFixture } from '@angular/core/testing';
-export declare type ComponentClazzFn = () => Type<any>;
+export type ComponentClazzFn = () => Type<any>;
 /**
  * Function generator that captures a Component Type accessor and enables
  * `createTestComponent()` to be reusable for *any* captured Component class.

@@ -57,5 +57,5 @@ export declare class ServerMatchMedia extends MatchMedia {
     static ɵfac: i0.ɵɵFactoryDeclaration<ServerMatchMedia, never>;
     static ɵprov: i0.ɵɵInjectableDeclaration<ServerMatchMedia>;
 }
-declare type MediaQueryListListener = ((this: MediaQueryList, ev: MediaQueryListEvent) => any) | null;
+type MediaQueryListListener = ((this: MediaQueryList, ev: MediaQueryListEvent) => any) | null;
 export {};
