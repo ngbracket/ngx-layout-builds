@@ -1,6 +1,6 @@
 import { BreakPoint } from './break-point';
 import * as i0 from "@angular/core";
-export declare type OptionalBreakPoint = BreakPoint | null;
+export type OptionalBreakPoint = BreakPoint | null;
 /**
  * Registry of 1..n MediaQuery breakpoint ranges
  * This is published as a provider and may be overridden from custom, application-specific ranges

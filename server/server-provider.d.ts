@@ -40,5 +40,5 @@ export declare const SERVER_PROVIDERS: ({
     multi?: undefined;
     useValue?: undefined;
 })[];
-export declare type StyleSheet = Map<HTMLElement, Map<string, string | number>>;
-export declare type ClassMap = Map<HTMLElement, string>;
+export type StyleSheet = Map<HTMLElement, Map<string, string | number>>;
+export type ClassMap = Map<HTMLElement, string>;

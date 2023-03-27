@@ -5,8 +5,8 @@ import { MatchMedia } from '../match-media/match-media';
 import { MediaChange } from '../media-change';
 import { PrintHook } from './print-hook';
 import * as i0 from "@angular/core";
-declare type ClearCallback = () => void;
-declare type UpdateCallback = (val: any) => void;
+type ClearCallback = () => void;
+type UpdateCallback = (val: any) => void;
 export interface ElementMatcher {
     element: HTMLElement;
     key: string;
