@@ -82,7 +82,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-rc.0", ng
  * found in the LICENSE file at https://angular.io/license
  */
 /** Current version of Angular Flex-Layout. */
-const VERSION = new Version('16.0.0-beta.2-e6013c5');
+const VERSION = new Version('16.0.0-beta.2-2af9274');
 
 /**
  * @license
