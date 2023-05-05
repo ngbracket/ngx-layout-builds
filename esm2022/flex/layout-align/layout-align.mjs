@@ -5,109 +5,143 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
+import * as i0 from '@angular/core';
 import { Directive, Injectable } from '@angular/core';
-import { BaseDirective2, StyleBuilder, } from '@ngbracket/ngx-layout/core';
+import {
+  LAYOUT_VALUES,
+  extendObject,
+  isFlowHorizontal,
+} from '@ngbracket/ngx-layout/_private-utils';
+import * as i1 from '@ngbracket/ngx-layout/core';
+import { BaseDirective2, StyleBuilder } from '@ngbracket/ngx-layout/core';
 import { takeUntil } from 'rxjs/operators';
-import { extendObject, isFlowHorizontal, LAYOUT_VALUES, } from '@ngbracket/ngx-layout/_private-utils';
-import * as i0 from "@angular/core";
-import * as i1 from "@ngbracket/ngx-layout/core";
 class LayoutAlignStyleBuilder extends StyleBuilder {
-    buildStyles(align, parent) {
-        const css = {}, [mainAxis, crossAxis] = align.split(' ');
-        // Main axis
-        switch (mainAxis) {
-            case 'center':
-                css['justify-content'] = 'center';
-                break;
-            case 'space-around':
-                css['justify-content'] = 'space-around';
-                break;
-            case 'space-between':
-                css['justify-content'] = 'space-between';
-                break;
-            case 'space-evenly':
-                css['justify-content'] = 'space-evenly';
-                break;
-            case 'end':
-            case 'flex-end':
-                css['justify-content'] = 'flex-end';
-                break;
-            case 'start':
-            case 'flex-start':
-            default: // default main axis
-                css['justify-content'] = 'flex-start';
-                break;
-        }
-        // Cross-axis
-        switch (crossAxis) {
-            case 'start':
-            case 'flex-start':
-                css['align-items'] = css['align-content'] = 'flex-start';
-                break;
-            case 'center':
-                css['align-items'] = css['align-content'] = 'center';
-                break;
-            case 'end':
-            case 'flex-end':
-                css['align-items'] = css['align-content'] = 'flex-end';
-                break;
-            case 'space-between':
-                css['align-content'] = 'space-between';
-                css['align-items'] = 'stretch';
-                break;
-            case 'space-around':
-                css['align-content'] = 'space-around';
-                css['align-items'] = 'stretch';
-                break;
-            case 'baseline':
-                css['align-content'] = 'stretch';
-                css['align-items'] = 'baseline';
-                break;
-            case 'stretch':
-            default: // 'stretch'
-                // default cross axis
-                css['align-items'] = css['align-content'] = 'stretch';
-                break;
-        }
-        return extendObject(css, {
-            display: parent.inline ? 'inline-flex' : 'flex',
-            'flex-direction': parent.layout,
-            'box-sizing': 'border-box',
-            'max-width': crossAxis === 'stretch'
-                ? !isFlowHorizontal(parent.layout)
-                    ? '100%'
-                    : null
-                : null,
-            'max-height': crossAxis === 'stretch'
-                ? isFlowHorizontal(parent.layout)
-                    ? '100%'
-                    : null
-                : null,
-        });
+  buildStyles(align, parent) {
+    const css = {},
+      [mainAxis, crossAxis] = align.split(' ');
+    // Main axis
+    switch (mainAxis) {
+      case 'center':
+        css['justify-content'] = 'center';
+        break;
+      case 'space-around':
+        css['justify-content'] = 'space-around';
+        break;
+      case 'space-between':
+        css['justify-content'] = 'space-between';
+        break;
+      case 'space-evenly':
+        css['justify-content'] = 'space-evenly';
+        break;
+      case 'end':
+      case 'flex-end':
+        css['justify-content'] = 'flex-end';
+        break;
+      case 'start':
+      case 'flex-start':
+      default: // default main axis
+        css['justify-content'] = 'flex-start';
+        break;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-ea322f4", ngImport: i0, type: LayoutAlignStyleBuilder, deps: null, target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.0-ea322f4", ngImport: i0, type: LayoutAlignStyleBuilder, providedIn: 'root' }); }
+    // Cross-axis
+    switch (crossAxis) {
+      case 'start':
+      case 'flex-start':
+        css['align-items'] = css['align-content'] = 'flex-start';
+        break;
+      case 'center':
+        css['align-items'] = css['align-content'] = 'center';
+        break;
+      case 'end':
+      case 'flex-end':
+        css['align-items'] = css['align-content'] = 'flex-end';
+        break;
+      case 'space-between':
+        css['align-content'] = 'space-between';
+        css['align-items'] = 'stretch';
+        break;
+      case 'space-around':
+        css['align-content'] = 'space-around';
+        css['align-items'] = 'stretch';
+        break;
+      case 'baseline':
+        css['align-content'] = 'stretch';
+        css['align-items'] = 'baseline';
+        break;
+      case 'stretch':
+      default: // 'stretch'
+        // default cross axis
+        css['align-items'] = css['align-content'] = 'stretch';
+        break;
+    }
+    return extendObject(css, {
+      display: parent.inline ? 'inline-flex' : 'flex',
+      'flex-direction': parent.layout,
+      'box-sizing': 'border-box',
+      'max-width':
+        crossAxis === 'stretch'
+          ? !isFlowHorizontal(parent.layout)
+            ? '100%'
+            : null
+          : null,
+      'max-height':
+        crossAxis === 'stretch'
+          ? isFlowHorizontal(parent.layout)
+            ? '100%'
+            : null
+          : null,
+    });
+  }
+  static {
+    this.ɵfac = i0.ɵɵngDeclareFactory({
+      minVersion: '12.0.0',
+      version: '16.0.0-6ca1503',
+      ngImport: i0,
+      type: LayoutAlignStyleBuilder,
+      deps: null,
+      target: i0.ɵɵFactoryTarget.Injectable,
+    });
+  }
+  static {
+    this.ɵprov = i0.ɵɵngDeclareInjectable({
+      minVersion: '12.0.0',
+      version: '16.0.0-6ca1503',
+      ngImport: i0,
+      type: LayoutAlignStyleBuilder,
+      providedIn: 'root',
+    });
+  }
 }
 export { LayoutAlignStyleBuilder };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-ea322f4", ngImport: i0, type: LayoutAlignStyleBuilder, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root' }]
-        }] });
+export { LayoutAlignDirective };
+export { DefaultLayoutAlignDirective };
+i0.ɵɵngDeclareClassMetadata({
+  minVersion: '12.0.0',
+  version: '16.0.0-6ca1503',
+  ngImport: i0,
+  type: LayoutAlignStyleBuilder,
+  decorators: [
+    {
+      type: Injectable,
+      args: [{ providedIn: 'root' }],
+    },
+  ],
+});
 const inputs = [
-    'fxLayoutAlign',
-    'fxLayoutAlign.xs',
-    'fxLayoutAlign.sm',
-    'fxLayoutAlign.md',
-    'fxLayoutAlign.lg',
-    'fxLayoutAlign.xl',
-    'fxLayoutAlign.lt-sm',
-    'fxLayoutAlign.lt-md',
-    'fxLayoutAlign.lt-lg',
-    'fxLayoutAlign.lt-xl',
-    'fxLayoutAlign.gt-xs',
-    'fxLayoutAlign.gt-sm',
-    'fxLayoutAlign.gt-md',
-    'fxLayoutAlign.gt-lg',
+  'fxLayoutAlign',
+  'fxLayoutAlign.xs',
+  'fxLayoutAlign.sm',
+  'fxLayoutAlign.md',
+  'fxLayoutAlign.lg',
+  'fxLayoutAlign.xl',
+  'fxLayoutAlign.lt-sm',
+  'fxLayoutAlign.lt-md',
+  'fxLayoutAlign.lt-lg',
+  'fxLayoutAlign.lt-xl',
+  'fxLayoutAlign.gt-xs',
+  'fxLayoutAlign.gt-sm',
+  'fxLayoutAlign.gt-md',
+  'fxLayoutAlign.gt-lg',
 ];
 const selector = `
   [fxLayoutAlign], [fxLayoutAlign.xs], [fxLayoutAlign.sm], [fxLayoutAlign.md],
@@ -125,84 +159,156 @@ const selector = `
  *  @see https://css-tricks.com/almanac/properties/a/align-content/
  */
 class LayoutAlignDirective extends BaseDirective2 {
-    constructor(elRef, styleUtils, styleBuilder, marshal) {
-        super(elRef, styleBuilder, styleUtils, marshal);
-        this.DIRECTIVE_KEY = 'layout-align';
-        this.layout = 'row'; // default flex-direction
-        this.inline = false; // default inline value
-        this.init();
-        this.marshal
-            .trackValue(this.nativeElement, 'layout')
-            .pipe(takeUntil(this.destroySubject))
-            .subscribe(this.onLayoutChange.bind(this));
+  constructor(elRef, styleUtils, styleBuilder, marshal) {
+    super(elRef, styleBuilder, styleUtils, marshal);
+    this.DIRECTIVE_KEY = 'layout-align';
+    this.layout = 'row'; // default flex-direction
+    this.inline = false; // default inline value
+    this.init();
+    this.marshal
+      .trackValue(this.nativeElement, 'layout')
+      .pipe(takeUntil(this.destroySubject))
+      .subscribe(this.onLayoutChange.bind(this));
+  }
+  // *********************************************
+  // Protected methods
+  // *********************************************
+  /**
+   *
+   */
+  updateWithValue(value) {
+    const layout = this.layout || 'row';
+    const inline = this.inline;
+    if (layout === 'row' && inline) {
+      this.styleCache = layoutAlignHorizontalInlineCache;
+    } else if (layout === 'row' && !inline) {
+      this.styleCache = layoutAlignHorizontalCache;
+    } else if (layout === 'row-reverse' && inline) {
+      this.styleCache = layoutAlignHorizontalRevInlineCache;
+    } else if (layout === 'row-reverse' && !inline) {
+      this.styleCache = layoutAlignHorizontalRevCache;
+    } else if (layout === 'column' && inline) {
+      this.styleCache = layoutAlignVerticalInlineCache;
+    } else if (layout === 'column' && !inline) {
+      this.styleCache = layoutAlignVerticalCache;
+    } else if (layout === 'column-reverse' && inline) {
+      this.styleCache = layoutAlignVerticalRevInlineCache;
+    } else if (layout === 'column-reverse' && !inline) {
+      this.styleCache = layoutAlignVerticalRevCache;
     }
-    // *********************************************
-    // Protected methods
-    // *********************************************
-    /**
-     *
-     */
-    updateWithValue(value) {
-        const layout = this.layout || 'row';
-        const inline = this.inline;
-        if (layout === 'row' && inline) {
-            this.styleCache = layoutAlignHorizontalInlineCache;
-        }
-        else if (layout === 'row' && !inline) {
-            this.styleCache = layoutAlignHorizontalCache;
-        }
-        else if (layout === 'row-reverse' && inline) {
-            this.styleCache = layoutAlignHorizontalRevInlineCache;
-        }
-        else if (layout === 'row-reverse' && !inline) {
-            this.styleCache = layoutAlignHorizontalRevCache;
-        }
-        else if (layout === 'column' && inline) {
-            this.styleCache = layoutAlignVerticalInlineCache;
-        }
-        else if (layout === 'column' && !inline) {
-            this.styleCache = layoutAlignVerticalCache;
-        }
-        else if (layout === 'column-reverse' && inline) {
-            this.styleCache = layoutAlignVerticalRevInlineCache;
-        }
-        else if (layout === 'column-reverse' && !inline) {
-            this.styleCache = layoutAlignVerticalRevCache;
-        }
-        this.addStyles(value, { layout, inline });
+    this.addStyles(value, { layout, inline });
+  }
+  /**
+   * Cache the parent container 'flex-direction' and update the 'flex' styles
+   */
+  onLayoutChange(matcher) {
+    const layoutKeys = matcher.value.split(' ');
+    this.layout = layoutKeys[0];
+    this.inline = matcher.value.includes('inline');
+    if (!LAYOUT_VALUES.find((x) => x === this.layout)) {
+      this.layout = 'row';
     }
-    /**
-     * Cache the parent container 'flex-direction' and update the 'flex' styles
-     */
-    onLayoutChange(matcher) {
-        const layoutKeys = matcher.value.split(' ');
-        this.layout = layoutKeys[0];
-        this.inline = matcher.value.includes('inline');
-        if (!LAYOUT_VALUES.find((x) => x === this.layout)) {
-            this.layout = 'row';
-        }
-        this.triggerUpdate();
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-ea322f4", ngImport: i0, type: LayoutAlignDirective, deps: [{ token: i0.ElementRef }, { token: i1.StyleUtils }, { token: LayoutAlignStyleBuilder }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0-ea322f4", type: LayoutAlignDirective, usesInheritance: true, ngImport: i0 }); }
+    this.triggerUpdate();
+  }
+  static {
+    this.ɵfac = i0.ɵɵngDeclareFactory({
+      minVersion: '12.0.0',
+      version: '16.0.0-6ca1503',
+      ngImport: i0,
+      type: LayoutAlignDirective,
+      deps: [
+        { token: i0.ElementRef },
+        { token: i1.StyleUtils },
+        { token: LayoutAlignStyleBuilder },
+        { token: i1.MediaMarshaller },
+      ],
+      target: i0.ɵɵFactoryTarget.Directive,
+    });
+  }
+  static {
+    this.ɵdir = i0.ɵɵngDeclareDirective({
+      minVersion: '14.0.0',
+      version: '16.0.0-6ca1503',
+      type: LayoutAlignDirective,
+      usesInheritance: true,
+      ngImport: i0,
+    });
+  }
 }
-export { LayoutAlignDirective };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-ea322f4", ngImport: i0, type: LayoutAlignDirective, decorators: [{
-            type: Directive
-        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i1.StyleUtils }, { type: LayoutAlignStyleBuilder }, { type: i1.MediaMarshaller }]; } });
+i0.ɵɵngDeclareClassMetadata({
+  minVersion: '12.0.0',
+  version: '16.0.0-6ca1503',
+  ngImport: i0,
+  type: LayoutAlignDirective,
+  decorators: [
+    {
+      type: Directive,
+    },
+  ],
+  ctorParameters: function () {
+    return [
+      { type: i0.ElementRef },
+      { type: i1.StyleUtils },
+      { type: LayoutAlignStyleBuilder },
+      { type: i1.MediaMarshaller },
+    ];
+  },
+});
 class DefaultLayoutAlignDirective extends LayoutAlignDirective {
-    constructor() {
-        super(...arguments);
-        this.inputs = inputs;
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-ea322f4", ngImport: i0, type: DefaultLayoutAlignDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0-ea322f4", type: DefaultLayoutAlignDirective, selector: "\n  [fxLayoutAlign], [fxLayoutAlign.xs], [fxLayoutAlign.sm], [fxLayoutAlign.md],\n  [fxLayoutAlign.lg], [fxLayoutAlign.xl], [fxLayoutAlign.lt-sm], [fxLayoutAlign.lt-md],\n  [fxLayoutAlign.lt-lg], [fxLayoutAlign.lt-xl], [fxLayoutAlign.gt-xs], [fxLayoutAlign.gt-sm],\n  [fxLayoutAlign.gt-md], [fxLayoutAlign.gt-lg]\n", inputs: { fxLayoutAlign: "fxLayoutAlign", "fxLayoutAlign.xs": "fxLayoutAlign.xs", "fxLayoutAlign.sm": "fxLayoutAlign.sm", "fxLayoutAlign.md": "fxLayoutAlign.md", "fxLayoutAlign.lg": "fxLayoutAlign.lg", "fxLayoutAlign.xl": "fxLayoutAlign.xl", "fxLayoutAlign.lt-sm": "fxLayoutAlign.lt-sm", "fxLayoutAlign.lt-md": "fxLayoutAlign.lt-md", "fxLayoutAlign.lt-lg": "fxLayoutAlign.lt-lg", "fxLayoutAlign.lt-xl": "fxLayoutAlign.lt-xl", "fxLayoutAlign.gt-xs": "fxLayoutAlign.gt-xs", "fxLayoutAlign.gt-sm": "fxLayoutAlign.gt-sm", "fxLayoutAlign.gt-md": "fxLayoutAlign.gt-md", "fxLayoutAlign.gt-lg": "fxLayoutAlign.gt-lg" }, usesInheritance: true, ngImport: i0 }); }
+  constructor() {
+    super(...arguments);
+    this.inputs = inputs;
+  }
+  static {
+    this.ɵfac = i0.ɵɵngDeclareFactory({
+      minVersion: '12.0.0',
+      version: '16.0.0-6ca1503',
+      ngImport: i0,
+      type: DefaultLayoutAlignDirective,
+      deps: null,
+      target: i0.ɵɵFactoryTarget.Directive,
+    });
+  }
+  static {
+    this.ɵdir = i0.ɵɵngDeclareDirective({
+      minVersion: '14.0.0',
+      version: '16.0.0-6ca1503',
+      type: DefaultLayoutAlignDirective,
+      selector:
+        '\n  [fxLayoutAlign], [fxLayoutAlign.xs], [fxLayoutAlign.sm], [fxLayoutAlign.md],\n  [fxLayoutAlign.lg], [fxLayoutAlign.xl], [fxLayoutAlign.lt-sm], [fxLayoutAlign.lt-md],\n  [fxLayoutAlign.lt-lg], [fxLayoutAlign.lt-xl], [fxLayoutAlign.gt-xs], [fxLayoutAlign.gt-sm],\n  [fxLayoutAlign.gt-md], [fxLayoutAlign.gt-lg]\n',
+      inputs: {
+        fxLayoutAlign: 'fxLayoutAlign',
+        'fxLayoutAlign.xs': 'fxLayoutAlign.xs',
+        'fxLayoutAlign.sm': 'fxLayoutAlign.sm',
+        'fxLayoutAlign.md': 'fxLayoutAlign.md',
+        'fxLayoutAlign.lg': 'fxLayoutAlign.lg',
+        'fxLayoutAlign.xl': 'fxLayoutAlign.xl',
+        'fxLayoutAlign.lt-sm': 'fxLayoutAlign.lt-sm',
+        'fxLayoutAlign.lt-md': 'fxLayoutAlign.lt-md',
+        'fxLayoutAlign.lt-lg': 'fxLayoutAlign.lt-lg',
+        'fxLayoutAlign.lt-xl': 'fxLayoutAlign.lt-xl',
+        'fxLayoutAlign.gt-xs': 'fxLayoutAlign.gt-xs',
+        'fxLayoutAlign.gt-sm': 'fxLayoutAlign.gt-sm',
+        'fxLayoutAlign.gt-md': 'fxLayoutAlign.gt-md',
+        'fxLayoutAlign.gt-lg': 'fxLayoutAlign.gt-lg',
+      },
+      usesInheritance: true,
+      ngImport: i0,
+    });
+  }
 }
-export { DefaultLayoutAlignDirective };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-ea322f4", ngImport: i0, type: DefaultLayoutAlignDirective, decorators: [{
-            type: Directive,
-            args: [{ selector, inputs }]
-        }] });
+i0.ɵɵngDeclareClassMetadata({
+  minVersion: '12.0.0',
+  version: '16.0.0-6ca1503',
+  ngImport: i0,
+  type: DefaultLayoutAlignDirective,
+  decorators: [
+    {
+      type: Directive,
+      args: [{ selector, inputs }],
+    },
+  ],
+});
 const layoutAlignHorizontalCache = new Map();
 const layoutAlignVerticalCache = new Map();
 const layoutAlignHorizontalRevCache = new Map();
