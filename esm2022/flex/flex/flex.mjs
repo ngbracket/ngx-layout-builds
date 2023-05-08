@@ -5,236 +5,190 @@
  * Use of this source code is governed by an MIT-style license that can be
  * found in the LICENSE file at https://angular.io/license
  */
-import * as i0 from '@angular/core';
-import { Directive, Inject, Injectable, Input } from '@angular/core';
-import {
-  extendObject,
-  isFlowHorizontal,
-} from '@ngbracket/ngx-layout/_private-utils';
-import * as i1 from '@ngbracket/ngx-layout/core';
-import {
-  BaseDirective2,
-  LAYOUT_CONFIG,
-  StyleBuilder,
-  validateBasis,
-} from '@ngbracket/ngx-layout/core';
+import { Directive, Inject, Injectable, Input, } from '@angular/core';
+import { BaseDirective2, LAYOUT_CONFIG, StyleBuilder, validateBasis, } from '@ngbracket/ngx-layout/core';
 import { takeUntil } from 'rxjs/operators';
+import { extendObject, isFlowHorizontal, } from '@ngbracket/ngx-layout/_private-utils';
+import * as i0 from "@angular/core";
+import * as i1 from "@ngbracket/ngx-layout/core";
 class FlexStyleBuilder extends StyleBuilder {
-  constructor(layoutConfig) {
-    super();
-    this.layoutConfig = layoutConfig;
-  }
-  buildStyles(input, parent) {
-    let [grow, shrink, ...basisParts] = input.split(' ');
-    let basis = basisParts.join(' ');
-    // The flex-direction of this element's flex container. Defaults to 'row'.
-    const direction =
-      parent.direction.indexOf('column') > -1 ? 'column' : 'row';
-    const max = isFlowHorizontal(direction) ? 'max-width' : 'max-height';
-    const min = isFlowHorizontal(direction) ? 'min-width' : 'min-height';
-    const hasCalc = String(basis).indexOf('calc') > -1;
-    const usingCalc = hasCalc || basis === 'auto';
-    const isPercent = String(basis).indexOf('%') > -1 && !hasCalc;
-    const hasUnits =
-      String(basis).indexOf('px') > -1 ||
-      String(basis).indexOf('rem') > -1 ||
-      String(basis).indexOf('em') > -1 ||
-      String(basis).indexOf('vw') > -1 ||
-      String(basis).indexOf('vh') > -1;
-    let isValue = hasCalc || hasUnits;
-    grow = grow == '0' ? 0 : grow;
-    shrink = shrink == '0' ? 0 : shrink;
-    // make box inflexible when shrink and grow are both zero
-    // should not set a min when the grow is zero
-    // should not set a max when the shrink is zero
-    const isFixed = !grow && !shrink;
-    let css = {};
-    // flex-basis allows you to specify the initial/starting main-axis size of the element,
-    // before anything else is computed. It can either be a percentage or an absolute value.
-    // It is, however, not the breaking point for flex-grow/shrink properties
-    //
-    // flex-grow can be seen as this:
-    //   0: Do not stretch. Either size to element's content width, or obey 'flex-basis'.
-    //   1: (Default value). Stretch; will be the same size to all other flex items on
-    //       the same row since they have a default value of 1.
-    //   ≥2 (integer n): Stretch. Will be n times the size of other elements
-    //      with 'flex-grow: 1' on the same row.
-    // Use `null` to clear existing styles.
-    const clearStyles = {
-      'max-width': null,
-      'max-height': null,
-      'min-width': null,
-      'min-height': null,
-    };
-    switch (basis || '') {
-      case '':
-        const useColumnBasisZero =
-          this.layoutConfig.useColumnBasisZero !== false;
-        basis =
-          direction === 'row'
-            ? '0%'
-            : useColumnBasisZero
-            ? '0.000000001px'
-            : 'auto';
-        break;
-      case 'initial': // default
-      case 'nogrow':
-        grow = 0;
-        basis = 'auto';
-        break;
-      case 'grow':
-        basis = '100%';
-        break;
-      case 'noshrink':
-        shrink = 0;
-        basis = 'auto';
-        break;
-      case 'auto':
-        break;
-      case 'none':
-        grow = 0;
-        shrink = 0;
-        basis = 'auto';
-        break;
-      default:
-        // Defaults to percentage sizing unless `px` is explicitly set
-        if (!isValue && !isPercent && !isNaN(basis)) {
-          basis = basis + '%';
-        }
-        // Fix for issue 280
-        if (basis === '0%') {
-          isValue = true;
-        }
-        if (basis === '0px') {
-          basis = '0%';
-        }
-        // fix issue #5345
-        if (hasCalc) {
-          css = extendObject(clearStyles, {
-            'flex-grow': grow,
-            'flex-shrink': shrink,
-            'flex-basis': isValue ? basis : '100%',
-          });
-        } else {
-          css = extendObject(clearStyles, {
-            flex: `${grow} ${shrink} ${isValue ? basis : '100%'}`,
-          });
-        }
-        break;
+    constructor(layoutConfig) {
+        super();
+        this.layoutConfig = layoutConfig;
     }
-    if (!(css['flex'] || css['flex-grow'])) {
-      if (hasCalc) {
-        css = extendObject(clearStyles, {
-          'flex-grow': grow,
-          'flex-shrink': shrink,
-          'flex-basis': basis,
-        });
-      } else {
-        css = extendObject(clearStyles, {
-          flex: `${grow} ${shrink} ${basis}`,
-        });
-      }
+    buildStyles(input, parent) {
+        let [grow, shrink, ...basisParts] = input.split(' ');
+        let basis = basisParts.join(' ');
+        // The flex-direction of this element's flex container. Defaults to 'row'.
+        const direction = parent.direction.indexOf('column') > -1 ? 'column' : 'row';
+        const max = isFlowHorizontal(direction) ? 'max-width' : 'max-height';
+        const min = isFlowHorizontal(direction) ? 'min-width' : 'min-height';
+        const hasCalc = String(basis).indexOf('calc') > -1;
+        const usingCalc = hasCalc || basis === 'auto';
+        const isPercent = String(basis).indexOf('%') > -1 && !hasCalc;
+        const hasUnits = String(basis).indexOf('px') > -1 ||
+            String(basis).indexOf('rem') > -1 ||
+            String(basis).indexOf('em') > -1 ||
+            String(basis).indexOf('vw') > -1 ||
+            String(basis).indexOf('vh') > -1;
+        let isValue = hasCalc || hasUnits;
+        grow = grow == '0' ? 0 : grow;
+        shrink = shrink == '0' ? 0 : shrink;
+        // make box inflexible when shrink and grow are both zero
+        // should not set a min when the grow is zero
+        // should not set a max when the shrink is zero
+        const isFixed = !grow && !shrink;
+        let css = {};
+        // flex-basis allows you to specify the initial/starting main-axis size of the element,
+        // before anything else is computed. It can either be a percentage or an absolute value.
+        // It is, however, not the breaking point for flex-grow/shrink properties
+        //
+        // flex-grow can be seen as this:
+        //   0: Do not stretch. Either size to element's content width, or obey 'flex-basis'.
+        //   1: (Default value). Stretch; will be the same size to all other flex items on
+        //       the same row since they have a default value of 1.
+        //   ≥2 (integer n): Stretch. Will be n times the size of other elements
+        //      with 'flex-grow: 1' on the same row.
+        // Use `null` to clear existing styles.
+        const clearStyles = {
+            'max-width': null,
+            'max-height': null,
+            'min-width': null,
+            'min-height': null,
+        };
+        switch (basis || '') {
+            case '':
+                const useColumnBasisZero = this.layoutConfig.useColumnBasisZero !== false;
+                basis =
+                    direction === 'row'
+                        ? '0%'
+                        : useColumnBasisZero
+                            ? '0.000000001px'
+                            : 'auto';
+                break;
+            case 'initial': // default
+            case 'nogrow':
+                grow = 0;
+                basis = 'auto';
+                break;
+            case 'grow':
+                basis = '100%';
+                break;
+            case 'noshrink':
+                shrink = 0;
+                basis = 'auto';
+                break;
+            case 'auto':
+                break;
+            case 'none':
+                grow = 0;
+                shrink = 0;
+                basis = 'auto';
+                break;
+            default:
+                // Defaults to percentage sizing unless `px` is explicitly set
+                if (!isValue && !isPercent && !isNaN(basis)) {
+                    basis = basis + '%';
+                }
+                // Fix for issue 280
+                if (basis === '0%') {
+                    isValue = true;
+                }
+                if (basis === '0px') {
+                    basis = '0%';
+                }
+                // fix issue #5345
+                if (hasCalc) {
+                    css = extendObject(clearStyles, {
+                        'flex-grow': grow,
+                        'flex-shrink': shrink,
+                        'flex-basis': isValue ? basis : '100%',
+                    });
+                }
+                else {
+                    css = extendObject(clearStyles, {
+                        flex: `${grow} ${shrink} ${isValue ? basis : '100%'}`,
+                    });
+                }
+                break;
+        }
+        if (!(css['flex'] || css['flex-grow'])) {
+            if (hasCalc) {
+                css = extendObject(clearStyles, {
+                    'flex-grow': grow,
+                    'flex-shrink': shrink,
+                    'flex-basis': basis,
+                });
+            }
+            else {
+                css = extendObject(clearStyles, {
+                    flex: `${grow} ${shrink} ${basis}`,
+                });
+            }
+        }
+        // Fix for issues 277, 534, and 728
+        if (basis !== '0%' &&
+            basis !== '0px' &&
+            basis !== '0.000000001px' &&
+            basis !== 'auto') {
+            css[min] = isFixed || (isValue && grow) ? basis : null;
+            css[max] = isFixed || (!usingCalc && shrink) ? basis : null;
+        }
+        // Fix for issue 528
+        if (!css[min] && !css[max]) {
+            if (hasCalc) {
+                css = extendObject(clearStyles, {
+                    'flex-grow': grow,
+                    'flex-shrink': shrink,
+                    'flex-basis': basis,
+                });
+            }
+            else {
+                css = extendObject(clearStyles, {
+                    flex: `${grow} ${shrink} ${basis}`,
+                });
+            }
+        }
+        else {
+            // Fix for issue 660
+            if (parent.hasWrap) {
+                css[hasCalc ? 'flex-basis' : 'flex'] = css[max]
+                    ? hasCalc
+                        ? css[max]
+                        : `${grow} ${shrink} ${css[max]}`
+                    : hasCalc
+                        ? css[min]
+                        : `${grow} ${shrink} ${css[min]}`;
+            }
+        }
+        return extendObject(css, { 'box-sizing': 'border-box' });
     }
-    // Fix for issues 277, 534, and 728
-    if (
-      basis !== '0%' &&
-      basis !== '0px' &&
-      basis !== '0.000000001px' &&
-      basis !== 'auto'
-    ) {
-      css[min] = isFixed || (isValue && grow) ? basis : null;
-      css[max] = isFixed || (!usingCalc && shrink) ? basis : null;
-    }
-    // Fix for issue 528
-    if (!css[min] && !css[max]) {
-      if (hasCalc) {
-        css = extendObject(clearStyles, {
-          'flex-grow': grow,
-          'flex-shrink': shrink,
-          'flex-basis': basis,
-        });
-      } else {
-        css = extendObject(clearStyles, {
-          flex: `${grow} ${shrink} ${basis}`,
-        });
-      }
-    } else {
-      // Fix for issue 660
-      if (parent.hasWrap) {
-        css[hasCalc ? 'flex-basis' : 'flex'] = css[max]
-          ? hasCalc
-            ? css[max]
-            : `${grow} ${shrink} ${css[max]}`
-          : hasCalc
-          ? css[min]
-          : `${grow} ${shrink} ${css[min]}`;
-      }
-    }
-    return extendObject(css, { 'box-sizing': 'border-box' });
-  }
-  static {
-    this.ɵfac = i0.ɵɵngDeclareFactory({
-      minVersion: '12.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: FlexStyleBuilder,
-      deps: [{ token: LAYOUT_CONFIG }],
-      target: i0.ɵɵFactoryTarget.Injectable,
-    });
-  }
-  static {
-    this.ɵprov = i0.ɵɵngDeclareInjectable({
-      minVersion: '12.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: FlexStyleBuilder,
-      providedIn: 'root',
-    });
-  }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexStyleBuilder, deps: [{ token: LAYOUT_CONFIG }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexStyleBuilder, providedIn: 'root' }); }
 }
 export { FlexStyleBuilder };
-export { FlexDirective };
-export { DefaultFlexDirective };
-i0.ɵɵngDeclareClassMetadata({
-  minVersion: '12.0.0',
-  version: '16.0.0-6ca1503',
-  ngImport: i0,
-  type: FlexStyleBuilder,
-  decorators: [
-    {
-      type: Injectable,
-      args: [{ providedIn: 'root' }],
-    },
-  ],
-  ctorParameters: function () {
-    return [
-      {
-        type: undefined,
-        decorators: [
-          {
-            type: Inject,
-            args: [LAYOUT_CONFIG],
-          },
-        ],
-      },
-    ];
-  },
-});
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexStyleBuilder, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
+        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
+                    type: Inject,
+                    args: [LAYOUT_CONFIG]
+                }] }]; } });
 const inputs = [
-  'fxFlex',
-  'fxFlex.xs',
-  'fxFlex.sm',
-  'fxFlex.md',
-  'fxFlex.lg',
-  'fxFlex.xl',
-  'fxFlex.lt-sm',
-  'fxFlex.lt-md',
-  'fxFlex.lt-lg',
-  'fxFlex.lt-xl',
-  'fxFlex.gt-xs',
-  'fxFlex.gt-sm',
-  'fxFlex.gt-md',
-  'fxFlex.gt-lg',
+    'fxFlex',
+    'fxFlex.xs',
+    'fxFlex.sm',
+    'fxFlex.md',
+    'fxFlex.lg',
+    'fxFlex.xl',
+    'fxFlex.lt-sm',
+    'fxFlex.lt-md',
+    'fxFlex.lt-lg',
+    'fxFlex.lt-xl',
+    'fxFlex.gt-xs',
+    'fxFlex.gt-sm',
+    'fxFlex.gt-md',
+    'fxFlex.gt-lg',
 ];
 const selector = `
   [fxFlex], [fxFlex.xs], [fxFlex.sm], [fxFlex.md],
@@ -249,222 +203,119 @@ const selector = `
  * @see https://css-tricks.com/snippets/css/a-guide-to-flexbox/
  */
 class FlexDirective extends BaseDirective2 {
-  get shrink() {
-    return this.flexShrink;
-  }
-  set shrink(value) {
-    this.flexShrink = value || '1';
-    this.triggerReflow();
-  }
-  get grow() {
-    return this.flexGrow;
-  }
-  set grow(value) {
-    this.flexGrow = value || '1';
-    this.triggerReflow();
-  }
-  constructor(elRef, styleUtils, layoutConfig, styleBuilder, marshal) {
-    super(elRef, styleBuilder, styleUtils, marshal);
-    this.layoutConfig = layoutConfig;
-    this.marshal = marshal;
-    this.DIRECTIVE_KEY = 'flex';
-    this.direction = undefined;
-    this.wrap = undefined;
-    this.flexGrow = '1';
-    this.flexShrink = '1';
-    this.init();
-  }
-  ngOnInit() {
-    if (this.parentElement) {
-      this.marshal
-        .trackValue(this.parentElement, 'layout')
-        .pipe(takeUntil(this.destroySubject))
-        .subscribe(this.onLayoutChange.bind(this));
-      this.marshal
-        .trackValue(this.nativeElement, 'layout-align')
-        .pipe(takeUntil(this.destroySubject))
-        .subscribe(this.triggerReflow.bind(this));
+    get shrink() {
+        return this.flexShrink;
     }
-  }
-  /**
-   * Caches the parent container's 'flex-direction' and updates the element's style.
-   * Used as a handler for layout change events from the parent flex container.
-   */
-  onLayoutChange(matcher) {
-    const layout = matcher.value;
-    const layoutParts = layout.split(' ');
-    this.direction = layoutParts[0];
-    this.wrap = layoutParts[1] !== undefined && layoutParts[1] === 'wrap';
-    this.triggerUpdate();
-  }
-  /** Input to this is exclusively the basis input value */
-  updateWithValue(value) {
-    const addFlexToParent = this.layoutConfig.addFlexToParent !== false;
-    if (this.direction === undefined) {
-      this.direction = this.getFlexFlowDirection(
-        this.parentElement,
-        addFlexToParent
-      );
+    set shrink(value) {
+        this.flexShrink = value || '1';
+        this.triggerReflow();
     }
-    if (this.wrap === undefined) {
-      this.wrap = this.hasWrap(this.parentElement);
+    get grow() {
+        return this.flexGrow;
     }
-    const direction = this.direction;
-    const isHorizontal = direction.startsWith('row');
-    const hasWrap = this.wrap;
-    if (isHorizontal && hasWrap) {
-      this.styleCache = flexRowWrapCache;
-    } else if (isHorizontal && !hasWrap) {
-      this.styleCache = flexRowCache;
-    } else if (!isHorizontal && hasWrap) {
-      this.styleCache = flexColumnWrapCache;
-    } else if (!isHorizontal && !hasWrap) {
-      this.styleCache = flexColumnCache;
+    set grow(value) {
+        this.flexGrow = value || '1';
+        this.triggerReflow();
     }
-    const basis = String(value).replace(';', '');
-    const parts = validateBasis(basis, this.flexGrow, this.flexShrink);
-    this.addStyles(parts.join(' '), { direction, hasWrap });
-  }
-  /** Trigger a style reflow, usually based on a shrink/grow input event */
-  triggerReflow() {
-    const activatedValue = this.activatedValue;
-    if (activatedValue !== undefined) {
-      const parts = validateBasis(
-        activatedValue + '',
-        this.flexGrow,
-        this.flexShrink
-      );
-      this.marshal.updateElement(
-        this.nativeElement,
-        this.DIRECTIVE_KEY,
-        parts.join(' ')
-      );
+    constructor(elRef, styleUtils, layoutConfig, styleBuilder, marshal) {
+        super(elRef, styleBuilder, styleUtils, marshal);
+        this.layoutConfig = layoutConfig;
+        this.marshal = marshal;
+        this.DIRECTIVE_KEY = 'flex';
+        this.direction = undefined;
+        this.wrap = undefined;
+        this.flexGrow = '1';
+        this.flexShrink = '1';
+        this.init();
     }
-  }
-  static {
-    this.ɵfac = i0.ɵɵngDeclareFactory({
-      minVersion: '12.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: FlexDirective,
-      deps: [
-        { token: i0.ElementRef },
-        { token: i1.StyleUtils },
-        { token: LAYOUT_CONFIG },
-        { token: FlexStyleBuilder },
-        { token: i1.MediaMarshaller },
-      ],
-      target: i0.ɵɵFactoryTarget.Directive,
-    });
-  }
-  static {
-    this.ɵdir = i0.ɵɵngDeclareDirective({
-      minVersion: '14.0.0',
-      version: '16.0.0-6ca1503',
-      type: FlexDirective,
-      inputs: { shrink: ['fxShrink', 'shrink'], grow: ['fxGrow', 'grow'] },
-      usesInheritance: true,
-      ngImport: i0,
-    });
-  }
+    ngOnInit() {
+        if (this.parentElement) {
+            this.marshal
+                .trackValue(this.parentElement, 'layout')
+                .pipe(takeUntil(this.destroySubject))
+                .subscribe(this.onLayoutChange.bind(this));
+            this.marshal
+                .trackValue(this.nativeElement, 'layout-align')
+                .pipe(takeUntil(this.destroySubject))
+                .subscribe(this.triggerReflow.bind(this));
+        }
+    }
+    /**
+     * Caches the parent container's 'flex-direction' and updates the element's style.
+     * Used as a handler for layout change events from the parent flex container.
+     */
+    onLayoutChange(matcher) {
+        const layout = matcher.value;
+        const layoutParts = layout.split(' ');
+        this.direction = layoutParts[0];
+        this.wrap = layoutParts[1] !== undefined && layoutParts[1] === 'wrap';
+        this.triggerUpdate();
+    }
+    /** Input to this is exclusively the basis input value */
+    updateWithValue(value) {
+        const addFlexToParent = this.layoutConfig.addFlexToParent !== false;
+        if (this.direction === undefined) {
+            this.direction = this.getFlexFlowDirection(this.parentElement, addFlexToParent);
+        }
+        if (this.wrap === undefined) {
+            this.wrap = this.hasWrap(this.parentElement);
+        }
+        const direction = this.direction;
+        const isHorizontal = direction.startsWith('row');
+        const hasWrap = this.wrap;
+        if (isHorizontal && hasWrap) {
+            this.styleCache = flexRowWrapCache;
+        }
+        else if (isHorizontal && !hasWrap) {
+            this.styleCache = flexRowCache;
+        }
+        else if (!isHorizontal && hasWrap) {
+            this.styleCache = flexColumnWrapCache;
+        }
+        else if (!isHorizontal && !hasWrap) {
+            this.styleCache = flexColumnCache;
+        }
+        const basis = String(value).replace(';', '');
+        const parts = validateBasis(basis, this.flexGrow, this.flexShrink);
+        this.addStyles(parts.join(' '), { direction, hasWrap });
+    }
+    /** Trigger a style reflow, usually based on a shrink/grow input event */
+    triggerReflow() {
+        const activatedValue = this.activatedValue;
+        if (activatedValue !== undefined) {
+            const parts = validateBasis(activatedValue + '', this.flexGrow, this.flexShrink);
+            this.marshal.updateElement(this.nativeElement, this.DIRECTIVE_KEY, parts.join(' '));
+        }
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexDirective, deps: [{ token: i0.ElementRef }, { token: i1.StyleUtils }, { token: LAYOUT_CONFIG }, { token: FlexStyleBuilder }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0", type: FlexDirective, inputs: { shrink: ["fxShrink", "shrink"], grow: ["fxGrow", "grow"] }, usesInheritance: true, ngImport: i0 }); }
 }
-i0.ɵɵngDeclareClassMetadata({
-  minVersion: '12.0.0',
-  version: '16.0.0-6ca1503',
-  ngImport: i0,
-  type: FlexDirective,
-  decorators: [
-    {
-      type: Directive,
-    },
-  ],
-  ctorParameters: function () {
-    return [
-      { type: i0.ElementRef },
-      { type: i1.StyleUtils },
-      {
-        type: undefined,
-        decorators: [
-          {
-            type: Inject,
-            args: [LAYOUT_CONFIG],
-          },
-        ],
-      },
-      { type: FlexStyleBuilder },
-      { type: i1.MediaMarshaller },
-    ];
-  },
-  propDecorators: {
-    shrink: [
-      {
-        type: Input,
-        args: ['fxShrink'],
-      },
-    ],
-    grow: [
-      {
-        type: Input,
-        args: ['fxGrow'],
-      },
-    ],
-  },
-});
+export { FlexDirective };
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexDirective, decorators: [{
+            type: Directive
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i1.StyleUtils }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [LAYOUT_CONFIG]
+                }] }, { type: FlexStyleBuilder }, { type: i1.MediaMarshaller }]; }, propDecorators: { shrink: [{
+                type: Input,
+                args: ['fxShrink']
+            }], grow: [{
+                type: Input,
+                args: ['fxGrow']
+            }] } });
 class DefaultFlexDirective extends FlexDirective {
-  constructor() {
-    super(...arguments);
-    this.inputs = inputs;
-  }
-  static {
-    this.ɵfac = i0.ɵɵngDeclareFactory({
-      minVersion: '12.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: DefaultFlexDirective,
-      deps: null,
-      target: i0.ɵɵFactoryTarget.Directive,
-    });
-  }
-  static {
-    this.ɵdir = i0.ɵɵngDeclareDirective({
-      minVersion: '14.0.0',
-      version: '16.0.0-6ca1503',
-      type: DefaultFlexDirective,
-      selector:
-        '\n  [fxFlex], [fxFlex.xs], [fxFlex.sm], [fxFlex.md],\n  [fxFlex.lg], [fxFlex.xl], [fxFlex.lt-sm], [fxFlex.lt-md],\n  [fxFlex.lt-lg], [fxFlex.lt-xl], [fxFlex.gt-xs], [fxFlex.gt-sm],\n  [fxFlex.gt-md], [fxFlex.gt-lg]\n',
-      inputs: {
-        fxFlex: 'fxFlex',
-        'fxFlex.xs': 'fxFlex.xs',
-        'fxFlex.sm': 'fxFlex.sm',
-        'fxFlex.md': 'fxFlex.md',
-        'fxFlex.lg': 'fxFlex.lg',
-        'fxFlex.xl': 'fxFlex.xl',
-        'fxFlex.lt-sm': 'fxFlex.lt-sm',
-        'fxFlex.lt-md': 'fxFlex.lt-md',
-        'fxFlex.lt-lg': 'fxFlex.lt-lg',
-        'fxFlex.lt-xl': 'fxFlex.lt-xl',
-        'fxFlex.gt-xs': 'fxFlex.gt-xs',
-        'fxFlex.gt-sm': 'fxFlex.gt-sm',
-        'fxFlex.gt-md': 'fxFlex.gt-md',
-        'fxFlex.gt-lg': 'fxFlex.gt-lg',
-      },
-      usesInheritance: true,
-      ngImport: i0,
-    });
-  }
+    constructor() {
+        super(...arguments);
+        this.inputs = inputs;
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: DefaultFlexDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0", type: DefaultFlexDirective, selector: "\n  [fxFlex], [fxFlex.xs], [fxFlex.sm], [fxFlex.md],\n  [fxFlex.lg], [fxFlex.xl], [fxFlex.lt-sm], [fxFlex.lt-md],\n  [fxFlex.lt-lg], [fxFlex.lt-xl], [fxFlex.gt-xs], [fxFlex.gt-sm],\n  [fxFlex.gt-md], [fxFlex.gt-lg]\n", inputs: { fxFlex: "fxFlex", "fxFlex.xs": "fxFlex.xs", "fxFlex.sm": "fxFlex.sm", "fxFlex.md": "fxFlex.md", "fxFlex.lg": "fxFlex.lg", "fxFlex.xl": "fxFlex.xl", "fxFlex.lt-sm": "fxFlex.lt-sm", "fxFlex.lt-md": "fxFlex.lt-md", "fxFlex.lt-lg": "fxFlex.lt-lg", "fxFlex.lt-xl": "fxFlex.lt-xl", "fxFlex.gt-xs": "fxFlex.gt-xs", "fxFlex.gt-sm": "fxFlex.gt-sm", "fxFlex.gt-md": "fxFlex.gt-md", "fxFlex.gt-lg": "fxFlex.gt-lg" }, usesInheritance: true, ngImport: i0 }); }
 }
-i0.ɵɵngDeclareClassMetadata({
-  minVersion: '12.0.0',
-  version: '16.0.0-6ca1503',
-  ngImport: i0,
-  type: DefaultFlexDirective,
-  decorators: [
-    {
-      type: Directive,
-      args: [{ inputs, selector }],
-    },
-  ],
-});
+export { DefaultFlexDirective };
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: DefaultFlexDirective, decorators: [{
+            type: Directive,
+            args: [{ inputs, selector }]
+        }] });
 const flexRowCache = new Map();
 const flexColumnCache = new Map();
 const flexRowWrapCache = new Map();

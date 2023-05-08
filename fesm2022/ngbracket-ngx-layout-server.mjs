@@ -1,17 +1,8 @@
-import { DOCUMENT } from '@angular/common';
 import * as i0 from '@angular/core';
-import { Inject, Injectable, NgModule, PLATFORM_ID } from '@angular/core';
+import { PLATFORM_ID, Injectable, Inject, NgModule } from '@angular/core';
+import { DOCUMENT } from '@angular/common';
 import { BEFORE_APP_SERIALIZED } from '@angular/platform-server';
-import {
-  BREAKPOINTS,
-  CLASS_NAME,
-  LAYOUT_CONFIG,
-  MediaMarshaller,
-  SERVER_TOKEN,
-  StylesheetMap,
-  sortAscendingPriority,
-  ɵMatchMedia,
-} from '@ngbracket/ngx-layout/core';
+import { ɵMatchMedia, BREAKPOINTS, LAYOUT_CONFIG, sortAscendingPriority, CLASS_NAME, StylesheetMap, MediaMarshaller, SERVER_TOKEN } from '@ngbracket/ngx-layout/core';
 
 /**
  * @license
@@ -26,75 +17,75 @@ import {
  * - manages listeners
  */
 class ServerMediaQueryList extends EventTarget {
-  get matches() {
-    return this._isActive;
-  }
-  get media() {
-    return this._mediaQuery;
-  }
-  constructor(_mediaQuery, _isActive = false) {
-    super();
-    this._mediaQuery = _mediaQuery;
-    this._isActive = _isActive;
-    this._listeners = [];
-    this.onchange = null;
-  }
-  /**
-   * Destroy the current list by deactivating the
-   * listeners and clearing the internal list
-   */
-  destroy() {
-    this.deactivate();
-    this._listeners = [];
-  }
-  /** Notify all listeners that 'matches === TRUE' */
-  activate() {
-    if (!this._isActive) {
-      this._isActive = true;
-      this._listeners.forEach((callback) => {
-        const cb = callback;
-        cb.call(this, {
-          matches: this.matches,
-          media: this.media,
-        });
-      });
+    get matches() {
+        return this._isActive;
     }
-    return this;
-  }
-  /** Notify all listeners that 'matches === false' */
-  deactivate() {
-    if (this._isActive) {
-      this._isActive = false;
-      this._listeners.forEach((callback) => {
-        const cb = callback;
-        cb.call(this, {
-          matches: this.matches,
-          media: this.media,
-        });
-      });
+    get media() {
+        return this._mediaQuery;
     }
-    return this;
-  }
-  /** Add a listener to our internal list to activate later */
-  addListener(listener) {
-    if (this._listeners.indexOf(listener) === -1) {
-      this._listeners.push(listener);
+    constructor(_mediaQuery, _isActive = false) {
+        super();
+        this._mediaQuery = _mediaQuery;
+        this._isActive = _isActive;
+        this._listeners = [];
+        this.onchange = null;
     }
-    if (this._isActive) {
-      const cb = listener;
-      cb.call(this, {
-        matches: this.matches,
-        media: this.media,
-      });
+    /**
+     * Destroy the current list by deactivating the
+     * listeners and clearing the internal list
+     */
+    destroy() {
+        this.deactivate();
+        this._listeners = [];
     }
-  }
-  /** Don't need to remove listeners in the server environment */
-  removeListener() {}
-  addEventListener() {}
-  removeEventListener() {}
-  dispatchEvent(_) {
-    return false;
-  }
+    /** Notify all listeners that 'matches === TRUE' */
+    activate() {
+        if (!this._isActive) {
+            this._isActive = true;
+            this._listeners.forEach((callback) => {
+                const cb = callback;
+                cb.call(this, {
+                    matches: this.matches,
+                    media: this.media,
+                });
+            });
+        }
+        return this;
+    }
+    /** Notify all listeners that 'matches === false' */
+    deactivate() {
+        if (this._isActive) {
+            this._isActive = false;
+            this._listeners.forEach((callback) => {
+                const cb = callback;
+                cb.call(this, {
+                    matches: this.matches,
+                    media: this.media,
+                });
+            });
+        }
+        return this;
+    }
+    /** Add a listener to our internal list to activate later */
+    addListener(listener) {
+        if (this._listeners.indexOf(listener) === -1) {
+            this._listeners.push(listener);
+        }
+        if (this._isActive) {
+            const cb = listener;
+            cb.call(this, {
+                matches: this.matches,
+                media: this.media,
+            });
+        }
+    }
+    /** Don't need to remove listeners in the server environment */
+    removeListener() { }
+    addEventListener() { }
+    removeEventListener() { }
+    dispatchEvent(_) {
+        return false;
+    }
 }
 /**
  * Special server-only implementation of MatchMedia that uses the above
@@ -103,130 +94,68 @@ class ServerMediaQueryList extends EventTarget {
  * Also contains methods to activate and deactivate breakpoints
  */
 class ServerMatchMedia extends ɵMatchMedia {
-  constructor(_zone, _platformId, _document, breakpoints, layoutConfig) {
-    super(_zone, _platformId, _document);
-    this._zone = _zone;
-    this._platformId = _platformId;
-    this._document = _document;
-    this.breakpoints = breakpoints;
-    this.layoutConfig = layoutConfig;
-    this._activeBreakpoints = [];
-    const serverBps = layoutConfig.ssrObserveBreakpoints;
-    if (serverBps) {
-      this._activeBreakpoints = serverBps.reduce((acc, serverBp) => {
-        const foundBp = breakpoints.find((bp) => serverBp === bp.alias);
-        if (!foundBp) {
-          console.warn(
-            `FlexLayoutServerModule: unknown breakpoint alias "${serverBp}"`
-          );
-        } else {
-          acc.push(foundBp);
+    constructor(_zone, _platformId, _document, breakpoints, layoutConfig) {
+        super(_zone, _platformId, _document);
+        this._zone = _zone;
+        this._platformId = _platformId;
+        this._document = _document;
+        this.breakpoints = breakpoints;
+        this.layoutConfig = layoutConfig;
+        this._activeBreakpoints = [];
+        const serverBps = layoutConfig.ssrObserveBreakpoints;
+        if (serverBps) {
+            this._activeBreakpoints = serverBps.reduce((acc, serverBp) => {
+                const foundBp = breakpoints.find((bp) => serverBp === bp.alias);
+                if (!foundBp) {
+                    console.warn(`FlexLayoutServerModule: unknown breakpoint alias "${serverBp}"`);
+                }
+                else {
+                    acc.push(foundBp);
+                }
+                return acc;
+            }, []);
         }
-        return acc;
-      }, []);
     }
-  }
-  /** Activate the specified breakpoint if we're on the server, no-op otherwise */
-  activateBreakpoint(bp) {
-    const lookupBreakpoint = this.registry.get(bp.mediaQuery);
-    if (lookupBreakpoint) {
-      lookupBreakpoint.activate();
+    /** Activate the specified breakpoint if we're on the server, no-op otherwise */
+    activateBreakpoint(bp) {
+        const lookupBreakpoint = this.registry.get(bp.mediaQuery);
+        if (lookupBreakpoint) {
+            lookupBreakpoint.activate();
+        }
     }
-  }
-  /** Deactivate the specified breakpoint if we're on the server, no-op otherwise */
-  deactivateBreakpoint(bp) {
-    const lookupBreakpoint = this.registry.get(bp.mediaQuery);
-    if (lookupBreakpoint) {
-      lookupBreakpoint.deactivate();
+    /** Deactivate the specified breakpoint if we're on the server, no-op otherwise */
+    deactivateBreakpoint(bp) {
+        const lookupBreakpoint = this.registry.get(bp.mediaQuery);
+        if (lookupBreakpoint) {
+            lookupBreakpoint.deactivate();
+        }
     }
-  }
-  /**
-   * Call window.matchMedia() to build a MediaQueryList; which
-   * supports 0..n listeners for activation/deactivation
-   */
-  buildMQL(query) {
-    const isActive = this._activeBreakpoints.some(
-      (ab) => ab.mediaQuery === query
-    );
-    return new ServerMediaQueryList(query, isActive);
-  }
-  static {
-    this.ɵfac = i0.ɵɵngDeclareFactory({
-      minVersion: '12.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: ServerMatchMedia,
-      deps: [
-        { token: i0.NgZone },
-        { token: PLATFORM_ID },
-        { token: DOCUMENT },
-        { token: BREAKPOINTS },
-        { token: LAYOUT_CONFIG },
-      ],
-      target: i0.ɵɵFactoryTarget.Injectable,
-    });
-  }
-  static {
-    this.ɵprov = i0.ɵɵngDeclareInjectable({
-      minVersion: '12.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: ServerMatchMedia,
-    });
-  }
+    /**
+     * Call window.matchMedia() to build a MediaQueryList; which
+     * supports 0..n listeners for activation/deactivation
+     */
+    buildMQL(query) {
+        const isActive = this._activeBreakpoints.some((ab) => ab.mediaQuery === query);
+        return new ServerMediaQueryList(query, isActive);
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: ServerMatchMedia, deps: [{ token: i0.NgZone }, { token: PLATFORM_ID }, { token: DOCUMENT }, { token: BREAKPOINTS }, { token: LAYOUT_CONFIG }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: ServerMatchMedia }); }
 }
-i0.ɵɵngDeclareClassMetadata({
-  minVersion: '12.0.0',
-  version: '16.0.0-6ca1503',
-  ngImport: i0,
-  type: ServerMatchMedia,
-  decorators: [
-    {
-      type: Injectable,
-    },
-  ],
-  ctorParameters: function () {
-    return [
-      { type: i0.NgZone },
-      {
-        type: Object,
-        decorators: [
-          {
-            type: Inject,
-            args: [PLATFORM_ID],
-          },
-        ],
-      },
-      {
-        type: undefined,
-        decorators: [
-          {
-            type: Inject,
-            args: [DOCUMENT],
-          },
-        ],
-      },
-      {
-        type: undefined,
-        decorators: [
-          {
-            type: Inject,
-            args: [BREAKPOINTS],
-          },
-        ],
-      },
-      {
-        type: undefined,
-        decorators: [
-          {
-            type: Inject,
-            args: [LAYOUT_CONFIG],
-          },
-        ],
-      },
-    ];
-  },
-});
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: ServerMatchMedia, decorators: [{
+            type: Injectable
+        }], ctorParameters: function () { return [{ type: i0.NgZone }, { type: Object, decorators: [{
+                    type: Inject,
+                    args: [PLATFORM_ID]
+                }] }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [DOCUMENT]
+                }] }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [BREAKPOINTS]
+                }] }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [LAYOUT_CONFIG]
+                }] }]; } });
 
 /**
  * @license
@@ -244,79 +173,63 @@ i0.ɵɵngDeclareClassMetadata({
  * @param breakpoints the registered breakpoints to activate/deactivate
  * @param mediaMarshaller the MediaMarshaller service to disable fallback styles dynamically
  */
-function generateStaticFlexLayoutStyles(
-  serverSheet,
-  mediaController,
-  breakpoints,
-  mediaMarshaller
-) {
-  // Store the custom classes in the following map, that way only
-  // one class gets allocated per HTMLElement, and each class can
-  // be referenced in the static media queries
-  const classMap = new Map();
-  // Get the initial stylings for all the directives,
-  // and initialize the fallback block of stylings.
-  const defaultStyles = new Map(serverSheet.stylesheet);
-  // Reset the class counter, otherwise class numbers will
-  // increase with each server render.
-  nextId = 0;
-  let styleText = generateCss(defaultStyles, 'all', classMap);
-  mediaMarshaller.useFallbacks = false;
-  [...breakpoints].sort(sortAscendingPriority).forEach((bp) => {
-    serverSheet.clearStyles();
-    mediaController.activateBreakpoint(bp);
-    const stylesheet = new Map(serverSheet.stylesheet);
-    if (stylesheet.size > 0) {
-      styleText += generateCss(stylesheet, bp.mediaQuery, classMap);
-    }
-    mediaController.deactivateBreakpoint(bp);
-  });
-  return styleText;
+function generateStaticFlexLayoutStyles(serverSheet, mediaController, breakpoints, mediaMarshaller) {
+    // Store the custom classes in the following map, that way only
+    // one class gets allocated per HTMLElement, and each class can
+    // be referenced in the static media queries
+    const classMap = new Map();
+    // Get the initial stylings for all the directives,
+    // and initialize the fallback block of stylings.
+    const defaultStyles = new Map(serverSheet.stylesheet);
+    // Reset the class counter, otherwise class numbers will
+    // increase with each server render.
+    nextId = 0;
+    let styleText = generateCss(defaultStyles, 'all', classMap);
+    mediaMarshaller.useFallbacks = false;
+    [...breakpoints].sort(sortAscendingPriority).forEach((bp) => {
+        serverSheet.clearStyles();
+        mediaController.activateBreakpoint(bp);
+        const stylesheet = new Map(serverSheet.stylesheet);
+        if (stylesheet.size > 0) {
+            styleText += generateCss(stylesheet, bp.mediaQuery, classMap);
+        }
+        mediaController.deactivateBreakpoint(bp);
+    });
+    return styleText;
 }
 /**
  * Create a style tag populated with the dynamic stylings from Flex
  * components and attach it to the head of the DOM
  */
-function FLEX_SSR_SERIALIZER_FACTORY(
-  serverSheet,
-  mediaController,
-  _document,
-  breakpoints,
-  mediaMarshaller
-) {
-  return () => {
-    // This is the style tag that gets inserted into the head of the DOM,
-    // populated with the manual media queries
-    const styleTag = _document.createElement('style');
-    const styleText = generateStaticFlexLayoutStyles(
-      serverSheet,
-      mediaController,
-      breakpoints,
-      mediaMarshaller
-    );
-    styleTag.classList.add(`${CLASS_NAME}ssr`);
-    styleTag.textContent = styleText;
-    _document.head.appendChild(styleTag);
-  };
+function FLEX_SSR_SERIALIZER_FACTORY(serverSheet, mediaController, _document, breakpoints, mediaMarshaller) {
+    return () => {
+        // This is the style tag that gets inserted into the head of the DOM,
+        // populated with the manual media queries
+        const styleTag = _document.createElement('style');
+        const styleText = generateStaticFlexLayoutStyles(serverSheet, mediaController, breakpoints, mediaMarshaller);
+        styleTag.classList.add(`${CLASS_NAME}ssr`);
+        styleTag.textContent = styleText;
+        _document.head.appendChild(styleTag);
+    };
 }
 /**
  *  Provider to set static styles on the server
  */
 const SERVER_PROVIDERS = [
-  {
-    provide: BEFORE_APP_SERIALIZED,
-    useFactory: FLEX_SSR_SERIALIZER_FACTORY,
-    deps: [StylesheetMap, ɵMatchMedia, DOCUMENT, BREAKPOINTS, MediaMarshaller],
-    multi: true,
-  },
-  {
-    provide: SERVER_TOKEN,
-    useValue: true,
-  },
-  {
-    provide: ɵMatchMedia,
-    useClass: ServerMatchMedia,
-  },
+    {
+        provide: BEFORE_APP_SERIALIZED,
+        useFactory: FLEX_SSR_SERIALIZER_FACTORY,
+        deps: [StylesheetMap, ɵMatchMedia, DOCUMENT, BREAKPOINTS, MediaMarshaller],
+        multi: true,
+    },
+    {
+        provide: SERVER_TOKEN,
+        useValue: true,
+    },
+    {
+        provide: ɵMatchMedia,
+        useClass: ServerMatchMedia,
+    },
 ];
 let nextId = 0;
 const IS_DEBUG_MODE = false;
@@ -330,34 +243,34 @@ const IS_DEBUG_MODE = false;
  * @param classMap the map of HTML elements to class names to avoid duplications
  */
 function generateCss(stylesheet, mediaQuery, classMap) {
-  let css = '';
-  stylesheet.forEach((styles, el) => {
-    let keyVals = '';
-    let className = getClassName(el, classMap);
-    styles.forEach((v, k) => {
-      keyVals += v ? format(`${k}:${v};`) : '';
+    let css = '';
+    stylesheet.forEach((styles, el) => {
+        let keyVals = '';
+        let className = getClassName(el, classMap);
+        styles.forEach((v, k) => {
+            keyVals += v ? format(`${k}:${v};`) : '';
+        });
+        if (keyVals) {
+            // Build list of CSS styles; each with a className
+            css += format(`.${className} {`, keyVals, '}');
+        }
     });
-    if (keyVals) {
-      // Build list of CSS styles; each with a className
-      css += format(`.${className} {`, keyVals, '}');
-    }
-  });
-  // Group 1 or more styles (each with className) in a specific mediaQuery
-  return format(`@media ${mediaQuery} {`, css, '}');
+    // Group 1 or more styles (each with className) in a specific mediaQuery
+    return format(`@media ${mediaQuery} {`, css, '}');
 }
 /**
  * For debugging purposes, prefix css segment with linefeed(s) for easy
  * debugging purposes.
  */
 function format(...list) {
-  let result = '';
-  list.forEach((css, i) => {
-    result += IS_DEBUG_MODE ? formatSegment(css, i !== 0) : css;
-  });
-  return result;
+    let result = '';
+    list.forEach((css, i) => {
+        result += IS_DEBUG_MODE ? formatSegment(css, i !== 0) : css;
+    });
+    return result;
 }
 function formatSegment(css, asPrefix = true) {
-  return asPrefix ? `\n${css}` : `${css}\n`;
+    return asPrefix ? `\n${css}` : `${css}\n`;
 }
 /**
  * Get className associated with CSS styling
@@ -365,13 +278,13 @@ function formatSegment(css, asPrefix = true) {
  * association.
  */
 function getClassName(element, classMap) {
-  let className = classMap.get(element);
-  if (!className) {
-    className = `${CLASS_NAME}${nextId++}`;
-    classMap.set(element, className);
-  }
-  element.classList.add(className);
-  return className;
+    let className = classMap.get(element);
+    if (!className) {
+        className = `${CLASS_NAME}${nextId++}`;
+        classMap.set(element, className);
+    }
+    element.classList.add(className);
+    return className;
 }
 
 /**
@@ -382,50 +295,16 @@ function getClassName(element, classMap) {
  * found in the LICENSE file at https://angular.io/license
  */
 class FlexLayoutServerModule {
-  static {
-    this.ɵfac = i0.ɵɵngDeclareFactory({
-      minVersion: '12.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: FlexLayoutServerModule,
-      deps: [],
-      target: i0.ɵɵFactoryTarget.NgModule,
-    });
-  }
-  static {
-    this.ɵmod = i0.ɵɵngDeclareNgModule({
-      minVersion: '14.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: FlexLayoutServerModule,
-    });
-  }
-  static {
-    this.ɵinj = i0.ɵɵngDeclareInjector({
-      minVersion: '12.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: FlexLayoutServerModule,
-      providers: [SERVER_PROVIDERS],
-    });
-  }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexLayoutServerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.0.0", ngImport: i0, type: FlexLayoutServerModule }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexLayoutServerModule, providers: [SERVER_PROVIDERS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({
-  minVersion: '12.0.0',
-  version: '16.0.0-6ca1503',
-  ngImport: i0,
-  type: FlexLayoutServerModule,
-  decorators: [
-    {
-      type: NgModule,
-      args: [
-        {
-          providers: [SERVER_PROVIDERS],
-        },
-      ],
-    },
-  ],
-});
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexLayoutServerModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    providers: [SERVER_PROVIDERS]
+                }]
+        }] });
 
 /**
  * @license
@@ -439,10 +318,5 @@ i0.ɵɵngDeclareClassMetadata({
  * Generated bundle index. Do not edit.
  */
 
-export {
-  FLEX_SSR_SERIALIZER_FACTORY,
-  FlexLayoutServerModule,
-  SERVER_PROVIDERS,
-  generateStaticFlexLayoutStyles,
-};
+export { FLEX_SSR_SERIALIZER_FACTORY, FlexLayoutServerModule, SERVER_PROVIDERS, generateStaticFlexLayoutStyles };
 //# sourceMappingURL=ngbracket-ngx-layout-server.mjs.map
