@@ -1,97 +1,55 @@
-import * as i1 from '@angular/cdk/bidi';
-import * as i0 from '@angular/core';
-import { Directive, Inject, Injectable } from '@angular/core';
+import { Directive, Inject, Injectable, } from '@angular/core';
+import { BaseDirective2, LAYOUT_CONFIG, StyleBuilder, ɵmultiply as multiply, } from '@ngbracket/ngx-layout/core';
 import { isFlowHorizontal } from '@ngbracket/ngx-layout/_private-utils';
-import * as i2 from '@ngbracket/ngx-layout/core';
-import {
-  BaseDirective2,
-  LAYOUT_CONFIG,
-  StyleBuilder,
-  ɵmultiply as multiply,
-} from '@ngbracket/ngx-layout/core';
 import { takeUntil } from 'rxjs/operators';
+import * as i0 from "@angular/core";
+import * as i1 from "@angular/cdk/bidi";
+import * as i2 from "@ngbracket/ngx-layout/core";
 class FlexOffsetStyleBuilder extends StyleBuilder {
-  constructor(_config) {
-    super();
-    this._config = _config;
-  }
-  buildStyles(offset, parent) {
-    offset ||= '0';
-    offset = multiply(offset, this._config.multiplier);
-    const isPercent = String(offset).indexOf('%') > -1;
-    const isPx = String(offset).indexOf('px') > -1;
-    if (!isPx && !isPercent && !isNaN(+offset)) {
-      offset = `${offset}%`;
+    constructor(_config) {
+        super();
+        this._config = _config;
     }
-    const horizontalLayoutKey = parent.isRtl ? 'margin-right' : 'margin-left';
-    const styles = isFlowHorizontal(parent.layout)
-      ? { [horizontalLayoutKey]: offset }
-      : { 'margin-top': offset };
-    return styles;
-  }
-  static {
-    this.ɵfac = i0.ɵɵngDeclareFactory({
-      minVersion: '12.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: FlexOffsetStyleBuilder,
-      deps: [{ token: LAYOUT_CONFIG }],
-      target: i0.ɵɵFactoryTarget.Injectable,
-    });
-  }
-  static {
-    this.ɵprov = i0.ɵɵngDeclareInjectable({
-      minVersion: '12.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: FlexOffsetStyleBuilder,
-      providedIn: 'root',
-    });
-  }
+    buildStyles(offset, parent) {
+        offset ||= '0';
+        offset = multiply(offset, this._config.multiplier);
+        const isPercent = String(offset).indexOf('%') > -1;
+        const isPx = String(offset).indexOf('px') > -1;
+        if (!isPx && !isPercent && !isNaN(+offset)) {
+            offset = `${offset}%`;
+        }
+        const horizontalLayoutKey = parent.isRtl ? 'margin-right' : 'margin-left';
+        const styles = isFlowHorizontal(parent.layout)
+            ? { [horizontalLayoutKey]: offset }
+            : { 'margin-top': offset };
+        return styles;
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexOffsetStyleBuilder, deps: [{ token: LAYOUT_CONFIG }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexOffsetStyleBuilder, providedIn: 'root' }); }
 }
 export { FlexOffsetStyleBuilder };
-export { FlexOffsetDirective };
-export { DefaultFlexOffsetDirective };
-i0.ɵɵngDeclareClassMetadata({
-  minVersion: '12.0.0',
-  version: '16.0.0-6ca1503',
-  ngImport: i0,
-  type: FlexOffsetStyleBuilder,
-  decorators: [
-    {
-      type: Injectable,
-      args: [{ providedIn: 'root' }],
-    },
-  ],
-  ctorParameters: function () {
-    return [
-      {
-        type: undefined,
-        decorators: [
-          {
-            type: Inject,
-            args: [LAYOUT_CONFIG],
-          },
-        ],
-      },
-    ];
-  },
-});
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexOffsetStyleBuilder, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
+        }], ctorParameters: function () { return [{ type: undefined, decorators: [{
+                    type: Inject,
+                    args: [LAYOUT_CONFIG]
+                }] }]; } });
 const inputs = [
-  'fxFlexOffset',
-  'fxFlexOffset.xs',
-  'fxFlexOffset.sm',
-  'fxFlexOffset.md',
-  'fxFlexOffset.lg',
-  'fxFlexOffset.xl',
-  'fxFlexOffset.lt-sm',
-  'fxFlexOffset.lt-md',
-  'fxFlexOffset.lt-lg',
-  'fxFlexOffset.lt-xl',
-  'fxFlexOffset.gt-xs',
-  'fxFlexOffset.gt-sm',
-  'fxFlexOffset.gt-md',
-  'fxFlexOffset.gt-lg',
+    'fxFlexOffset',
+    'fxFlexOffset.xs',
+    'fxFlexOffset.sm',
+    'fxFlexOffset.md',
+    'fxFlexOffset.lg',
+    'fxFlexOffset.xl',
+    'fxFlexOffset.lt-sm',
+    'fxFlexOffset.lt-md',
+    'fxFlexOffset.lt-lg',
+    'fxFlexOffset.lt-xl',
+    'fxFlexOffset.gt-xs',
+    'fxFlexOffset.gt-sm',
+    'fxFlexOffset.gt-md',
+    'fxFlexOffset.gt-lg',
 ];
 const selector = `
   [fxFlexOffset], [fxFlexOffset.xs], [fxFlexOffset.sm], [fxFlexOffset.md],
@@ -104,143 +62,65 @@ const selector = `
  * Configures the 'margin-left' of the element in a layout container
  */
 class FlexOffsetDirective extends BaseDirective2 {
-  constructor(elRef, directionality, styleBuilder, marshal, styler) {
-    super(elRef, styleBuilder, styler, marshal);
-    this.directionality = directionality;
-    this.DIRECTIVE_KEY = 'flex-offset';
-    this.init([this.directionality.change]);
-    // Parent DOM `layout-gap` with affect the nested child with `flex-offset`
-    if (this.parentElement) {
-      this.marshal
-        .trackValue(this.parentElement, 'layout-gap')
-        .pipe(takeUntil(this.destroySubject))
-        .subscribe(this.triggerUpdate.bind(this));
+    constructor(elRef, directionality, styleBuilder, marshal, styler) {
+        super(elRef, styleBuilder, styler, marshal);
+        this.directionality = directionality;
+        this.DIRECTIVE_KEY = 'flex-offset';
+        this.init([this.directionality.change]);
+        // Parent DOM `layout-gap` with affect the nested child with `flex-offset`
+        if (this.parentElement) {
+            this.marshal
+                .trackValue(this.parentElement, 'layout-gap')
+                .pipe(takeUntil(this.destroySubject))
+                .subscribe(this.triggerUpdate.bind(this));
+        }
     }
-  }
-  // *********************************************
-  // Protected methods
-  // *********************************************
-  /**
-   * Using the current fxFlexOffset value, update the inline CSS
-   * NOTE: this will assign `margin-left` if the parent flex-direction == 'row',
-   *       otherwise `margin-top` is used for the offset.
-   */
-  updateWithValue(value = '') {
-    // The flex-direction of this element's flex container. Defaults to 'row'.
-    const layout = this.getFlexFlowDirection(this.parentElement, true);
-    const isRtl = this.directionality.value === 'rtl';
-    if (layout === 'row' && isRtl) {
-      this.styleCache = flexOffsetCacheRowRtl;
-    } else if (layout === 'row' && !isRtl) {
-      this.styleCache = flexOffsetCacheRowLtr;
-    } else if (layout === 'column' && isRtl) {
-      this.styleCache = flexOffsetCacheColumnRtl;
-    } else if (layout === 'column' && !isRtl) {
-      this.styleCache = flexOffsetCacheColumnLtr;
+    // *********************************************
+    // Protected methods
+    // *********************************************
+    /**
+     * Using the current fxFlexOffset value, update the inline CSS
+     * NOTE: this will assign `margin-left` if the parent flex-direction == 'row',
+     *       otherwise `margin-top` is used for the offset.
+     */
+    updateWithValue(value = '') {
+        // The flex-direction of this element's flex container. Defaults to 'row'.
+        const layout = this.getFlexFlowDirection(this.parentElement, true);
+        const isRtl = this.directionality.value === 'rtl';
+        if (layout === 'row' && isRtl) {
+            this.styleCache = flexOffsetCacheRowRtl;
+        }
+        else if (layout === 'row' && !isRtl) {
+            this.styleCache = flexOffsetCacheRowLtr;
+        }
+        else if (layout === 'column' && isRtl) {
+            this.styleCache = flexOffsetCacheColumnRtl;
+        }
+        else if (layout === 'column' && !isRtl) {
+            this.styleCache = flexOffsetCacheColumnLtr;
+        }
+        this.addStyles(value + '', { layout, isRtl });
     }
-    this.addStyles(value + '', { layout, isRtl });
-  }
-  static {
-    this.ɵfac = i0.ɵɵngDeclareFactory({
-      minVersion: '12.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: FlexOffsetDirective,
-      deps: [
-        { token: i0.ElementRef },
-        { token: i1.Directionality },
-        { token: FlexOffsetStyleBuilder },
-        { token: i2.MediaMarshaller },
-        { token: i2.StyleUtils },
-      ],
-      target: i0.ɵɵFactoryTarget.Directive,
-    });
-  }
-  static {
-    this.ɵdir = i0.ɵɵngDeclareDirective({
-      minVersion: '14.0.0',
-      version: '16.0.0-6ca1503',
-      type: FlexOffsetDirective,
-      usesInheritance: true,
-      ngImport: i0,
-    });
-  }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexOffsetDirective, deps: [{ token: i0.ElementRef }, { token: i1.Directionality }, { token: FlexOffsetStyleBuilder }, { token: i2.MediaMarshaller }, { token: i2.StyleUtils }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0", type: FlexOffsetDirective, usesInheritance: true, ngImport: i0 }); }
 }
-i0.ɵɵngDeclareClassMetadata({
-  minVersion: '12.0.0',
-  version: '16.0.0-6ca1503',
-  ngImport: i0,
-  type: FlexOffsetDirective,
-  decorators: [
-    {
-      type: Directive,
-    },
-  ],
-  ctorParameters: function () {
-    return [
-      { type: i0.ElementRef },
-      { type: i1.Directionality },
-      { type: FlexOffsetStyleBuilder },
-      { type: i2.MediaMarshaller },
-      { type: i2.StyleUtils },
-    ];
-  },
-});
+export { FlexOffsetDirective };
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: FlexOffsetDirective, decorators: [{
+            type: Directive
+        }], ctorParameters: function () { return [{ type: i0.ElementRef }, { type: i1.Directionality }, { type: FlexOffsetStyleBuilder }, { type: i2.MediaMarshaller }, { type: i2.StyleUtils }]; } });
 class DefaultFlexOffsetDirective extends FlexOffsetDirective {
-  constructor() {
-    super(...arguments);
-    this.inputs = inputs;
-  }
-  static {
-    this.ɵfac = i0.ɵɵngDeclareFactory({
-      minVersion: '12.0.0',
-      version: '16.0.0-6ca1503',
-      ngImport: i0,
-      type: DefaultFlexOffsetDirective,
-      deps: null,
-      target: i0.ɵɵFactoryTarget.Directive,
-    });
-  }
-  static {
-    this.ɵdir = i0.ɵɵngDeclareDirective({
-      minVersion: '14.0.0',
-      version: '16.0.0-6ca1503',
-      type: DefaultFlexOffsetDirective,
-      selector:
-        '\n  [fxFlexOffset], [fxFlexOffset.xs], [fxFlexOffset.sm], [fxFlexOffset.md],\n  [fxFlexOffset.lg], [fxFlexOffset.xl], [fxFlexOffset.lt-sm], [fxFlexOffset.lt-md],\n  [fxFlexOffset.lt-lg], [fxFlexOffset.lt-xl], [fxFlexOffset.gt-xs], [fxFlexOffset.gt-sm],\n  [fxFlexOffset.gt-md], [fxFlexOffset.gt-lg]\n',
-      inputs: {
-        fxFlexOffset: 'fxFlexOffset',
-        'fxFlexOffset.xs': 'fxFlexOffset.xs',
-        'fxFlexOffset.sm': 'fxFlexOffset.sm',
-        'fxFlexOffset.md': 'fxFlexOffset.md',
-        'fxFlexOffset.lg': 'fxFlexOffset.lg',
-        'fxFlexOffset.xl': 'fxFlexOffset.xl',
-        'fxFlexOffset.lt-sm': 'fxFlexOffset.lt-sm',
-        'fxFlexOffset.lt-md': 'fxFlexOffset.lt-md',
-        'fxFlexOffset.lt-lg': 'fxFlexOffset.lt-lg',
-        'fxFlexOffset.lt-xl': 'fxFlexOffset.lt-xl',
-        'fxFlexOffset.gt-xs': 'fxFlexOffset.gt-xs',
-        'fxFlexOffset.gt-sm': 'fxFlexOffset.gt-sm',
-        'fxFlexOffset.gt-md': 'fxFlexOffset.gt-md',
-        'fxFlexOffset.gt-lg': 'fxFlexOffset.gt-lg',
-      },
-      usesInheritance: true,
-      ngImport: i0,
-    });
-  }
+    constructor() {
+        super(...arguments);
+        this.inputs = inputs;
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: DefaultFlexOffsetDirective, deps: null, target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "16.0.0", type: DefaultFlexOffsetDirective, selector: "\n  [fxFlexOffset], [fxFlexOffset.xs], [fxFlexOffset.sm], [fxFlexOffset.md],\n  [fxFlexOffset.lg], [fxFlexOffset.xl], [fxFlexOffset.lt-sm], [fxFlexOffset.lt-md],\n  [fxFlexOffset.lt-lg], [fxFlexOffset.lt-xl], [fxFlexOffset.gt-xs], [fxFlexOffset.gt-sm],\n  [fxFlexOffset.gt-md], [fxFlexOffset.gt-lg]\n", inputs: { fxFlexOffset: "fxFlexOffset", "fxFlexOffset.xs": "fxFlexOffset.xs", "fxFlexOffset.sm": "fxFlexOffset.sm", "fxFlexOffset.md": "fxFlexOffset.md", "fxFlexOffset.lg": "fxFlexOffset.lg", "fxFlexOffset.xl": "fxFlexOffset.xl", "fxFlexOffset.lt-sm": "fxFlexOffset.lt-sm", "fxFlexOffset.lt-md": "fxFlexOffset.lt-md", "fxFlexOffset.lt-lg": "fxFlexOffset.lt-lg", "fxFlexOffset.lt-xl": "fxFlexOffset.lt-xl", "fxFlexOffset.gt-xs": "fxFlexOffset.gt-xs", "fxFlexOffset.gt-sm": "fxFlexOffset.gt-sm", "fxFlexOffset.gt-md": "fxFlexOffset.gt-md", "fxFlexOffset.gt-lg": "fxFlexOffset.gt-lg" }, usesInheritance: true, ngImport: i0 }); }
 }
-i0.ɵɵngDeclareClassMetadata({
-  minVersion: '12.0.0',
-  version: '16.0.0-6ca1503',
-  ngImport: i0,
-  type: DefaultFlexOffsetDirective,
-  decorators: [
-    {
-      type: Directive,
-      args: [{ selector, inputs }],
-    },
-  ],
-});
+export { DefaultFlexOffsetDirective };
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: DefaultFlexOffsetDirective, decorators: [{
+            type: Directive,
+            args: [{ selector, inputs }]
+        }] });
 const flexOffsetCacheRowRtl = new Map();
 const flexOffsetCacheColumnRtl = new Map();
 const flexOffsetCacheRowLtr = new Map();
