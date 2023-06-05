@@ -24,18 +24,18 @@ const ALL_DIRECTIVES = [
  * *****************************************************************
  */
 class ExtendedModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: ExtendedModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.0.0", ngImport: i0, type: ExtendedModule, declarations: [DefaultShowHideDirective,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.0.0-c9a4500", ngImport: i0, type: ExtendedModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "16.0.0-c9a4500", ngImport: i0, type: ExtendedModule, declarations: [DefaultShowHideDirective,
             DefaultClassDirective,
             DefaultStyleDirective,
             DefaultImgSrcDirective], imports: [CoreModule], exports: [DefaultShowHideDirective,
             DefaultClassDirective,
             DefaultStyleDirective,
             DefaultImgSrcDirective] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: ExtendedModule, imports: [CoreModule] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "16.0.0-c9a4500", ngImport: i0, type: ExtendedModule, imports: [CoreModule] }); }
 }
 export { ExtendedModule };
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0", ngImport: i0, type: ExtendedModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.0.0-c9a4500", ngImport: i0, type: ExtendedModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CoreModule],
