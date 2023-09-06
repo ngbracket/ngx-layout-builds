@@ -84,6 +84,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.3", ngImpor
 /** Current version of Angular Flex-Layout. */
 const VERSION = new Version('16.0.0-765f063');
 
+
 /**
  * @license
  * Copyright Google LLC All Rights Reserved.
