@@ -24,6 +24,7 @@ export declare class FlexOrderDirective extends BaseDirective2 implements OnChan
     protected DIRECTIVE_KEY: string;
     constructor(elRef: ElementRef, styleUtils: StyleUtils, styleBuilder: FlexOrderStyleBuilder, marshal: MediaMarshaller);
     protected styleCache: Map<string, StyleDefinition>;
+    updateWithValue(input: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<FlexOrderDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<FlexOrderDirective, never, never, {}, {}, never, never, false, never>;
 }
