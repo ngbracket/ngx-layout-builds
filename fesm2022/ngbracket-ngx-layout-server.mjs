@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { PLATFORM_ID, Injectable, Inject, NgModule } from '@angular/core';
+import { PLATFORM_ID, Injectable, Inject, Optional, CSP_NONCE, NgModule } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { BEFORE_APP_SERIALIZED } from '@angular/platform-server';
 import { ɵMatchMedia, BREAKPOINTS, LAYOUT_CONFIG, sortAscendingPriority, CLASS_NAME, StylesheetMap, MediaMarshaller, SERVER_TOKEN } from '@ngbracket/ngx-layout/core';
@@ -201,11 +201,14 @@ function generateStaticFlexLayoutStyles(serverSheet, mediaController, breakpoint
  * Create a style tag populated with the dynamic stylings from Flex
  * components and attach it to the head of the DOM
  */
-function FLEX_SSR_SERIALIZER_FACTORY(serverSheet, mediaController, _document, breakpoints, mediaMarshaller) {
+function FLEX_SSR_SERIALIZER_FACTORY(serverSheet, mediaController, _document, breakpoints, mediaMarshaller, _nonce) {
     return () => {
         // This is the style tag that gets inserted into the head of the DOM,
         // populated with the manual media queries
         const styleTag = _document.createElement('style');
+        if (_nonce) {
+            styleTag.setAttribute('nonce', _nonce);
+        }
         const styleText = generateStaticFlexLayoutStyles(serverSheet, mediaController, breakpoints, mediaMarshaller);
         styleTag.classList.add(`${CLASS_NAME}ssr`);
         styleTag.textContent = styleText;
@@ -219,7 +222,14 @@ const SERVER_PROVIDERS = [
     {
         provide: BEFORE_APP_SERIALIZED,
         useFactory: FLEX_SSR_SERIALIZER_FACTORY,
-        deps: [StylesheetMap, ɵMatchMedia, DOCUMENT, BREAKPOINTS, MediaMarshaller],
+        deps: [
+            StylesheetMap,
+            ɵMatchMedia,
+            DOCUMENT,
+            BREAKPOINTS,
+            MediaMarshaller,
+            [new Optional(), new Inject(CSP_NONCE)],
+        ],
         multi: true,
     },
     {
