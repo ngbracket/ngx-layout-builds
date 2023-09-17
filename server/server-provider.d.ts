@@ -1,5 +1,6 @@
 import { BreakPoint, MediaMarshaller, StylesheetMap, ɵMatchMedia as MatchMedia } from '@ngbracket/ngx-layout/core';
 import { ServerMatchMedia } from './server-match-media';
+import { Optional } from '@angular/core';
 /**
  * Activate all the registered breakpoints in sequence, and then
  * retrieve the associated stylings from the virtual stylesheet
@@ -14,14 +15,14 @@ export declare function generateStaticFlexLayoutStyles(serverSheet: StylesheetMa
  * Create a style tag populated with the dynamic stylings from Flex
  * components and attach it to the head of the DOM
  */
-export declare function FLEX_SSR_SERIALIZER_FACTORY(serverSheet: StylesheetMap, mediaController: ServerMatchMedia, _document: Document, breakpoints: BreakPoint[], mediaMarshaller: MediaMarshaller): () => void;
+export declare function FLEX_SSR_SERIALIZER_FACTORY(serverSheet: StylesheetMap, mediaController: ServerMatchMedia, _document: Document, breakpoints: BreakPoint[], mediaMarshaller: MediaMarshaller, _nonce?: string): () => void;
 /**
  *  Provider to set static styles on the server
  */
 export declare const SERVER_PROVIDERS: ({
     provide: import("@angular/core").InjectionToken<(() => void | Promise<void>)[]>;
     useFactory: typeof FLEX_SSR_SERIALIZER_FACTORY;
-    deps: (import("@angular/core").InjectionToken<Document> | typeof StylesheetMap | typeof MatchMedia | typeof MediaMarshaller)[];
+    deps: (import("@angular/core").InjectionToken<Document> | typeof StylesheetMap | typeof MatchMedia | typeof MediaMarshaller | Optional[])[];
     multi: boolean;
     useValue?: undefined;
     useClass?: undefined;

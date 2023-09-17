@@ -15,6 +15,7 @@ import * as i0 from "@angular/core";
  * range and to clearAll mediaQuery listeners.
  */
 export declare class MockMatchMedia extends MatchMedia {
+    _document: any;
     private _breakpoints;
     autoRegisterQueries: boolean;
     useOverlaps: boolean;
@@ -23,6 +24,7 @@ export declare class MockMatchMedia extends MatchMedia {
     clearAll(): void;
     /** Feature to support manual, simulated activation of a mediaQuery. */
     activate(mediaQuery: string, useOverlaps?: boolean): boolean;
+    setNonce(nonce: string | null): void;
     /** Converts an optional mediaQuery alias to a specific, valid mediaQuery */
     _validateQuery(queryOrAlias: string): string;
     /**

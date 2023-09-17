@@ -1,5 +1,5 @@
 import * as i0 from '@angular/core';
-import { APP_BOOTSTRAP_LISTENER, PLATFORM_ID, NgModule, Injectable, InjectionToken, Inject, inject, Directive } from '@angular/core';
+import { APP_BOOTSTRAP_LISTENER, PLATFORM_ID, NgModule, Injectable, InjectionToken, Inject, CSP_NONCE, Optional, inject, Directive } from '@angular/core';
 import { isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
 import { BehaviorSubject, Observable, merge, Subject, asapScheduler, of, fromEvent } from 'rxjs';
 import { applyCssPrefixes, extendObject, buildLayoutCSS } from '@ngbracket/ngx-layout/_private-utils';
@@ -477,10 +477,11 @@ function sortAscendingPriority(a, b) {
  * NOTE: both mediaQuery activations and de-activations are announced in notifications
  */
 class MatchMedia {
-    constructor(_zone, _platformId, _document) {
+    constructor(_zone, _platformId, _document, _nonce) {
         this._zone = _zone;
         this._platformId = _platformId;
         this._document = _document;
+        this._nonce = _nonce;
         /** Initialize source with 'all' so all non-responsive APIs trigger style updates */
         this.source = new BehaviorSubject(new MediaChange(true));
         this.registry = new Map();
@@ -541,7 +542,7 @@ class MatchMedia {
     registerQuery(mediaQuery) {
         const list = Array.isArray(mediaQuery) ? mediaQuery : [mediaQuery];
         const matches = [];
-        buildQueryCss(list, this._document);
+        buildQueryCss(list, this._document, this._nonce);
         list.forEach((query) => {
             const onMQLEvent = (e) => {
                 this._zone.run(() => this.source.next(new MediaChange(e.matches, query)));
@@ -572,7 +573,7 @@ class MatchMedia {
     buildMQL(query) {
         return constructMql(query, isPlatformBrowser(this._platformId));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.3", ngImport: i0, type: MatchMedia, deps: [{ token: i0.NgZone }, { token: PLATFORM_ID }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.3", ngImport: i0, type: MatchMedia, deps: [{ token: i0.NgZone }, { token: PLATFORM_ID }, { token: DOCUMENT }, { token: CSP_NONCE, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
     static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.3", ngImport: i0, type: MatchMedia, providedIn: 'root' }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.3", ngImport: i0, type: MatchMedia, decorators: [{
@@ -584,6 +585,11 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.3", ngImpor
                 }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [DOCUMENT]
+                }] }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [CSP_NONCE]
                 }] }]; } });
 /**
  * Private global registry for all dynamically-created, injected style tags
@@ -597,13 +603,16 @@ const ALL_STYLES = {};
  * @param mediaQueries
  * @param _document
  */
-function buildQueryCss(mediaQueries, _document) {
+function buildQueryCss(mediaQueries, _document, _nonce) {
     const list = mediaQueries.filter((it) => !ALL_STYLES[it]);
     if (list.length > 0) {
         const query = list.join(', ');
         try {
             const styleEl = _document.createElement('style');
             styleEl.setAttribute('type', 'text/css');
+            if (_nonce) {
+                styleEl.setAttribute('nonce', _nonce);
+            }
             if (!styleEl.styleSheet) {
                 const cssText = `
 /*
@@ -1630,6 +1639,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.3", ngImpor
 class MockMatchMedia extends MatchMedia {
     constructor(_zone, _platformId, _document, _breakpoints) {
         super(_zone, _platformId, _document);
+        this._document = _document;
         this._breakpoints = _breakpoints;
         this.autoRegisterQueries = true; // Used for testing BreakPoint registrations
         this.useOverlaps = false; // Allow fallback to overlapping mediaQueries
@@ -1651,6 +1661,9 @@ class MockMatchMedia extends MatchMedia {
             this._activateWithOverlaps(mediaQuery, useOverlaps);
         }
         return this.hasActivated;
+    }
+    setNonce(nonce) {
+        super._nonce = nonce;
     }
     /** Converts an optional mediaQuery alias to a specific, valid mediaQuery */
     _validateQuery(queryOrAlias) {
