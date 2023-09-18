@@ -1,6 +1,6 @@
 {
   "name": "@ngbracket/ngx-layout",
-  "version": "16.1.1-930ed4a",
+  "version": "16.1.3-239c8b5",
   "exports": {
     "./mq": {
       "sass": "./core/sass/_layout-bp.scss"
@@ -23,12 +23,6 @@
       "esm": "./esm2022/_private-utils/ngbracket-ngx-layout-_private-utils.mjs",
       "default": "./fesm2022/ngbracket-ngx-layout-_private-utils.mjs"
     },
-    "./extended": {
-      "types": "./extended/index.d.ts",
-      "esm2022": "./esm2022/extended/ngbracket-ngx-layout-extended.mjs",
-      "esm": "./esm2022/extended/ngbracket-ngx-layout-extended.mjs",
-      "default": "./fesm2022/ngbracket-ngx-layout-extended.mjs"
-    },
     "./core": {
       "types": "./core/index.d.ts",
       "esm2022": "./esm2022/core/ngbracket-ngx-layout-core.mjs",
@@ -40,6 +34,12 @@
       "esm2022": "./esm2022/grid/ngbracket-ngx-layout-grid.mjs",
       "esm": "./esm2022/grid/ngbracket-ngx-layout-grid.mjs",
       "default": "./fesm2022/ngbracket-ngx-layout-grid.mjs"
+    },
+    "./extended": {
+      "types": "./extended/index.d.ts",
+      "esm2022": "./esm2022/extended/ngbracket-ngx-layout-extended.mjs",
+      "esm": "./esm2022/extended/ngbracket-ngx-layout-extended.mjs",
+      "default": "./fesm2022/ngbracket-ngx-layout-extended.mjs"
     },
     "./flex": {
       "types": "./flex/index.d.ts",
