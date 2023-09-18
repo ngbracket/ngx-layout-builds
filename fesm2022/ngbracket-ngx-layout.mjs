@@ -82,7 +82,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.3", ngImpor
  * found in the LICENSE file at https://angular.io/license
  */
 /** Current version of Angular Flex-Layout. */
-const VERSION = new Version('16.1.3-ac396ce');
+const VERSION = new Version('16.1.3-ebcfb51');
 
 /**
  * @license
