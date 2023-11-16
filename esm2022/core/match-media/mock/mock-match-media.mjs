@@ -137,18 +137,18 @@ export class MockMatchMedia extends MatchMedia {
     get hasActivated() {
         return this.activations.length > 0;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "16.2.3", ngImport: i0, type: MockMatchMedia, deps: [{ token: i0.NgZone }, { token: PLATFORM_ID }, { token: DOCUMENT }, { token: i1.BreakPointRegistry }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "16.2.3", ngImport: i0, type: MockMatchMedia }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.3", ngImport: i0, type: MockMatchMedia, deps: [{ token: i0.NgZone }, { token: PLATFORM_ID }, { token: DOCUMENT }, { token: i1.BreakPointRegistry }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.0.3", ngImport: i0, type: MockMatchMedia }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "16.2.3", ngImport: i0, type: MockMatchMedia, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.3", ngImport: i0, type: MockMatchMedia, decorators: [{
             type: Injectable
-        }], ctorParameters: function () { return [{ type: i0.NgZone }, { type: Object, decorators: [{
+        }], ctorParameters: () => [{ type: i0.NgZone }, { type: Object, decorators: [{
                     type: Inject,
                     args: [PLATFORM_ID]
                 }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [DOCUMENT]
-                }] }, { type: i1.BreakPointRegistry }]; } });
+                }] }, { type: i1.BreakPointRegistry }] });
 /**
  * Special internal class to simulate a MediaQueryList and
  * - supports manual activation to simulate mediaQuery matching
