@@ -20,7 +20,7 @@ export declare function FLEX_SSR_SERIALIZER_FACTORY(serverSheet: StylesheetMap, 
  *  Provider to set static styles on the server
  */
 export declare const SERVER_PROVIDERS: ({
-    provide: import("@angular/core").InjectionToken<(() => void | Promise<void>)[]>;
+    provide: import("@angular/core").InjectionToken<readonly (() => void | Promise<void>)[]>;
     useFactory: typeof FLEX_SSR_SERIALIZER_FACTORY;
     deps: (import("@angular/core").InjectionToken<Document> | typeof StylesheetMap | typeof MatchMedia | typeof MediaMarshaller | Optional[])[];
     multi: boolean;
