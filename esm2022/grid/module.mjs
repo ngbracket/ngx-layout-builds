@@ -38,8 +38,8 @@ const ALL_DIRECTIVES = [
  * *****************************************************************
  */
 export class GridModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.3", ngImport: i0, type: GridModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.0.3", ngImport: i0, type: GridModule, declarations: [DefaultGridAlignDirective,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: GridModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.0.9", ngImport: i0, type: GridModule, declarations: [DefaultGridAlignDirective,
             DefaultGridAlignColumnsDirective,
             DefaultGridAlignRowsDirective,
             DefaultGridAreaDirective,
@@ -60,9 +60,9 @@ export class GridModule {
             DefaultGridGapDirective,
             DefaultGridRowDirective,
             DefaultGridRowsDirective] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.0.3", ngImport: i0, type: GridModule, imports: [CoreModule] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: GridModule, imports: [CoreModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.3", ngImport: i0, type: GridModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: GridModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CoreModule],
