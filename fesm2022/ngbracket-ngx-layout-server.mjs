@@ -2,7 +2,7 @@ import * as i0 from '@angular/core';
 import { PLATFORM_ID, Injectable, Inject, Optional, CSP_NONCE, NgModule } from '@angular/core';
 import { DOCUMENT } from '@angular/common';
 import { BEFORE_APP_SERIALIZED } from '@angular/platform-server';
-import { ɵMatchMedia, BREAKPOINTS, LAYOUT_CONFIG, sortAscendingPriority, CLASS_NAME, StylesheetMap, MediaMarshaller, SERVER_TOKEN } from '@ngbracket/ngx-layout/core';
+import { ɵMatchMedia as _MatchMedia, BREAKPOINTS, LAYOUT_CONFIG, sortAscendingPriority, CLASS_NAME, StylesheetMap, MediaMarshaller, SERVER_TOKEN } from '@ngbracket/ngx-layout/core';
 
 /**
  * @license
@@ -93,7 +93,7 @@ class ServerMediaQueryList extends EventTarget {
  *
  * Also contains methods to activate and deactivate breakpoints
  */
-class ServerMatchMedia extends ɵMatchMedia {
+class ServerMatchMedia extends _MatchMedia {
     constructor(_zone, _platformId, _document, breakpoints, layoutConfig) {
         super(_zone, _platformId, _document);
         this._zone = _zone;
@@ -138,10 +138,10 @@ class ServerMatchMedia extends ɵMatchMedia {
         const isActive = this._activeBreakpoints.some((ab) => ab.mediaQuery === query);
         return new ServerMediaQueryList(query, isActive);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.3", ngImport: i0, type: ServerMatchMedia, deps: [{ token: i0.NgZone }, { token: PLATFORM_ID }, { token: DOCUMENT }, { token: BREAKPOINTS }, { token: LAYOUT_CONFIG }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.0.3", ngImport: i0, type: ServerMatchMedia }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: ServerMatchMedia, deps: [{ token: i0.NgZone }, { token: PLATFORM_ID }, { token: DOCUMENT }, { token: BREAKPOINTS }, { token: LAYOUT_CONFIG }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: ServerMatchMedia }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.3", ngImport: i0, type: ServerMatchMedia, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: ServerMatchMedia, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i0.NgZone }, { type: Object, decorators: [{
                     type: Inject,
@@ -224,7 +224,7 @@ const SERVER_PROVIDERS = [
         useFactory: FLEX_SSR_SERIALIZER_FACTORY,
         deps: [
             StylesheetMap,
-            ɵMatchMedia,
+            _MatchMedia,
             DOCUMENT,
             BREAKPOINTS,
             MediaMarshaller,
@@ -237,7 +237,7 @@ const SERVER_PROVIDERS = [
         useValue: true,
     },
     {
-        provide: ɵMatchMedia,
+        provide: _MatchMedia,
         useClass: ServerMatchMedia,
     },
 ];
@@ -305,11 +305,11 @@ function getClassName(element, classMap) {
  * found in the LICENSE file at https://angular.io/license
  */
 class FlexLayoutServerModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.3", ngImport: i0, type: FlexLayoutServerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.0.3", ngImport: i0, type: FlexLayoutServerModule }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.0.3", ngImport: i0, type: FlexLayoutServerModule, providers: [SERVER_PROVIDERS] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: FlexLayoutServerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.0.9", ngImport: i0, type: FlexLayoutServerModule }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: FlexLayoutServerModule, providers: [SERVER_PROVIDERS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.3", ngImport: i0, type: FlexLayoutServerModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: FlexLayoutServerModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [SERVER_PROVIDERS]
