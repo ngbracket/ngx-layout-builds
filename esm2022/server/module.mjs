@@ -9,11 +9,11 @@ import { NgModule } from '@angular/core';
 import { SERVER_PROVIDERS } from './server-provider';
 import * as i0 from "@angular/core";
 export class FlexLayoutServerModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: FlexLayoutServerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.0.9", ngImport: i0, type: FlexLayoutServerModule }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: FlexLayoutServerModule, providers: [SERVER_PROVIDERS] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.4", ngImport: i0, type: FlexLayoutServerModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.4", ngImport: i0, type: FlexLayoutServerModule }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.4", ngImport: i0, type: FlexLayoutServerModule, providers: [SERVER_PROVIDERS] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: FlexLayoutServerModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.4", ngImport: i0, type: FlexLayoutServerModule, decorators: [{
             type: NgModule,
             args: [{
                     providers: [SERVER_PROVIDERS]

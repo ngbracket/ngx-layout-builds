@@ -33,8 +33,8 @@ const ALL_DIRECTIVES = [
  * *****************************************************************
  */
 export class FlexModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: FlexModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.0.9", ngImport: i0, type: FlexModule, declarations: [DefaultLayoutDirective,
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "17.3.4", ngImport: i0, type: FlexModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "17.3.4", ngImport: i0, type: FlexModule, declarations: [DefaultLayoutDirective,
             DefaultLayoutGapDirective,
             DefaultLayoutAlignDirective,
             DefaultFlexOrderDirective,
@@ -49,9 +49,9 @@ export class FlexModule {
             FlexFillDirective,
             DefaultFlexAlignDirective,
             DefaultFlexDirective] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: FlexModule, imports: [CoreModule, BidiModule] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "17.3.4", ngImport: i0, type: FlexModule, imports: [CoreModule, BidiModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.0.9", ngImport: i0, type: FlexModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "17.3.4", ngImport: i0, type: FlexModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [CoreModule, BidiModule],
