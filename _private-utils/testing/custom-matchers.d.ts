@@ -1,4 +1,3 @@
-/// <reference types="jasmine" />
 export declare const expect: (actual: any) => NgMatchers;
 /**
  * Jasmine matchers that check Angular specific conditions.
