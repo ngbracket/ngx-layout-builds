@@ -1,6 +1,6 @@
 {
   "name": "@ngbracket/ngx-layout",
-  "version": "19.0.0-11d3dfe",
+  "version": "19.0.0-608c465",
   "exports": {
     "./mq": {
       "sass": "./core/sass/_layout-bp.scss"
@@ -19,14 +19,6 @@
       "types": "./_private-utils/index.d.ts",
       "default": "./fesm2022/ngbracket-ngx-layout-_private-utils.mjs"
     },
-    "./flex": {
-      "types": "./flex/index.d.ts",
-      "default": "./fesm2022/ngbracket-ngx-layout-flex.mjs"
-    },
-    "./grid": {
-      "types": "./grid/index.d.ts",
-      "default": "./fesm2022/ngbracket-ngx-layout-grid.mjs"
-    },
     "./core": {
       "types": "./core/index.d.ts",
       "default": "./fesm2022/ngbracket-ngx-layout-core.mjs"
@@ -34,6 +26,14 @@
     "./extended": {
       "types": "./extended/index.d.ts",
       "default": "./fesm2022/ngbracket-ngx-layout-extended.mjs"
+    },
+    "./flex": {
+      "types": "./flex/index.d.ts",
+      "default": "./fesm2022/ngbracket-ngx-layout-flex.mjs"
+    },
+    "./grid": {
+      "types": "./grid/index.d.ts",
+      "default": "./fesm2022/ngbracket-ngx-layout-grid.mjs"
     },
     "./server": {
       "types": "./server/index.d.ts",
@@ -65,10 +65,10 @@
     "tslib": "^2.5.0"
   },
   "peerDependencies": {
-    "@angular/cdk": ">=19.0.0-11d3dfe",
-    "@angular/core": ">=19.0.0-11d3dfe",
-    "@angular/common": ">=19.0.0-11d3dfe",
-    "@angular/platform-browser": ">=19.0.0-11d3dfe",
+    "@angular/cdk": ">=19.0.0-608c465",
+    "@angular/core": ">=19.0.0-608c465",
+    "@angular/common": ">=19.0.0-608c465",
+    "@angular/platform-browser": ">=19.0.0-608c465",
     "rxjs": "^6.5.3 || ^7.8.1"
   },
   "type": "module",
