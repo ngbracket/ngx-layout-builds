@@ -1,10 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { ElementRef } from '@angular/core';
 import { BaseDirective2, MediaMarshaller, StyleBuilder, StyleDefinition, StyleUtils } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
@@ -26,6 +19,10 @@ export declare class GridColumnDirective extends BaseDirective2 {
  * 'grid-column' CSS Grid styling directive
  * Configures the name or position of an element within the grid
  * @see https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-26
+ */
+/**
+ * @deprecated The DefaultGridColumnDirective will be removed in version 21.
+ * Use GridColumnDirective directly instead.
  */
 export declare class DefaultGridColumnDirective extends GridColumnDirective {
     protected inputs: string[];

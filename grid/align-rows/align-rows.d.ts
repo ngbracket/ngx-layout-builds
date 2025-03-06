@@ -25,6 +25,10 @@ export declare class GridAlignRowsDirective extends BaseDirective2 {
  * @see https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-18
  * @see https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-20
  */
+/**
+ * @deprecated The DefaultGridAlignRowsDirective will be removed in version 21.
+ * Use GridAlignRowsDirective directly instead.
+ */
 export declare class DefaultGridAlignRowsDirective extends GridAlignRowsDirective {
     protected inputs: string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<DefaultGridAlignRowsDirective, never>;

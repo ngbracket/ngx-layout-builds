@@ -1,13 +1,6 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { NgZone } from '@angular/core';
-import { MatchMedia } from '../match-media';
 import { BreakPointRegistry } from '../../breakpoints/break-point-registry';
+import { MatchMedia } from '../match-media';
 import * as i0 from "@angular/core";
 /**
  * MockMatchMedia mocks calls to the Window API matchMedia with a build of a simulated

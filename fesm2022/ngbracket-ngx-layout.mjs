@@ -1,4 +1,4 @@
-import { LAYOUT_CONFIG, DEFAULT_CONFIG, BREAKPOINT, SERVER_TOKEN } from '@ngbracket/ngx-layout/core';
+import { DEFAULT_CONFIG, LAYOUT_CONFIG, BREAKPOINT, SERVER_TOKEN } from '@ngbracket/ngx-layout/core';
 export * from '@ngbracket/ngx-layout/core';
 import { ExtendedModule } from '@ngbracket/ngx-layout/extended';
 export * from '@ngbracket/ngx-layout/extended';
@@ -8,15 +8,22 @@ import { GridModule } from '@ngbracket/ngx-layout/grid';
 export * from '@ngbracket/ngx-layout/grid';
 import { isPlatformServer } from '@angular/common';
 import * as i0 from '@angular/core';
-import { PLATFORM_ID, NgModule, Inject, Version } from '@angular/core';
+import { PLATFORM_ID, Inject, NgModule, Version } from '@angular/core';
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
+function provideFlexLayout(configOptions, breakpoints = []) {
+    const providers = [
+        {
+            provide: LAYOUT_CONFIG,
+            useValue: { ...DEFAULT_CONFIG, ...configOptions },
+        },
+        { provide: BREAKPOINT, useValue: breakpoints, multi: true },
+    ];
+    if (configOptions.serverLoaded) {
+        providers.push({ provide: SERVER_TOKEN, useValue: true });
+    }
+    return providers;
+}
+
 /**
  * FlexLayoutModule -- the main import for all utilities in the Angular Layout library
  * * Will automatically provide Flex, Grid, and Extended modules for use in the application
@@ -28,27 +35,10 @@ class FlexLayoutModule {
      * Initialize the FlexLayoutModule with a set of config options,
      * which sets the corresponding tokens accordingly
      */
-    static withConfig(configOptions, 
-    // tslint:disable-next-line:max-line-length
-    breakpoints = []) {
+    static withConfig(configOptions, breakpoints = []) {
         return {
             ngModule: FlexLayoutModule,
-            providers: configOptions.serverLoaded
-                ? [
-                    {
-                        provide: LAYOUT_CONFIG,
-                        useValue: { ...DEFAULT_CONFIG, ...configOptions },
-                    },
-                    { provide: BREAKPOINT, useValue: breakpoints, multi: true },
-                    { provide: SERVER_TOKEN, useValue: true },
-                ]
-                : [
-                    {
-                        provide: LAYOUT_CONFIG,
-                        useValue: { ...DEFAULT_CONFIG, ...configOptions },
-                    },
-                    { provide: BREAKPOINT, useValue: breakpoints, multi: true },
-                ],
+            providers: provideFlexLayout(configOptions, breakpoints),
         };
     }
     constructor(serverModuleLoaded, platformId) {
@@ -56,11 +46,11 @@ class FlexLayoutModule {
             console.warn('Warning: Flex Layout loaded on the server without FlexLayoutServerModule');
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: FlexLayoutModule, deps: [{ token: SERVER_TOKEN }, { token: PLATFORM_ID }], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.0.3", ngImport: i0, type: FlexLayoutModule, imports: [FlexModule, ExtendedModule, GridModule], exports: [FlexModule, ExtendedModule, GridModule] }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: FlexLayoutModule, imports: [FlexModule, ExtendedModule, GridModule, FlexModule, ExtendedModule, GridModule] }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: FlexLayoutModule, deps: [{ token: SERVER_TOKEN }, { token: PLATFORM_ID }], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.6", ngImport: i0, type: FlexLayoutModule, imports: [FlexModule, ExtendedModule, GridModule], exports: [FlexModule, ExtendedModule, GridModule] }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: FlexLayoutModule, imports: [FlexModule, ExtendedModule, GridModule, FlexModule, ExtendedModule, GridModule] }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: FlexLayoutModule, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: FlexLayoutModule, decorators: [{
             type: NgModule,
             args: [{
                     imports: [FlexModule, ExtendedModule, GridModule],
@@ -74,23 +64,9 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImpor
                     args: [PLATFORM_ID]
                 }] }] });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** Current version of Angular Flex-Layout. */
-const VERSION = new Version('19.0.0-525147d');
+const VERSION = new Version('19.0.0-0522bcf');
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * @module
  * @description

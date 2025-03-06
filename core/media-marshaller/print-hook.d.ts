@@ -1,15 +1,8 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { OnDestroy } from '@angular/core';
-import { MediaChange } from '../media-change';
 import { BreakPoint } from '../breakpoints/break-point';
-import { LayoutConfigOptions } from '../tokens/library-config';
 import { BreakPointRegistry, OptionalBreakPoint } from '../breakpoints/break-point-registry';
+import { MediaChange } from '../media-change';
+import { LayoutConfigOptions } from '../tokens/library-config';
 import * as i0 from "@angular/core";
 /**
  * Interface to apply PrintHook to call anonymous `target.updateStyles()`

@@ -28,6 +28,10 @@ export declare class GridGapDirective extends BaseDirective2 {
  * Syntax: <row gap> [<column-gap>]
  * @see https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-17
  */
+/**
+ * @deprecated The DefaultGridGapDirective will be removed in version 21.
+ * Use GridGapDirective directly instead.
+ */
 export declare class DefaultGridGapDirective extends GridGapDirective {
     protected inputs: string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<DefaultGridGapDirective, never>;

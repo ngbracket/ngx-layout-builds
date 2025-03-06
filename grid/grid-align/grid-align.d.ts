@@ -1,10 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { ElementRef } from '@angular/core';
 import { BaseDirective2, MediaMarshaller, StyleBuilder, StyleDefinition, StyleUtils } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
@@ -29,6 +22,10 @@ export declare class GridAlignDirective extends BaseDirective2 {
  *
  *  @see https://css-tricks.com/snippets/css/complete-guide-grid/#prop-justify-self
  *  @see https://css-tricks.com/snippets/css/complete-guide-grid/#prop-align-self
+ */
+/**
+ * @deprecated The DefaultGridAlignDirective will be removed in version 21.
+ * Use GridAlignDirective directly instead.
  */
 export declare class DefaultGridAlignDirective extends GridAlignDirective {
     protected inputs: string[];

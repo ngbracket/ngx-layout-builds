@@ -1,5 +1,5 @@
-import { MatchMedia } from '../match-media/match-media';
 import { BreakPointRegistry } from '../breakpoints/break-point-registry';
+import { MatchMedia } from '../match-media/match-media';
 import { LayoutConfigOptions } from '../tokens/library-config';
 import * as i0 from "@angular/core";
 /**

@@ -1,11 +1,4 @@
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Applies CSS prefixes to appropriate style keys.
  *
  * Note: `-ms-`, `-moz` and `-webkit-box` are no longer supported. e.g.
@@ -23,16 +16,10 @@ function applyCssPrefixes(target) {
         switch (key) {
             case 'display':
                 if (value === 'flex') {
-                    target['display'] = [
-                        '-webkit-flex',
-                        'flex'
-                    ];
+                    target['display'] = ['-webkit-flex', 'flex'];
                 }
                 else if (value === 'inline-flex') {
-                    target['display'] = [
-                        '-webkit-inline-flex',
-                        'inline-flex'
-                    ];
+                    target['display'] = ['-webkit-inline-flex', 'inline-flex'];
                 }
                 else {
                     target['display'] = value;
@@ -55,20 +42,15 @@ function applyCssPrefixes(target) {
                 target['flex-direction'] = value;
                 break;
             case 'order':
-                target['order'] = target['-webkit-' + key] = isNaN(+value) ? '0' : value;
+                target['order'] = target['-webkit-' + key] = isNaN(+value)
+                    ? '0'
+                    : value;
                 break;
         }
     }
     return target;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 const INLINE = 'inline';
 const LAYOUT_VALUES = ['row', 'column', 'row-reverse', 'column-reverse'];
 /**
@@ -79,18 +61,18 @@ function buildLayoutCSS(value) {
     return buildCSS(direction, wrap, isInline);
 }
 /**
-  * Validate the value to be one of the acceptable value options
-  * Use default fallback of 'row'
-  */
+ * Validate the value to be one of the acceptable value options
+ * Use default fallback of 'row'
+ */
 function validateValue(value) {
     value = value?.toLowerCase() ?? '';
     let [direction, wrap, inline] = value.split(' ');
     // First value must be the `flex-direction`
-    if (!LAYOUT_VALUES.find(x => x === direction)) {
+    if (!LAYOUT_VALUES.find((x) => x === direction)) {
         direction = LAYOUT_VALUES[0];
     }
     if (wrap === INLINE) {
-        wrap = (inline !== INLINE) ? inline : '';
+        wrap = inline !== INLINE ? inline : '';
         inline = INLINE;
     }
     return [direction, validateWrapValue(wrap), !!inline];
@@ -100,7 +82,7 @@ function validateValue(value) {
  * a horizontal/row flow.
  */
 function isFlowHorizontal(value) {
-    let [flow,] = validateValue(value);
+    let [flow] = validateValue(value);
     return flow.indexOf('row') > -1;
 }
 /**
@@ -146,13 +128,6 @@ function buildCSS(direction, wrap = null, inline = false) {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Extends an object with the *enumerable* and *own* properties of one or more source objects,
  * similar to Object.assign.
  *
@@ -174,14 +149,6 @@ function extendObject(dest, ...sources) {
     }
     return dest;
 }
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 
 /**
  * Generated bundle index. Do not edit.

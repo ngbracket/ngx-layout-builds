@@ -1,10 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { InjectionToken } from '@angular/core';
 /**
  * Find all of the server-generated stylings, if any, and remove them
@@ -18,7 +11,7 @@ export declare function removeStyles(_document: Document, platformId: Object): (
 export declare const BROWSER_PROVIDER: {
     provide: InjectionToken<(() => void)[]>;
     useFactory: typeof removeStyles;
-    deps: InjectionToken<Object>[];
+    deps: InjectionToken<Document>[];
     multi: boolean;
 };
 export declare const CLASS_NAME = "flex-layout-";

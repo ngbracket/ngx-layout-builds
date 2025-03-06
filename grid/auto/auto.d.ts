@@ -27,6 +27,10 @@ export declare class GridAutoDirective extends BaseDirective2 {
  * Configures the auto placement algorithm for the grid
  * @see https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-23
  */
+/**
+ * @deprecated The DefaultGridAutoDirective will be removed in version 21.
+ * Use GridAutoDirective directly instead.
+ */
 export declare class DefaultGridAutoDirective extends GridAutoDirective {
     protected inputs: string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<DefaultGridAutoDirective, never>;

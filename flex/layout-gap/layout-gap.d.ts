@@ -1,10 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { Directionality } from '@angular/cdk/bidi';
 import { AfterContentInit, ElementRef, NgZone, OnDestroy } from '@angular/core';
 import { BaseDirective2, ElementMatcher, LayoutConfigOptions, MediaMarshaller, StyleBuilder, StyleDefinition, StyleUtils } from '@ngbracket/ngx-layout/core';
@@ -58,6 +51,10 @@ export declare class LayoutGapDirective extends BaseDirective2 implements AfterC
     static ɵfac: i0.ɵɵFactoryDeclaration<LayoutGapDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<LayoutGapDirective, never, never, {}, {}, never, never, true, never>;
 }
+/**
+ * @deprecated The DefaultLayoutGapDirective will be removed in version 21.
+ * Use LayoutGapDirective directly instead.
+ */
 export declare class DefaultLayoutGapDirective extends LayoutGapDirective {
     protected inputs: string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<DefaultLayoutGapDirective, never>;

@@ -1,10 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { ElementRef } from '@angular/core';
 import { BaseDirective2, MediaMarshaller, StyleBuilder, StyleDefinition, StyleUtils } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
@@ -25,6 +18,10 @@ export declare class FlexAlignDirective extends BaseDirective2 {
     static ɵfac: i0.ɵɵFactoryDeclaration<FlexAlignDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<FlexAlignDirective, never, never, {}, {}, never, never, true, never>;
 }
+/**
+ * @deprecated The DefaultFlexAlignDirective will be removed in version 21.
+ * Use FlexAlignDirective directly instead.
+ */
 export declare class DefaultFlexAlignDirective extends FlexAlignDirective {
     protected inputs: string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<DefaultFlexAlignDirective, never>;

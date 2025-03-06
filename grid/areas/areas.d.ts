@@ -27,6 +27,10 @@ export declare class GridAreasDirective extends BaseDirective2 {
  * Configures the names of elements within the grid
  * @see https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-14
  */
+/**
+ * @deprecated The DefaultGridAreasDirective will be removed in version 21.
+ * Use GridAreasDirective directly instead.
+ */
 export declare class DefaultGridAreasDirective extends GridAreasDirective {
     protected inputs: string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<DefaultGridAreasDirective, never>;

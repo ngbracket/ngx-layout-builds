@@ -1,10 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { ElementRef, OnChanges } from '@angular/core';
 import { BaseDirective2, LayoutConfigOptions, MediaMarshaller, StyleBuilder, StyleUtils } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
@@ -36,6 +29,10 @@ export declare class LayoutDirective extends BaseDirective2 implements OnChanges
     static ɵfac: i0.ɵɵFactoryDeclaration<LayoutDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<LayoutDirective, never, never, {}, {}, never, never, true, never>;
 }
+/**
+ * @deprecated The DefaultLayoutDirective will be removed in version 21.
+ * Use LayoutDirective directly instead.
+ */
 export declare class DefaultLayoutDirective extends LayoutDirective {
     protected inputs: string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<DefaultLayoutDirective, never>;

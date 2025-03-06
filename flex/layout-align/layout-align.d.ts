@@ -1,10 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { ElementRef } from '@angular/core';
 import { BaseDirective2, ElementMatcher, MediaMarshaller, StyleBuilder, StyleDefinition, StyleUtils } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
@@ -42,6 +35,10 @@ export declare class LayoutAlignDirective extends BaseDirective2 {
     static ɵfac: i0.ɵɵFactoryDeclaration<LayoutAlignDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<LayoutAlignDirective, never, never, {}, {}, never, never, true, never>;
 }
+/**
+ * @deprecated The DefaultLayoutAlignDirective will be removed in version 21.
+ * Use LayoutAlignDirective directly instead.
+ */
 export declare class DefaultLayoutAlignDirective extends LayoutAlignDirective {
     protected inputs: string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<DefaultLayoutAlignDirective, never>;

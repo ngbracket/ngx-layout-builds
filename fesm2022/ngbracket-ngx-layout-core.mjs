@@ -1,72 +1,9 @@
-import * as i0 from '@angular/core';
-import { APP_BOOTSTRAP_LISTENER, PLATFORM_ID, NgModule, Injectable, InjectionToken, Inject, CSP_NONCE, Optional, inject, Directive } from '@angular/core';
 import { isPlatformBrowser, DOCUMENT, isPlatformServer } from '@angular/common';
+import * as i0 from '@angular/core';
+import { PLATFORM_ID, APP_BOOTSTRAP_LISTENER, NgModule, Injectable, InjectionToken, inject, Inject, CSP_NONCE, Optional, Directive } from '@angular/core';
 import { BehaviorSubject, Observable, merge, Subject, asapScheduler, of, fromEvent } from 'rxjs';
-import { applyCssPrefixes, extendObject, buildLayoutCSS } from '@ngbracket/ngx-layout/_private-utils';
+import { extendObject, applyCssPrefixes, buildLayoutCSS } from '@ngbracket/ngx-layout/_private-utils';
 import { filter, tap, debounceTime, switchMap, map, distinctUntilChanged, takeUntil, take } from 'rxjs/operators';
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * Find all of the server-generated stylings, if any, and remove them
- * This will be in the form of inline classes and the style block in the
- * head of the DOM
- */
-function removeStyles(_document, platformId) {
-    return () => {
-        if (isPlatformBrowser(platformId)) {
-            const elements = Array.from(_document.querySelectorAll(`[class*=${CLASS_NAME}]`));
-            // RegExp constructor should only be used if passing a variable to the constructor.
-            // When using static regular expression it is more performant to use reg exp literal.
-            // This is also needed to provide Safari 9 compatibility, please see
-            // https://stackoverflow.com/questions/37919802 for more discussion.
-            const classRegex = /\bflex-layout-.+?\b/g;
-            elements.forEach(el => {
-                el.classList.contains(`${CLASS_NAME}ssr`) && el.parentNode ?
-                    el.parentNode.removeChild(el) : el.className.replace(classRegex, '');
-            });
-        }
-    };
-}
-/**
- *  Provider to remove SSR styles on the browser
- */
-const BROWSER_PROVIDER = {
-    provide: APP_BOOTSTRAP_LISTENER,
-    useFactory: removeStyles,
-    deps: [DOCUMENT, PLATFORM_ID],
-    multi: true
-};
-const CLASS_NAME = 'flex-layout-';
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * *****************************************************************
- * Define module for common Angular Layout utilities
- * *****************************************************************
- */
-class CoreModule {
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: CoreModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
-    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.0.3", ngImport: i0, type: CoreModule }); }
-    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: CoreModule, providers: [BROWSER_PROVIDER] }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: CoreModule, decorators: [{
-            type: NgModule,
-            args: [{
-                    providers: [BROWSER_PROVIDER]
-                }]
-        }] });
 
 /**
  * Class instances emitted [to observers] for each mql notification
@@ -94,12 +31,70 @@ class MediaChange {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * For the specified MediaChange, make sure it contains the breakpoint alias
+ * and suffix (if available).
  */
+function mergeAlias(dest, source) {
+    dest = dest?.clone() ?? new MediaChange();
+    if (source) {
+        dest.mqAlias = source.alias;
+        dest.mediaQuery = source.mediaQuery;
+        dest.suffix = source.suffix;
+        dest.priority = source.priority;
+    }
+    return dest;
+}
+
+/**
+ * Find all of the server-generated stylings, if any, and remove them
+ * This will be in the form of inline classes and the style block in the
+ * head of the DOM
+ */
+function removeStyles(_document, platformId) {
+    return () => {
+        if (isPlatformBrowser(platformId)) {
+            const elements = Array.from(_document.querySelectorAll(`[class*=${CLASS_NAME}]`));
+            // RegExp constructor should only be used if passing a variable to the constructor.
+            // When using static regular expression it is more performant to use reg exp literal.
+            // This is also needed to provide Safari 9 compatibility, please see
+            // https://stackoverflow.com/questions/37919802 for more discussion.
+            const classRegex = /\bflex-layout-.+?\b/g;
+            elements.forEach((el) => {
+                el.classList.contains(`${CLASS_NAME}ssr`) && el.parentNode
+                    ? el.parentNode.removeChild(el)
+                    : el.className.replace(classRegex, '');
+            });
+        }
+    };
+}
+/**
+ *  Provider to remove SSR styles on the browser
+ */
+const BROWSER_PROVIDER = {
+    provide: APP_BOOTSTRAP_LISTENER,
+    useFactory: removeStyles,
+    deps: [DOCUMENT, PLATFORM_ID],
+    multi: true,
+};
+const CLASS_NAME = 'flex-layout-';
+
+/**
+ * *****************************************************************
+ * Define module for common Angular Layout utilities
+ * *****************************************************************
+ */
+class CoreModule {
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: CoreModule, deps: [], target: i0.ɵɵFactoryTarget.NgModule }); }
+    static { this.ɵmod = i0.ɵɵngDeclareNgModule({ minVersion: "14.0.0", version: "19.1.6", ngImport: i0, type: CoreModule }); }
+    static { this.ɵinj = i0.ɵɵngDeclareInjector({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: CoreModule, providers: [BROWSER_PROVIDER] }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: CoreModule, decorators: [{
+            type: NgModule,
+            args: [{
+                    providers: [BROWSER_PROVIDER],
+                }]
+        }] });
+
 /**
  * Utility to emulate a CSS stylesheet
  *
@@ -142,29 +137,19 @@ class StylesheetMap {
         }
         return value;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: StylesheetMap, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: StylesheetMap, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: StylesheetMap, deps: [], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: StylesheetMap, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: StylesheetMap, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: StylesheetMap, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
+const BREAKPOINT = new InjectionToken('Flex Layout token, collect all breakpoints into one provider', {
+    providedIn: 'root',
+    factory: () => null,
+});
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 const DEFAULT_CONFIG = {
     addFlexToParent: true,
     addOrientationBps: false,
@@ -184,16 +169,9 @@ const DEFAULT_CONFIG = {
 };
 const LAYOUT_CONFIG = new InjectionToken('Flex Layout token, config options for the library', {
     providedIn: 'root',
-    factory: () => DEFAULT_CONFIG
+    factory: () => DEFAULT_CONFIG,
 });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Token that is provided to tell whether the FlexLayoutServerModule
  * has been included in the bundle
@@ -202,253 +180,9 @@ const LAYOUT_CONFIG = new InjectionToken('Flex Layout token, config options for 
  */
 const SERVER_TOKEN = new InjectionToken('FlexLayoutServerLoaded', {
     providedIn: 'root',
-    factory: () => false
+    factory: () => false,
 });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-const BREAKPOINT = new InjectionToken('Flex Layout token, collect all breakpoints into one provider', {
-    providedIn: 'root',
-    factory: () => null
-});
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * For the specified MediaChange, make sure it contains the breakpoint alias
- * and suffix (if available).
- */
-function mergeAlias(dest, source) {
-    dest = dest?.clone() ?? new MediaChange();
-    if (source) {
-        dest.mqAlias = source.alias;
-        dest.mediaQuery = source.mediaQuery;
-        dest.suffix = source.suffix;
-        dest.priority = source.priority;
-    }
-    return dest;
-}
-
-/** A class that encapsulates CSS style generation for common directives */
-class StyleBuilder {
-    constructor() {
-        /** Whether to cache the generated output styles */
-        this.shouldCache = true;
-    }
-    /**
-     * Run a side effect computation given the input string and the computed styles
-     * from the build task and the host configuration object
-     * NOTE: This should be a no-op unless an algorithm is provided in a subclass
-     */
-    sideEffect(_input, _styles, _parent) {
-    }
-}
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-class StyleUtils {
-    constructor(_serverStylesheet, _serverModuleLoaded, _platformId, layoutConfig) {
-        this._serverStylesheet = _serverStylesheet;
-        this._serverModuleLoaded = _serverModuleLoaded;
-        this._platformId = _platformId;
-        this.layoutConfig = layoutConfig;
-    }
-    /**
-     * Applies styles given via string pair or object map to the directive element
-     */
-    applyStyleToElement(element, style, value = null) {
-        let styles = {};
-        if (typeof style === 'string') {
-            styles[style] = value;
-            style = styles;
-        }
-        styles = this.layoutConfig.disableVendorPrefixes
-            ? style
-            : applyCssPrefixes(style);
-        this._applyMultiValueStyleToElement(styles, element);
-    }
-    /**
-     * Applies styles given via string pair or object map to the directive's element
-     */
-    applyStyleToElements(style, elements = []) {
-        const styles = this.layoutConfig.disableVendorPrefixes
-            ? style
-            : applyCssPrefixes(style);
-        elements.forEach((el) => {
-            this._applyMultiValueStyleToElement(styles, el);
-        });
-    }
-    /**
-     * Determine the DOM element's Flexbox flow (flex-direction)
-     *
-     * Check inline style first then check computed (stylesheet) style
-     */
-    getFlowDirection(target) {
-        const query = 'flex-direction';
-        let value = this.lookupStyle(target, query);
-        const hasInlineValue = this.lookupInlineStyle(target, query) ||
-            (isPlatformServer(this._platformId) && this._serverModuleLoaded)
-            ? value
-            : '';
-        return [value || 'row', hasInlineValue];
-    }
-    hasWrap(target) {
-        const query = 'flex-wrap';
-        return this.lookupStyle(target, query) === 'wrap';
-    }
-    /**
-     * Find the DOM element's raw attribute value (if any)
-     */
-    lookupAttributeValue(element, attribute) {
-        return element.getAttribute(attribute) ?? '';
-    }
-    /**
-     * Find the DOM element's inline style value (if any)
-     */
-    lookupInlineStyle(element, styleName) {
-        return isPlatformBrowser(this._platformId)
-            ? element.style.getPropertyValue(styleName)
-            : getServerStyle(element, styleName);
-    }
-    /**
-     * Determine the inline or inherited CSS style
-     * NOTE: platform-server has no implementation for getComputedStyle
-     */
-    lookupStyle(element, styleName, inlineOnly = false) {
-        let value = '';
-        if (element) {
-            let immediateValue = (value = this.lookupInlineStyle(element, styleName));
-            if (!immediateValue) {
-                if (isPlatformBrowser(this._platformId)) {
-                    if (!inlineOnly) {
-                        value = getComputedStyle(element).getPropertyValue(styleName);
-                    }
-                }
-                else {
-                    if (this._serverModuleLoaded) {
-                        value = this._serverStylesheet.getStyleForElement(element, styleName);
-                    }
-                }
-            }
-        }
-        // Note: 'inline' is the default of all elements, unless UA stylesheet overrides;
-        //       in which case getComputedStyle() should determine a valid value.
-        return value ? value.trim() : '';
-    }
-    /**
-     * Applies the styles to the element. The styles object map may contain an array of values
-     * Each value will be added as element style
-     * Keys are sorted to add prefixed styles (like -webkit-x) first, before the standard ones
-     */
-    _applyMultiValueStyleToElement(styles, element) {
-        Object.keys(styles)
-            .sort()
-            .forEach((key) => {
-            const el = styles[key];
-            const values = Array.isArray(el)
-                ? el
-                : [el];
-            values.sort();
-            for (let value of values) {
-                value = value ? value + '' : '';
-                if (isPlatformBrowser(this._platformId) ||
-                    !this._serverModuleLoaded) {
-                    isPlatformBrowser(this._platformId)
-                        ? element.style.setProperty(key, value)
-                        : setServerStyle(element, key, value);
-                }
-                else {
-                    this._serverStylesheet.addStyleToElement(element, key, value);
-                }
-            }
-        });
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: StyleUtils, deps: [{ token: StylesheetMap }, { token: SERVER_TOKEN }, { token: PLATFORM_ID }, { token: LAYOUT_CONFIG }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: StyleUtils, providedIn: 'root' }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: StyleUtils, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: StylesheetMap }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [SERVER_TOKEN]
-                }] }, { type: Object, decorators: [{
-                    type: Inject,
-                    args: [PLATFORM_ID]
-                }] }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [LAYOUT_CONFIG]
-                }] }] });
-function getServerStyle(element, styleName) {
-    const styleMap = readStyleAttribute(element);
-    return styleMap[styleName] ?? '';
-}
-function setServerStyle(element, styleName, styleValue) {
-    styleName = styleName.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
-    const styleMap = readStyleAttribute(element);
-    styleMap[styleName] = styleValue ?? '';
-    writeStyleAttribute(element, styleMap);
-}
-function writeStyleAttribute(element, styleMap) {
-    let styleAttrValue = '';
-    for (const key in styleMap) {
-        const newValue = styleMap[key];
-        if (newValue) {
-            styleAttrValue += `${key}:${styleMap[key]};`;
-        }
-    }
-    element.setAttribute('style', styleAttrValue);
-}
-function readStyleAttribute(element) {
-    const styleMap = {};
-    const styleAttribute = element.getAttribute('style');
-    if (styleAttribute) {
-        const styleList = styleAttribute.split(/;+/g);
-        for (let i = 0; i < styleList.length; i++) {
-            const style = styleList[i].trim();
-            if (style.length > 0) {
-                const colonIndex = style.indexOf(':');
-                if (colonIndex === -1) {
-                    throw new Error(`Invalid CSS style: ${style}`);
-                }
-                const name = style.substr(0, colonIndex).trim();
-                styleMap[name] = style.substr(colonIndex + 1).trim();
-            }
-        }
-    }
-    return styleMap;
-}
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** HOF to sort the breakpoints by descending priority */
 function sortDescendingPriority(a, b) {
     const priorityA = a ? a.priority || 0 : 0;
@@ -462,199 +196,6 @@ function sortAscendingPriority(a, b) {
     return pA - pB;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
- * MediaMonitor configures listeners to mediaQuery changes and publishes an Observable facade to
- * convert mediaQuery change callbacks to subscriber notifications. These notifications will be
- * performed within the ng Zone to trigger change detections and component updates.
- *
- * NOTE: both mediaQuery activations and de-activations are announced in notifications
- */
-class MatchMedia {
-    constructor(_zone, _platformId, _document, _nonce) {
-        this._zone = _zone;
-        this._platformId = _platformId;
-        this._document = _document;
-        this._nonce = _nonce;
-        /** Initialize source with 'all' so all non-responsive APIs trigger style updates */
-        this.source = new BehaviorSubject(new MediaChange(true));
-        this.registry = new Map();
-        this.pendingRemoveListenerFns = [];
-        this._observable$ = this.source.asObservable();
-    }
-    /**
-     * Publish list of all current activations
-     */
-    get activations() {
-        const results = [];
-        this.registry.forEach((mql, key) => {
-            if (mql.matches) {
-                results.push(key);
-            }
-        });
-        return results;
-    }
-    /**
-     * For the specified mediaQuery?
-     */
-    isActive(mediaQuery) {
-        const mql = this.registry.get(mediaQuery);
-        return (mql?.matches ?? this.registerQuery(mediaQuery).some((m) => m.matches));
-    }
-    /**
-     * External observers can watch for all (or a specific) mql changes.
-     * Typically used by the MediaQueryAdaptor; optionally available to components
-     * who wish to use the MediaMonitor as mediaMonitor$ observable service.
-     *
-     * Use deferred registration process to register breakpoints only on subscription
-     * This logic also enforces logic to register all mediaQueries BEFORE notify
-     * subscribers of notifications.
-     */
-    observe(mqList, filterOthers = false) {
-        if (mqList && mqList.length) {
-            const matchMedia$ = this._observable$.pipe(filter((change) => !filterOthers ? true : mqList.indexOf(change.mediaQuery) > -1));
-            const registration$ = new Observable((observer) => {
-                // tslint:disable-line:max-line-length
-                const matches = this.registerQuery(mqList);
-                if (matches.length) {
-                    const lastChange = matches.pop();
-                    matches.forEach((e) => {
-                        observer.next(e);
-                    });
-                    this.source.next(lastChange); // last match is cached
-                }
-                observer.complete();
-            });
-            return merge(registration$, matchMedia$);
-        }
-        return this._observable$;
-    }
-    /**
-     * Based on the BreakPointRegistry provider, register internal listeners for each unique
-     * mediaQuery. Each listener emits specific MediaChange data to observers
-     */
-    registerQuery(mediaQuery) {
-        const list = Array.isArray(mediaQuery) ? mediaQuery : [mediaQuery];
-        const matches = [];
-        buildQueryCss(list, this._document, this._nonce);
-        list.forEach((query) => {
-            const onMQLEvent = (e) => {
-                this._zone.run(() => this.source.next(new MediaChange(e.matches, query)));
-            };
-            let mql = this.registry.get(query);
-            if (!mql) {
-                mql = this.buildMQL(query);
-                mql.addListener(onMQLEvent);
-                this.pendingRemoveListenerFns.push(() => mql.removeListener(onMQLEvent));
-                this.registry.set(query, mql);
-            }
-            if (mql.matches) {
-                matches.push(new MediaChange(true, query));
-            }
-        });
-        return matches;
-    }
-    ngOnDestroy() {
-        let fn;
-        while ((fn = this.pendingRemoveListenerFns.pop())) {
-            fn();
-        }
-    }
-    /**
-     * Call window.matchMedia() to build a MediaQueryList; which
-     * supports 0..n listeners for activation/deactivation
-     */
-    buildMQL(query) {
-        return constructMql(query, isPlatformBrowser(this._platformId));
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MatchMedia, deps: [{ token: i0.NgZone }, { token: PLATFORM_ID }, { token: DOCUMENT }, { token: CSP_NONCE, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MatchMedia, providedIn: 'root' }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MatchMedia, decorators: [{
-            type: Injectable,
-            args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: i0.NgZone }, { type: Object, decorators: [{
-                    type: Inject,
-                    args: [PLATFORM_ID]
-                }] }, { type: undefined, decorators: [{
-                    type: Inject,
-                    args: [DOCUMENT]
-                }] }, { type: undefined, decorators: [{
-                    type: Optional
-                }, {
-                    type: Inject,
-                    args: [CSP_NONCE]
-                }] }] });
-/**
- * Private global registry for all dynamically-created, injected style tags
- * @see prepare(query)
- */
-const ALL_STYLES = {};
-/**
- * For Webkit engines that only trigger the MediaQueryList Listener
- * when there is at least one CSS selector for the respective media query.
- *
- * @param mediaQueries
- * @param _document
- */
-function buildQueryCss(mediaQueries, _document, _nonce) {
-    const list = mediaQueries.filter((it) => !ALL_STYLES[it]);
-    if (list.length > 0) {
-        const query = list.join(', ');
-        try {
-            const styleEl = _document.createElement('style');
-            styleEl.setAttribute('type', 'text/css');
-            if (_nonce) {
-                styleEl.setAttribute('nonce', _nonce);
-            }
-            if (!styleEl.styleSheet) {
-                const cssText = `
-/*
-  @ngbracket/ngx-layout - workaround for possible browser quirk with mediaQuery listeners
-  see http://bit.ly/2sd4HMP
-*/
-@media ${query} {.fx-query-test{ }}
-`;
-                styleEl.appendChild(_document.createTextNode(cssText));
-            }
-            _document.head.appendChild(styleEl);
-            // Store in private global registry
-            list.forEach((mq) => (ALL_STYLES[mq] = styleEl));
-        }
-        catch (e) {
-            console.error(e);
-        }
-    }
-}
-function buildMockMql(query) {
-    const et = new EventTarget();
-    et.matches = query === 'all' || query === '';
-    et.media = query;
-    et.addListener = () => { };
-    et.removeListener = () => { };
-    et.addEventListener = () => { };
-    et.dispatchEvent = () => false;
-    et.onchange = null;
-    return et;
-}
-function constructMql(query, isBrowser) {
-    const canListen = isBrowser && !!window.matchMedia('all').addListener;
-    return canListen ? window.matchMedia(query) : buildMockMql(query);
-}
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 const ALIAS_DELIMITERS = /(\.|-|_)/g;
 function firstUpperCase(part) {
     let first = part.length > 0 ? part.charAt(0) : '';
@@ -771,7 +312,8 @@ const DEFAULT_BREAKPOINTS = [
         overlapping: true,
         mediaQuery: 'screen and (min-width: 960px)',
         priority: -850,
-    }, {
+    },
+    {
         alias: 'gt-md',
         overlapping: true,
         mediaQuery: 'screen and (min-width: 1280px)',
@@ -782,16 +324,9 @@ const DEFAULT_BREAKPOINTS = [
         overlapping: true,
         mediaQuery: 'screen and (min-width: 1920px)',
         priority: -650,
-    }
+    },
 ];
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /* tslint:disable */
 const HANDSET_PORTRAIT = '(orientation: portrait) and (max-width: 599.98px)';
 const HANDSET_LANDSCAPE = '(orientation: landscape) and (max-width: 959.98px)';
@@ -800,38 +335,62 @@ const TABLET_LANDSCAPE = '(orientation: landscape) and (min-width: 960px) and (m
 const WEB_PORTRAIT = '(orientation: portrait) and (min-width: 840px)';
 const WEB_LANDSCAPE = '(orientation: landscape) and (min-width: 1280px)';
 const ScreenTypes = {
-    'HANDSET': `${HANDSET_PORTRAIT}, ${HANDSET_LANDSCAPE}`,
-    'TABLET': `${TABLET_PORTRAIT} , ${TABLET_LANDSCAPE}`,
-    'WEB': `${WEB_PORTRAIT}, ${WEB_LANDSCAPE} `,
-    'HANDSET_PORTRAIT': `${HANDSET_PORTRAIT}`,
-    'TABLET_PORTRAIT': `${TABLET_PORTRAIT} `,
-    'WEB_PORTRAIT': `${WEB_PORTRAIT}`,
-    'HANDSET_LANDSCAPE': `${HANDSET_LANDSCAPE}`,
-    'TABLET_LANDSCAPE': `${TABLET_LANDSCAPE}`,
-    'WEB_LANDSCAPE': `${WEB_LANDSCAPE}`
+    HANDSET: `${HANDSET_PORTRAIT}, ${HANDSET_LANDSCAPE}`,
+    TABLET: `${TABLET_PORTRAIT} , ${TABLET_LANDSCAPE}`,
+    WEB: `${WEB_PORTRAIT}, ${WEB_LANDSCAPE} `,
+    HANDSET_PORTRAIT: `${HANDSET_PORTRAIT}`,
+    TABLET_PORTRAIT: `${TABLET_PORTRAIT} `,
+    WEB_PORTRAIT: `${WEB_PORTRAIT}`,
+    HANDSET_LANDSCAPE: `${HANDSET_LANDSCAPE}`,
+    TABLET_LANDSCAPE: `${TABLET_LANDSCAPE}`,
+    WEB_LANDSCAPE: `${WEB_LANDSCAPE}`,
 };
 /**
  * Extended Breakpoints for handset/tablets with landscape or portrait orientations
  */
 const ORIENTATION_BREAKPOINTS = [
-    { 'alias': 'handset', priority: 2000, 'mediaQuery': ScreenTypes.HANDSET },
-    { 'alias': 'handset.landscape', priority: 2000, 'mediaQuery': ScreenTypes.HANDSET_LANDSCAPE },
-    { 'alias': 'handset.portrait', priority: 2000, 'mediaQuery': ScreenTypes.HANDSET_PORTRAIT },
-    { 'alias': 'tablet', priority: 2100, 'mediaQuery': ScreenTypes.TABLET },
-    { 'alias': 'tablet.landscape', priority: 2100, 'mediaQuery': ScreenTypes.TABLET_LANDSCAPE },
-    { 'alias': 'tablet.portrait', priority: 2100, 'mediaQuery': ScreenTypes.TABLET_PORTRAIT },
-    { 'alias': 'web', priority: 2200, 'mediaQuery': ScreenTypes.WEB, overlapping: true },
-    { 'alias': 'web.landscape', priority: 2200, 'mediaQuery': ScreenTypes.WEB_LANDSCAPE, overlapping: true },
-    { 'alias': 'web.portrait', priority: 2200, 'mediaQuery': ScreenTypes.WEB_PORTRAIT, overlapping: true }
+    { alias: 'handset', priority: 2000, mediaQuery: ScreenTypes.HANDSET },
+    {
+        alias: 'handset.landscape',
+        priority: 2000,
+        mediaQuery: ScreenTypes.HANDSET_LANDSCAPE,
+    },
+    {
+        alias: 'handset.portrait',
+        priority: 2000,
+        mediaQuery: ScreenTypes.HANDSET_PORTRAIT,
+    },
+    { alias: 'tablet', priority: 2100, mediaQuery: ScreenTypes.TABLET },
+    {
+        alias: 'tablet.landscape',
+        priority: 2100,
+        mediaQuery: ScreenTypes.TABLET_LANDSCAPE,
+    },
+    {
+        alias: 'tablet.portrait',
+        priority: 2100,
+        mediaQuery: ScreenTypes.TABLET_PORTRAIT,
+    },
+    {
+        alias: 'web',
+        priority: 2200,
+        mediaQuery: ScreenTypes.WEB,
+        overlapping: true,
+    },
+    {
+        alias: 'web.landscape',
+        priority: 2200,
+        mediaQuery: ScreenTypes.WEB_LANDSCAPE,
+        overlapping: true,
+    },
+    {
+        alias: 'web.portrait',
+        priority: 2200,
+        mediaQuery: ScreenTypes.WEB_PORTRAIT,
+        overlapping: true,
+    },
 ];
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  *  Injection token unique to the flex-layout library.
  *  Use this token when build a custom provider (see below).
@@ -847,13 +406,6 @@ const BREAKPOINTS = new InjectionToken('Token (@ngbracket/ngx-layout) Breakpoint
     },
 });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * Registry of 1..n MediaQuery breakpoint ranges
  * This is published as a provider and may be overridden from custom, application-specific ranges
@@ -871,7 +423,9 @@ class BreakPointRegistry {
      * Search breakpoints by alias (e.g. gt-xs)
      */
     findByAlias(alias) {
-        return !alias ? null : this.findWithPredicate(alias, (bp) => bp.alias === alias);
+        return !alias
+            ? null
+            : this.findWithPredicate(alias, (bp) => bp.alias === alias);
     }
     findByQuery(query) {
         return this.findWithPredicate(query, (bp) => bp.mediaQuery === query);
@@ -881,13 +435,13 @@ class BreakPointRegistry {
      * e.g. gt-sm overlaps md, lg, and xl
      */
     get overlappings() {
-        return this.items.filter(it => it.overlapping);
+        return this.items.filter((it) => it.overlapping);
     }
     /**
      * Get list of all registered (non-empty) breakpoint aliases
      */
     get aliases() {
-        return this.items.map(it => it.alias);
+        return this.items.map((it) => it.alias);
     }
     /**
      * Aliases are mapped to properties using suffixes
@@ -895,7 +449,7 @@ class BreakPointRegistry {
      * for property layoutGtSM.
      */
     get suffixes() {
-        return this.items.map(it => it?.suffix ?? '');
+        return this.items.map((it) => it?.suffix ?? '');
     }
     /**
      * Memoized lookup using custom predicate function
@@ -908,10 +462,10 @@ class BreakPointRegistry {
         }
         return response ?? null;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: BreakPointRegistry, deps: [{ token: BREAKPOINTS }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: BreakPointRegistry, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: BreakPointRegistry, deps: [{ token: BREAKPOINTS }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: BreakPointRegistry, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: BreakPointRegistry, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: BreakPointRegistry, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: undefined, decorators: [{
@@ -920,17 +474,189 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImpor
                 }] }] });
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
+ * MediaMonitor configures listeners to mediaQuery changes and publishes an Observable facade to
+ * convert mediaQuery change callbacks to subscriber notifications. These notifications will be
+ * performed within the ng Zone to trigger change detections and component updates.
  *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * NOTE: both mediaQuery activations and de-activations are announced in notifications
  */
+class MatchMedia {
+    constructor(_zone, _platformId, _document, _nonce) {
+        this._zone = _zone;
+        this._platformId = _platformId;
+        this._document = _document;
+        this._nonce = _nonce;
+        /** Initialize source with 'all' so all non-responsive APIs trigger style updates */
+        this.source = new BehaviorSubject(new MediaChange(true));
+        this.registry = new Map();
+        this.pendingRemoveListenerFns = [];
+        this._observable$ = this.source.asObservable();
+    }
+    /**
+     * Publish list of all current activations
+     */
+    get activations() {
+        const results = [];
+        this.registry.forEach((mql, key) => {
+            if (mql.matches) {
+                results.push(key);
+            }
+        });
+        return results;
+    }
+    /**
+     * For the specified mediaQuery?
+     */
+    isActive(mediaQuery) {
+        const mql = this.registry.get(mediaQuery);
+        return (mql?.matches ?? this.registerQuery(mediaQuery).some((m) => m.matches));
+    }
+    /**
+     * External observers can watch for all (or a specific) mql changes.
+     * Typically used by the MediaQueryAdaptor; optionally available to components
+     * who wish to use the MediaMonitor as mediaMonitor$ observable service.
+     *
+     * Use deferred registration process to register breakpoints only on subscription
+     * This logic also enforces logic to register all mediaQueries BEFORE notify
+     * subscribers of notifications.
+     */
+    observe(mqList, filterOthers = false) {
+        if (mqList && mqList.length) {
+            const matchMedia$ = this._observable$.pipe(filter((change) => !filterOthers ? true : mqList.indexOf(change.mediaQuery) > -1));
+            const registration$ = new Observable((observer) => {
+                // tslint:disable-line:max-line-length
+                const matches = this.registerQuery(mqList);
+                if (matches.length) {
+                    const lastChange = matches.pop();
+                    matches.forEach((e) => {
+                        observer.next(e);
+                    });
+                    this.source.next(lastChange); // last match is cached
+                }
+                observer.complete();
+            });
+            return merge(registration$, matchMedia$);
+        }
+        return this._observable$;
+    }
+    /**
+     * Based on the BreakPointRegistry provider, register internal listeners for each unique
+     * mediaQuery. Each listener emits specific MediaChange data to observers
+     */
+    registerQuery(mediaQuery) {
+        const list = Array.isArray(mediaQuery) ? mediaQuery : [mediaQuery];
+        const matches = [];
+        buildQueryCss(list, this._document, this._nonce);
+        list.forEach((query) => {
+            const onMQLEvent = (e) => {
+                this._zone.run(() => this.source.next(new MediaChange(e.matches, query)));
+            };
+            let mql = this.registry.get(query);
+            if (!mql) {
+                mql = this.buildMQL(query);
+                mql.addListener(onMQLEvent);
+                this.pendingRemoveListenerFns.push(() => mql.removeListener(onMQLEvent));
+                this.registry.set(query, mql);
+            }
+            if (mql.matches) {
+                matches.push(new MediaChange(true, query));
+            }
+        });
+        return matches;
+    }
+    ngOnDestroy() {
+        let fn;
+        while ((fn = this.pendingRemoveListenerFns.pop())) {
+            fn();
+        }
+    }
+    /**
+     * Call window.matchMedia() to build a MediaQueryList; which
+     * supports 0..n listeners for activation/deactivation
+     */
+    buildMQL(query) {
+        return constructMql(query, isPlatformBrowser(this._platformId));
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MatchMedia, deps: [{ token: i0.NgZone }, { token: PLATFORM_ID }, { token: DOCUMENT }, { token: CSP_NONCE, optional: true }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MatchMedia, providedIn: 'root' }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MatchMedia, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
+        }], ctorParameters: () => [{ type: i0.NgZone }, { type: Object, decorators: [{
+                    type: Inject,
+                    args: [PLATFORM_ID]
+                }] }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [DOCUMENT]
+                }] }, { type: undefined, decorators: [{
+                    type: Optional
+                }, {
+                    type: Inject,
+                    args: [CSP_NONCE]
+                }] }] });
+/**
+ * Private global registry for all dynamically-created, injected style tags
+ * @see prepare(query)
+ */
+const ALL_STYLES = {};
+/**
+ * For Webkit engines that only trigger the MediaQueryList Listener
+ * when there is at least one CSS selector for the respective media query.
+ *
+ * @param mediaQueries
+ * @param _document
+ */
+function buildQueryCss(mediaQueries, _document, _nonce) {
+    const list = mediaQueries.filter((it) => !ALL_STYLES[it]);
+    if (list.length > 0) {
+        const query = list.join(', ');
+        try {
+            const styleEl = _document.createElement('style');
+            styleEl.setAttribute('type', 'text/css');
+            if (_nonce) {
+                styleEl.setAttribute('nonce', _nonce);
+            }
+            if (!styleEl.styleSheet) {
+                const cssText = `
+/*
+  @ngbracket/ngx-layout - workaround for possible browser quirk with mediaQuery listeners
+  see http://bit.ly/2sd4HMP
+*/
+@media ${query} {.fx-query-test{ }}
+`;
+                styleEl.appendChild(_document.createTextNode(cssText));
+            }
+            _document.head.appendChild(styleEl);
+            // Store in private global registry
+            list.forEach((mq) => (ALL_STYLES[mq] = styleEl));
+        }
+        catch (e) {
+            console.error(e);
+        }
+    }
+}
+function buildMockMql(query) {
+    const et = new EventTarget();
+    et.matches = query === 'all' || query === '';
+    et.media = query;
+    et.addListener = () => { };
+    et.removeListener = () => { };
+    et.addEventListener = () => { };
+    et.dispatchEvent = () => false;
+    et.onchange = null;
+    return et;
+}
+function constructMql(query, isBrowser) {
+    const canListen = isBrowser && !!window.matchMedia('all').addListener;
+    return canListen ? window.matchMedia(query) : buildMockMql(query);
+}
+
 const PRINT = 'print';
 const BREAKPOINT_PRINT = {
     alias: PRINT,
     mediaQuery: PRINT,
-    priority: 1000
+    priority: 1000,
 };
 /**
  * PrintHook - Use to intercept print MediaQuery activations and force
@@ -975,8 +701,8 @@ class PrintHook {
     /** Lookup breakpoints associated with print aliases. */
     get printBreakPoints() {
         return this.printAlias
-            .map(alias => this.breakpoints.findByAlias(alias))
-            .filter(bp => bp !== null);
+            .map((alias) => this.breakpoints.findByAlias(alias))
+            .filter((bp) => bp !== null);
     }
     /** Lookup breakpoint associated with mediaQuery */
     getEventBreakpoints({ mediaQuery }) {
@@ -1039,7 +765,9 @@ class PrintHook {
                     this.startPrinting(target, this.getEventBreakpoints(event));
                     target.updateStyles();
                 }
-                else if (!event.matches && this.isPrinting && !this.isPrintingBeforeAfterEvent) {
+                else if (!event.matches &&
+                    this.isPrinting &&
+                    !this.isPrintingBeforeAfterEvent) {
                     this.stopPrinting(target);
                     target.updateStyles();
                 }
@@ -1116,14 +844,14 @@ class PrintHook {
     /** Teardown logic for the service. */
     ngOnDestroy() {
         if (this._document.defaultView) {
-            this.beforePrintEventListeners.forEach(l => this._document.defaultView.removeEventListener('beforeprint', l));
-            this.afterPrintEventListeners.forEach(l => this._document.defaultView.removeEventListener('afterprint', l));
+            this.beforePrintEventListeners.forEach((l) => this._document.defaultView.removeEventListener('beforeprint', l));
+            this.afterPrintEventListeners.forEach((l) => this._document.defaultView.removeEventListener('afterprint', l));
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: PrintHook, deps: [{ token: BreakPointRegistry }, { token: LAYOUT_CONFIG }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: PrintHook, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: PrintHook, deps: [{ token: BreakPointRegistry }, { token: LAYOUT_CONFIG }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: PrintHook, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: PrintHook, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: PrintHook, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: BreakPointRegistry }, { type: undefined, decorators: [{
@@ -1148,17 +876,18 @@ class PrintQueue {
     addPrintBreakpoints(bpList) {
         bpList.push(BREAKPOINT_PRINT);
         bpList.sort(sortDescendingPriority);
-        bpList.forEach(bp => this.addBreakpoint(bp));
+        bpList.forEach((bp) => this.addBreakpoint(bp));
         return this.printBreakpoints;
     }
     /** Add Print breakpoint to queue */
     addBreakpoint(bp) {
         if (!!bp) {
-            const bpInList = this.printBreakpoints.find(it => it.mediaQuery === bp.mediaQuery);
+            const bpInList = this.printBreakpoints.find((it) => it.mediaQuery === bp.mediaQuery);
             if (bpInList === undefined) {
                 // If this is a `printAlias` breakpoint, then append. If a true 'print' breakpoint,
                 // register as highest priority in the queue
-                this.printBreakpoints = isPrintBreakPoint(bp) ? [bp, ...this.printBreakpoints]
+                this.printBreakpoints = isPrintBreakPoint(bp)
+                    ? [bp, ...this.printBreakpoints]
                     : [...this.printBreakpoints, bp];
             }
         }
@@ -1176,13 +905,6 @@ function isPrintBreakPoint(bp) {
     return bp?.mediaQuery.startsWith(PRINT) ?? false;
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * MediaMarshaller - register responsive values from directives and
  *                   trigger them based on media query events
@@ -1308,7 +1030,7 @@ class MediaMarshaller {
     trackValue(element, key) {
         return this.subject
             .asObservable()
-            .pipe(filter(v => v.element === element && v.key === key));
+            .pipe(filter((v) => v.element === element && v.key === key));
     }
     /** update all styles for all elements on the current breakpoint */
     updateStyles() {
@@ -1321,7 +1043,7 @@ class MediaMarshaller {
                     keyMap.delete(k);
                 });
             }
-            keyMap.forEach(k => {
+            keyMap.forEach((k) => {
                 valueMap = this.getActivatedValues(bpMap, k);
                 if (valueMap) {
                     const value = valueMap.get(k);
@@ -1371,7 +1093,7 @@ class MediaMarshaller {
     releaseElement(element) {
         const watcherMap = this.watcherMap.get(element);
         if (watcherMap) {
-            watcherMap.forEach(s => s.unsubscribe());
+            watcherMap.forEach((s) => s.unsubscribe());
             this.watcherMap.delete(element);
         }
         const elementMap = this.elementMap.get(element);
@@ -1445,7 +1167,8 @@ class MediaMarshaller {
             const activatedBp = this.activatedBreakpoints[i];
             const valueMap = bpMap.get(activatedBp.alias);
             if (valueMap) {
-                if (key === undefined || (valueMap.has(key) && valueMap.get(key) != null)) {
+                if (key === undefined ||
+                    (valueMap.has(key) && valueMap.get(key) != null)) {
                     return valueMap;
                 }
             }
@@ -1456,23 +1179,25 @@ class MediaMarshaller {
             return undefined;
         }
         const lastHope = bpMap.get('');
-        return (key === undefined || lastHope && lastHope.has(key)) ? lastHope : undefined;
+        return key === undefined || (lastHope && lastHope.has(key))
+            ? lastHope
+            : undefined;
     }
     /**
      * Watch for mediaQuery breakpoint activations
      */
     observeActivations() {
-        const queries = this.breakpoints.items.map(bp => bp.mediaQuery);
+        const queries = this.breakpoints.items.map((bp) => bp.mediaQuery);
         this.hook.registerBeforeAfterPrintHooks(this);
         this.matchMedia
             .observe(this.hook.withPrintQuery(queries))
             .pipe(tap(this.hook.interceptEvents(this)), filter(this.hook.blockPropagation()))
             .subscribe(this.onMediaChange.bind(this));
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MediaMarshaller, deps: [{ token: MatchMedia }, { token: BreakPointRegistry }, { token: PrintHook }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MediaMarshaller, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MediaMarshaller, deps: [{ token: MatchMedia }, { token: BreakPointRegistry }, { token: PrintHook }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MediaMarshaller, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MediaMarshaller, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MediaMarshaller, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: MatchMedia }, { type: BreakPointRegistry }, { type: PrintHook }] });
@@ -1484,13 +1209,193 @@ function initBuilderMap(map, element, key, input) {
     }
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
+/** A class that encapsulates CSS style generation for common directives */
+class StyleBuilder {
+    constructor() {
+        /** Whether to cache the generated output styles */
+        this.shouldCache = true;
+    }
+    /**
+     * Run a side effect computation given the input string and the computed styles
+     * from the build task and the host configuration object
+     * NOTE: This should be a no-op unless an algorithm is provided in a subclass
+     */
+    sideEffect(_input, _styles, _parent) { }
+}
+
+class StyleUtils {
+    constructor(_serverStylesheet, _serverModuleLoaded, _platformId, layoutConfig) {
+        this._serverStylesheet = _serverStylesheet;
+        this._serverModuleLoaded = _serverModuleLoaded;
+        this._platformId = _platformId;
+        this.layoutConfig = layoutConfig;
+    }
+    /**
+     * Applies styles given via string pair or object map to the directive element
+     */
+    applyStyleToElement(element, style, value = null) {
+        let styles = {};
+        if (typeof style === 'string') {
+            styles[style] = value;
+            style = styles;
+        }
+        styles = this.layoutConfig.disableVendorPrefixes
+            ? style
+            : applyCssPrefixes(style);
+        this._applyMultiValueStyleToElement(styles, element);
+    }
+    /**
+     * Applies styles given via string pair or object map to the directive's element
+     */
+    applyStyleToElements(style, elements = []) {
+        const styles = this.layoutConfig.disableVendorPrefixes
+            ? style
+            : applyCssPrefixes(style);
+        elements.forEach((el) => {
+            this._applyMultiValueStyleToElement(styles, el);
+        });
+    }
+    /**
+     * Determine the DOM element's Flexbox flow (flex-direction)
+     *
+     * Check inline style first then check computed (stylesheet) style
+     */
+    getFlowDirection(target) {
+        const query = 'flex-direction';
+        let value = this.lookupStyle(target, query);
+        const hasInlineValue = this.lookupInlineStyle(target, query) ||
+            (isPlatformServer(this._platformId) && this._serverModuleLoaded)
+            ? value
+            : '';
+        return [value || 'row', hasInlineValue];
+    }
+    hasWrap(target) {
+        const query = 'flex-wrap';
+        return this.lookupStyle(target, query) === 'wrap';
+    }
+    /**
+     * Find the DOM element's raw attribute value (if any)
+     */
+    lookupAttributeValue(element, attribute) {
+        return element.getAttribute(attribute) ?? '';
+    }
+    /**
+     * Find the DOM element's inline style value (if any)
+     */
+    lookupInlineStyle(element, styleName) {
+        return isPlatformBrowser(this._platformId)
+            ? element.style.getPropertyValue(styleName)
+            : getServerStyle(element, styleName);
+    }
+    /**
+     * Determine the inline or inherited CSS style
+     * NOTE: platform-server has no implementation for getComputedStyle
+     */
+    lookupStyle(element, styleName, inlineOnly = false) {
+        let value = '';
+        if (element) {
+            let immediateValue = (value = this.lookupInlineStyle(element, styleName));
+            if (!immediateValue) {
+                if (isPlatformBrowser(this._platformId)) {
+                    if (!inlineOnly) {
+                        value = getComputedStyle(element).getPropertyValue(styleName);
+                    }
+                }
+                else {
+                    if (this._serverModuleLoaded) {
+                        value = this._serverStylesheet.getStyleForElement(element, styleName);
+                    }
+                }
+            }
+        }
+        // Note: 'inline' is the default of all elements, unless UA stylesheet overrides;
+        //       in which case getComputedStyle() should determine a valid value.
+        return value ? value.trim() : '';
+    }
+    /**
+     * Applies the styles to the element. The styles object map may contain an array of values
+     * Each value will be added as element style
+     * Keys are sorted to add prefixed styles (like -webkit-x) first, before the standard ones
+     */
+    _applyMultiValueStyleToElement(styles, element) {
+        Object.keys(styles)
+            .sort()
+            .forEach((key) => {
+            const el = styles[key];
+            const values = Array.isArray(el)
+                ? el
+                : [el];
+            values.sort();
+            for (let value of values) {
+                value = value ? value + '' : '';
+                if (isPlatformBrowser(this._platformId) ||
+                    !this._serverModuleLoaded) {
+                    isPlatformBrowser(this._platformId)
+                        ? element.style.setProperty(key, value)
+                        : setServerStyle(element, key, value);
+                }
+                else {
+                    this._serverStylesheet.addStyleToElement(element, key, value);
+                }
+            }
+        });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: StyleUtils, deps: [{ token: StylesheetMap }, { token: SERVER_TOKEN }, { token: PLATFORM_ID }, { token: LAYOUT_CONFIG }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: StyleUtils, providedIn: 'root' }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: StyleUtils, decorators: [{
+            type: Injectable,
+            args: [{ providedIn: 'root' }]
+        }], ctorParameters: () => [{ type: StylesheetMap }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [SERVER_TOKEN]
+                }] }, { type: Object, decorators: [{
+                    type: Inject,
+                    args: [PLATFORM_ID]
+                }] }, { type: undefined, decorators: [{
+                    type: Inject,
+                    args: [LAYOUT_CONFIG]
+                }] }] });
+function getServerStyle(element, styleName) {
+    const styleMap = readStyleAttribute(element);
+    return styleMap[styleName] ?? '';
+}
+function setServerStyle(element, styleName, styleValue) {
+    styleName = styleName.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+    const styleMap = readStyleAttribute(element);
+    styleMap[styleName] = styleValue ?? '';
+    writeStyleAttribute(element, styleMap);
+}
+function writeStyleAttribute(element, styleMap) {
+    let styleAttrValue = '';
+    for (const key in styleMap) {
+        const newValue = styleMap[key];
+        if (newValue) {
+            styleAttrValue += `${key}:${styleMap[key]};`;
+        }
+    }
+    element.setAttribute('style', styleAttrValue);
+}
+function readStyleAttribute(element) {
+    const styleMap = {};
+    const styleAttribute = element.getAttribute('style');
+    if (styleAttribute) {
+        const styleList = styleAttribute.split(/;+/g);
+        for (let i = 0; i < styleList.length; i++) {
+            const style = styleList[i].trim();
+            if (style.length > 0) {
+                const colonIndex = style.indexOf(':');
+                if (colonIndex === -1) {
+                    throw new Error(`Invalid CSS style: ${style}`);
+                }
+                const name = style.substr(0, colonIndex).trim();
+                styleMap[name] = style.substr(colonIndex + 1).trim();
+            }
+        }
+    }
+    return styleMap;
+}
+
 class BaseDirective2 {
     /** Access to host element's parent DOM node */
     get parentElement() {
@@ -1601,36 +1506,13 @@ class BaseDirective2 {
             this.currentValue = input;
         }
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: BaseDirective2, deps: [{ token: i0.ElementRef }, { token: StyleBuilder }, { token: StyleUtils }, { token: MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.0.3", type: BaseDirective2, isStandalone: true, usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: BaseDirective2, deps: [{ token: i0.ElementRef }, { token: StyleBuilder }, { token: StyleUtils }, { token: MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: BaseDirective2, isStandalone: true, usesOnChanges: true, ngImport: i0 }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: BaseDirective2, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: BaseDirective2, decorators: [{
             type: Directive
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: StyleBuilder }, { type: StyleUtils }, { type: MediaMarshaller }] });
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * MockMatchMedia mocks calls to the Window API matchMedia with a build of a simulated
  * MockMediaQueryListener. Methods are available to simulate an activation of a mediaQuery
@@ -1758,10 +1640,10 @@ class MockMatchMedia extends MatchMedia {
     get hasActivated() {
         return this.activations.length > 0;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MockMatchMedia, deps: [{ token: i0.NgZone }, { token: PLATFORM_ID }, { token: DOCUMENT }, { token: BreakPointRegistry }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MockMatchMedia }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MockMatchMedia, deps: [{ token: i0.NgZone }, { token: PLATFORM_ID }, { token: DOCUMENT }, { token: BreakPointRegistry }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MockMatchMedia }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MockMatchMedia, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MockMatchMedia, decorators: [{
             type: Injectable
         }], ctorParameters: () => [{ type: i0.NgZone }, { type: Object, decorators: [{
                     type: Inject,
@@ -1803,7 +1685,10 @@ class MockMediaQueryList extends EventTarget {
             this._isActive = true;
             this._listeners.forEach((callback) => {
                 const cb = callback;
-                cb.call(this, { matches: this.matches, media: this.media });
+                cb.call(this, {
+                    matches: this.matches,
+                    media: this.media,
+                });
             });
         }
         return this;
@@ -1814,7 +1699,10 @@ class MockMediaQueryList extends EventTarget {
             this._isActive = false;
             this._listeners.forEach((callback) => {
                 const cb = callback;
-                cb.call(this, { matches: this.matches, media: this.media });
+                cb.call(this, {
+                    matches: this.matches,
+                    media: this.media,
+                });
             });
         }
         return this;
@@ -1826,12 +1714,14 @@ class MockMediaQueryList extends EventTarget {
         }
         if (this._isActive) {
             const cb = listener;
-            cb.call(this, { matches: this.matches, media: this.media });
+            cb.call(this, {
+                matches: this.matches,
+                media: this.media,
+            });
         }
     }
     /** Don't need to remove listeners in the testing environment */
-    removeListener(_) {
-    }
+    removeListener(_) { }
     dispatchEvent(_) {
         return false;
     }
@@ -1841,36 +1731,14 @@ class MockMediaQueryList extends EventTarget {
  */
 const MockMatchMediaProvider = {
     provide: MatchMedia,
-    useClass: MockMatchMedia
+    useClass: MockMatchMedia,
 };
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /** Wraps the provided value in an array, unless the provided value is an array. */
 function coerceArray(value) {
     return Array.isArray(value) ? value : [value];
 }
 
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 /**
  * MediaObserver enables applications to listen for 1..n mediaQuery activations and to determine
  * if a mediaQuery is currently activated.
@@ -2020,10 +1888,10 @@ class MediaObserver {
             .map(mergeMQAlias)
             .sort(sortDescendingPriority);
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MediaObserver, deps: [{ token: BreakPointRegistry }, { token: MatchMedia }, { token: PrintHook }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MediaObserver, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MediaObserver, deps: [{ token: BreakPointRegistry }, { token: MatchMedia }, { token: PrintHook }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MediaObserver, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MediaObserver, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MediaObserver, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: BreakPointRegistry }, { type: MatchMedia }, { type: PrintHook }] });
@@ -2045,21 +1913,6 @@ function splitQueries(queries) {
 }
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
  * Class
  */
 class MediaTrigger {
@@ -2078,7 +1931,7 @@ class MediaTrigger {
      * @param list array of mediaQuery or alias strings
      */
     activate(list) {
-        list = list.map(it => it.trim()); // trim queries
+        list = list.map((it) => it.trim()); // trim queries
         this.saveActivations();
         this.deactivateAll();
         this.setActivations(list);
@@ -2175,7 +2028,7 @@ class MediaTrigger {
      */
     forceRegistryMatches(queries, matches) {
         const registry = new Map();
-        queries.forEach(query => {
+        queries.forEach((query) => {
             registry.set(query, { matches });
         });
         this.matchMedia.registry = registry;
@@ -2212,10 +2065,10 @@ class MediaTrigger {
     get currentActivations() {
         return this.matchMedia.activations;
     }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MediaTrigger, deps: [{ token: BreakPointRegistry }, { token: MatchMedia }, { token: LAYOUT_CONFIG }, { token: PLATFORM_ID }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable }); }
-    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MediaTrigger, providedIn: 'root' }); }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MediaTrigger, deps: [{ token: BreakPointRegistry }, { token: MatchMedia }, { token: LAYOUT_CONFIG }, { token: PLATFORM_ID }, { token: DOCUMENT }], target: i0.ɵɵFactoryTarget.Injectable }); }
+    static { this.ɵprov = i0.ɵɵngDeclareInjectable({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MediaTrigger, providedIn: 'root' }); }
 }
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImport: i0, type: MediaTrigger, decorators: [{
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MediaTrigger, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }], ctorParameters: () => [{ type: BreakPointRegistry }, { type: MatchMedia }, { type: undefined, decorators: [{
@@ -2230,33 +2083,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.0.3", ngImpor
                 }] }] });
 
 /**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
+ * The flex API permits 3 or 1 parts of the value:
+ *    - `flex-grow flex-shrink flex-basis`, or
+ *    - `flex-basis`
  */
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
-/**
-* The flex API permits 3 or 1 parts of the value:
-*    - `flex-grow flex-shrink flex-basis`, or
-*    - `flex-basis`
-*/
 function validateBasis(basis, grow = '1', shrink = '1') {
     let parts = [grow, shrink, basis];
     let j = basis.indexOf('calc');
@@ -2273,9 +2103,7 @@ function validateBasis(basis, grow = '1', shrink = '1') {
     }
     else {
         let matches = basis.split(' ');
-        parts = (matches.length === 3) ? matches : [
-            grow, shrink, basis
-        ];
+        parts = matches.length === 3 ? matches : [grow, shrink, basis];
     }
     return parts;
 }
@@ -2308,14 +2136,6 @@ function multiply(value, multiplier) {
     return value.includes(' ') ?
         value.split(' ').map(transformValue).join(' ') : transformValue(value);
 }
-
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 
 /**
  * Generated bundle index. Do not edit.

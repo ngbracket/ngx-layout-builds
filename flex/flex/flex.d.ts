@@ -1,10 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { ElementRef, OnInit } from '@angular/core';
 import { BaseDirective2, ElementMatcher, LayoutConfigOptions, MediaMarshaller, StyleBuilder, StyleDefinition, StyleUtils } from '@ngbracket/ngx-layout/core';
 import * as i0 from "@angular/core";
@@ -51,6 +44,10 @@ export declare class FlexDirective extends BaseDirective2 implements OnInit {
     static ɵfac: i0.ɵɵFactoryDeclaration<FlexDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<FlexDirective, never, never, { "shrink": { "alias": "fxShrink"; "required": false; }; "grow": { "alias": "fxGrow"; "required": false; }; }, {}, never, never, true, never>;
 }
+/**
+ * @deprecated The DefaultFlexDirective will be removed in version 21.
+ * Use FlexDirective directly instead.
+ */
 export declare class DefaultFlexDirective extends FlexDirective {
     protected inputs: string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<DefaultFlexDirective, never>;

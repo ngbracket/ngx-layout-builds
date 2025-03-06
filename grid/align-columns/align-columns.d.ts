@@ -25,6 +25,10 @@ export declare class GridAlignColumnsDirective extends BaseDirective2 {
  * @see https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-19
  * @see https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-21
  */
+/**
+ * @deprecated The DefaultGridAlignColumnsDirective will be removed in version 21.
+ * Use GridAlignColumnsDirective directly instead.
+ */
 export declare class DefaultGridAlignColumnsDirective extends GridAlignColumnsDirective {
     protected inputs: string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<DefaultGridAlignColumnsDirective, never>;

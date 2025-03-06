@@ -1,10 +1,3 @@
-/**
- * @license
- * Copyright Google LLC All Rights Reserved.
- *
- * Use of this source code is governed by an MIT-style license that can be
- * found in the LICENSE file at https://angular.io/license
- */
 import { Directionality } from '@angular/cdk/bidi';
 import { ElementRef, OnChanges } from '@angular/core';
 import { BaseDirective2, LayoutConfigOptions, MediaMarshaller, StyleBuilder, StyleDefinition, StyleUtils } from '@ngbracket/ngx-layout/core';
@@ -37,6 +30,10 @@ export declare class FlexOffsetDirective extends BaseDirective2 implements OnCha
     static ɵfac: i0.ɵɵFactoryDeclaration<FlexOffsetDirective, never>;
     static ɵdir: i0.ɵɵDirectiveDeclaration<FlexOffsetDirective, never, never, {}, {}, never, never, true, never>;
 }
+/**
+ * @deprecated The DefaultFlexOffsetDirective will be removed in version 21.
+ * Use FlexOffsetDirective directly instead.
+ */
 export declare class DefaultFlexOffsetDirective extends FlexOffsetDirective {
     protected inputs: string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<DefaultFlexOffsetDirective, never>;

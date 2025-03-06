@@ -1,6 +1,6 @@
-import { BreakPoint, MediaMarshaller, StylesheetMap, ɵMatchMedia as MatchMedia } from '@ngbracket/ngx-layout/core';
-import { ServerMatchMedia } from './server-match-media';
+import { BreakPoint, ɵMatchMedia as MatchMedia, MediaMarshaller, StylesheetMap } from '@ngbracket/ngx-layout/core';
 import { Optional } from '@angular/core';
+import { ServerMatchMedia } from './server-match-media';
 /**
  * Activate all the registered breakpoints in sequence, and then
  * retrieve the associated stylings from the virtual stylesheet
@@ -22,7 +22,7 @@ export declare function FLEX_SSR_SERIALIZER_FACTORY(serverSheet: StylesheetMap, 
 export declare const SERVER_PROVIDERS: ({
     provide: import("@angular/core").InjectionToken<readonly (() => void | Promise<void>)[]>;
     useFactory: typeof FLEX_SSR_SERIALIZER_FACTORY;
-    deps: (import("@angular/core").InjectionToken<Document> | typeof StylesheetMap | typeof MatchMedia | typeof MediaMarshaller | Optional[])[];
+    deps: (typeof MatchMedia | import("@angular/core").InjectionToken<Document> | typeof StylesheetMap | typeof MediaMarshaller | Optional[])[];
     multi: boolean;
     useValue?: undefined;
     useClass?: undefined;

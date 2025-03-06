@@ -29,6 +29,10 @@ export declare class GridRowsDirective extends BaseDirective2 {
  * Syntax: <column value> [auto]
  * @see https://css-tricks.com/snippets/css/complete-guide-grid/#article-header-id-13
  */
+/**
+ * @deprecated The DefaultGridRowsDirective will be removed in version 21.
+ * Use GridRowsDirective directly instead.
+ */
 export declare class DefaultGridRowsDirective extends GridRowsDirective {
     protected inputs: string[];
     static ɵfac: i0.ɵɵFactoryDeclaration<DefaultGridRowsDirective, never>;
