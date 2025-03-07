@@ -17,37 +17,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
-class GridAlignColumnsDirective extends BaseDirective2 {
-    get inline() {
-        return this._inline;
-    }
-    set inline(val) {
-        this._inline = coerceBooleanProperty(val);
-    }
-    constructor(elementRef, styleBuilder, styler, marshal) {
-        super(elementRef, styleBuilder, styler, marshal);
-        this.DIRECTIVE_KEY = 'grid-align-columns';
-        this._inline = false;
-        this.init();
-    }
-    // *********************************************
-    // Protected methods
-    // *********************************************
-    updateWithValue(value) {
-        this.styleCache = this.inline ? alignColumnsInlineCache : alignColumnsCache;
-        this.addStyles(value, { inline: this.inline });
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAlignColumnsDirective, deps: [{ token: i0.ElementRef }, { token: GridAlignColumnsStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridAlignColumnsDirective, isStandalone: true, inputs: { inline: ["gdInline", "inline"] }, usesInheritance: true, ngImport: i0 }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAlignColumnsDirective, decorators: [{
-            type: Directive
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridAlignColumnsStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }], propDecorators: { inline: [{
-                type: Input,
-                args: ['gdInline']
-            }] } });
-const alignColumnsCache = new Map();
-const alignColumnsInlineCache = new Map();
 const inputs$a = [
     'gdAlignColumns',
     'gdAlignColumns.xs',
@@ -72,6 +41,38 @@ const selector$a = `
   [gdAlignColumns.gt-xs], [gdAlignColumns.gt-sm], [gdAlignColumns.gt-md],
   [gdAlignColumns.gt-lg]
 `;
+class GridAlignColumnsDirective extends BaseDirective2 {
+    get inline() {
+        return this._inline;
+    }
+    set inline(val) {
+        this._inline = coerceBooleanProperty(val);
+    }
+    constructor(elementRef, styleBuilder, styler, marshal) {
+        super(elementRef, styleBuilder, styler, marshal);
+        this.DIRECTIVE_KEY = 'grid-align-columns';
+        this._inline = false;
+        this.init();
+    }
+    // *********************************************
+    // Protected methods
+    // *********************************************
+    updateWithValue(value) {
+        this.styleCache = this.inline ? alignColumnsInlineCache : alignColumnsCache;
+        this.addStyles(value, { inline: this.inline });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAlignColumnsDirective, deps: [{ token: i0.ElementRef }, { token: GridAlignColumnsStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridAlignColumnsDirective, isStandalone: true, selector: "\n  [gdAlignColumns],\n  [gdAlignColumns.xs], [gdAlignColumns.sm], [gdAlignColumns.md],\n  [gdAlignColumns.lg], [gdAlignColumns.xl], [gdAlignColumns.lt-sm],\n  [gdAlignColumns.lt-md], [gdAlignColumns.lt-lg], [gdAlignColumns.lt-xl],\n  [gdAlignColumns.gt-xs], [gdAlignColumns.gt-sm], [gdAlignColumns.gt-md],\n  [gdAlignColumns.gt-lg]\n", inputs: { gdAlignColumns: "gdAlignColumns", "gdAlignColumns.xs": "gdAlignColumns.xs", "gdAlignColumns.sm": "gdAlignColumns.sm", "gdAlignColumns.md": "gdAlignColumns.md", "gdAlignColumns.lg": "gdAlignColumns.lg", "gdAlignColumns.xl": "gdAlignColumns.xl", "gdAlignColumns.lt-sm": "gdAlignColumns.lt-sm", "gdAlignColumns.lt-md": "gdAlignColumns.lt-md", "gdAlignColumns.lt-lg": "gdAlignColumns.lt-lg", "gdAlignColumns.lt-xl": "gdAlignColumns.lt-xl", "gdAlignColumns.gt-xs": "gdAlignColumns.gt-xs", "gdAlignColumns.gt-sm": "gdAlignColumns.gt-sm", "gdAlignColumns.gt-md": "gdAlignColumns.gt-md", "gdAlignColumns.gt-lg": "gdAlignColumns.gt-lg", inline: ["gdInline", "inline"] }, usesInheritance: true, ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAlignColumnsDirective, decorators: [{
+            type: Directive,
+            args: [{ inputs: inputs$a, selector: selector$a }]
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridAlignColumnsStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }], propDecorators: { inline: [{
+                type: Input,
+                args: ['gdInline']
+            }] } });
+const alignColumnsCache = new Map();
+const alignColumnsInlineCache = new Map();
 /**
  * 'column alignment' CSS Grid styling directive
  * Configures the alignment in the column direction
@@ -159,37 +160,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
-class GridAlignRowsDirective extends BaseDirective2 {
-    get inline() {
-        return this._inline;
-    }
-    set inline(val) {
-        this._inline = coerceBooleanProperty(val);
-    }
-    constructor(elementRef, styleBuilder, styler, marshal) {
-        super(elementRef, styleBuilder, styler, marshal);
-        this.DIRECTIVE_KEY = 'grid-align-rows';
-        this._inline = false;
-        this.init();
-    }
-    // *********************************************
-    // Protected methods
-    // *********************************************
-    updateWithValue(value) {
-        this.styleCache = this.inline ? alignRowsInlineCache : alignRowsCache;
-        this.addStyles(value, { inline: this.inline });
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAlignRowsDirective, deps: [{ token: i0.ElementRef }, { token: GridAlignRowsStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridAlignRowsDirective, isStandalone: true, inputs: { inline: ["gdInline", "inline"] }, usesInheritance: true, ngImport: i0 }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAlignRowsDirective, decorators: [{
-            type: Directive
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridAlignRowsStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }], propDecorators: { inline: [{
-                type: Input,
-                args: ['gdInline']
-            }] } });
-const alignRowsCache = new Map();
-const alignRowsInlineCache = new Map();
 const inputs$9 = [
     'gdAlignRows',
     'gdAlignRows.xs',
@@ -214,6 +184,38 @@ const selector$9 = `
   [gdAlignRows.gt-xs], [gdAlignRows.gt-sm], [gdAlignRows.gt-md],
   [gdAlignRows.gt-lg]
 `;
+class GridAlignRowsDirective extends BaseDirective2 {
+    get inline() {
+        return this._inline;
+    }
+    set inline(val) {
+        this._inline = coerceBooleanProperty(val);
+    }
+    constructor(elementRef, styleBuilder, styler, marshal) {
+        super(elementRef, styleBuilder, styler, marshal);
+        this.DIRECTIVE_KEY = 'grid-align-rows';
+        this._inline = false;
+        this.init();
+    }
+    // *********************************************
+    // Protected methods
+    // *********************************************
+    updateWithValue(value) {
+        this.styleCache = this.inline ? alignRowsInlineCache : alignRowsCache;
+        this.addStyles(value, { inline: this.inline });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAlignRowsDirective, deps: [{ token: i0.ElementRef }, { token: GridAlignRowsStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridAlignRowsDirective, isStandalone: true, selector: "\n  [gdAlignRows],\n  [gdAlignRows.xs], [gdAlignRows.sm], [gdAlignRows.md],\n  [gdAlignRows.lg], [gdAlignRows.xl], [gdAlignRows.lt-sm],\n  [gdAlignRows.lt-md], [gdAlignRows.lt-lg], [gdAlignRows.lt-xl],\n  [gdAlignRows.gt-xs], [gdAlignRows.gt-sm], [gdAlignRows.gt-md],\n  [gdAlignRows.gt-lg]\n", inputs: { gdAlignRows: "gdAlignRows", "gdAlignRows.xs": "gdAlignRows.xs", "gdAlignRows.sm": "gdAlignRows.sm", "gdAlignRows.md": "gdAlignRows.md", "gdAlignRows.lg": "gdAlignRows.lg", "gdAlignRows.xl": "gdAlignRows.xl", "gdAlignRows.lt-sm": "gdAlignRows.lt-sm", "gdAlignRows.lt-md": "gdAlignRows.lt-md", "gdAlignRows.lt-lg": "gdAlignRows.lt-lg", "gdAlignRows.lt-xl": "gdAlignRows.lt-xl", "gdAlignRows.gt-xs": "gdAlignRows.gt-xs", "gdAlignRows.gt-sm": "gdAlignRows.gt-sm", "gdAlignRows.gt-md": "gdAlignRows.gt-md", "gdAlignRows.gt-lg": "gdAlignRows.gt-lg", inline: ["gdInline", "inline"] }, usesInheritance: true, ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAlignRowsDirective, decorators: [{
+            type: Directive,
+            args: [{ selector: selector$9, inputs: inputs$9 }]
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridAlignRowsStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }], propDecorators: { inline: [{
+                type: Input,
+                args: ['gdInline']
+            }] } });
+const alignRowsCache = new Map();
+const alignRowsInlineCache = new Map();
 /**
  * 'row alignment' CSS Grid styling directive
  * Configures the alignment in the row direction
@@ -282,20 +284,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
-class GridAreaDirective extends BaseDirective2 {
-    constructor(elRef, styleUtils, styleBuilder, marshal) {
-        super(elRef, styleBuilder, styleUtils, marshal);
-        this.DIRECTIVE_KEY = 'grid-area';
-        this.styleCache = gridAreaCache;
-        this.init();
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAreaDirective, deps: [{ token: i0.ElementRef }, { token: i1.StyleUtils }, { token: GridAreaStyleBuilder }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridAreaDirective, isStandalone: true, usesInheritance: true, ngImport: i0 }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAreaDirective, decorators: [{
-            type: Directive
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1.StyleUtils }, { type: GridAreaStyleBuilder }, { type: i1.MediaMarshaller }] });
-const gridAreaCache = new Map();
 const inputs$8 = [
     'gdArea',
     'gdArea.xs',
@@ -318,6 +306,21 @@ const selector$8 = `
   [gdArea.lt-sm], [gdArea.lt-md], [gdArea.lt-lg], [gdArea.lt-xl],
   [gdArea.gt-xs], [gdArea.gt-sm], [gdArea.gt-md], [gdArea.gt-lg]
 `;
+class GridAreaDirective extends BaseDirective2 {
+    constructor(elRef, styleUtils, styleBuilder, marshal) {
+        super(elRef, styleBuilder, styleUtils, marshal);
+        this.DIRECTIVE_KEY = 'grid-area';
+        this.styleCache = gridAreaCache;
+        this.init();
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAreaDirective, deps: [{ token: i0.ElementRef }, { token: i1.StyleUtils }, { token: GridAreaStyleBuilder }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridAreaDirective, isStandalone: true, selector: "\n  [gdArea],\n  [gdArea.xs], [gdArea.sm], [gdArea.md], [gdArea.lg], [gdArea.xl],\n  [gdArea.lt-sm], [gdArea.lt-md], [gdArea.lt-lg], [gdArea.lt-xl],\n  [gdArea.gt-xs], [gdArea.gt-sm], [gdArea.gt-md], [gdArea.gt-lg]\n", inputs: { gdArea: "gdArea", "gdArea.xs": "gdArea.xs", "gdArea.sm": "gdArea.sm", "gdArea.md": "gdArea.md", "gdArea.lg": "gdArea.lg", "gdArea.xl": "gdArea.xl", "gdArea.lt-sm": "gdArea.lt-sm", "gdArea.lt-md": "gdArea.lt-md", "gdArea.lt-lg": "gdArea.lt-lg", "gdArea.lt-xl": "gdArea.lt-xl", "gdArea.gt-xs": "gdArea.gt-xs", "gdArea.gt-sm": "gdArea.gt-sm", "gdArea.gt-md": "gdArea.gt-md", "gdArea.gt-lg": "gdArea.gt-lg" }, usesInheritance: true, ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAreaDirective, decorators: [{
+            type: Directive,
+            args: [{ inputs: inputs$8, selector: selector$8 }]
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1.StyleUtils }, { type: GridAreaStyleBuilder }, { type: i1.MediaMarshaller }] });
+const gridAreaCache = new Map();
 /**
  * 'grid-area' CSS Grid styling directive
  * Configures the name or position of an element within the grid
@@ -359,37 +362,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
-class GridAreasDirective extends BaseDirective2 {
-    get inline() {
-        return this._inline;
-    }
-    set inline(val) {
-        this._inline = coerceBooleanProperty(val);
-    }
-    constructor(elRef, styleUtils, styleBuilder, marshal) {
-        super(elRef, styleBuilder, styleUtils, marshal);
-        this.DIRECTIVE_KEY = 'grid-areas';
-        this._inline = false;
-        this.init();
-    }
-    // *********************************************
-    // Protected methods
-    // *********************************************
-    updateWithValue(value) {
-        this.styleCache = this.inline ? areasInlineCache : areasCache;
-        this.addStyles(value, { inline: this.inline });
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAreasDirective, deps: [{ token: i0.ElementRef }, { token: i1.StyleUtils }, { token: GridAreasStyleBuiler }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridAreasDirective, isStandalone: true, inputs: { inline: ["gdInline", "inline"] }, usesInheritance: true, ngImport: i0 }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAreasDirective, decorators: [{
-            type: Directive
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1.StyleUtils }, { type: GridAreasStyleBuiler }, { type: i1.MediaMarshaller }], propDecorators: { inline: [{
-                type: Input,
-                args: ['gdInline']
-            }] } });
-const areasCache = new Map();
-const areasInlineCache = new Map();
 const inputs$7 = [
     'gdAreas',
     'gdAreas.xs',
@@ -412,6 +384,38 @@ const selector$7 = `
   [gdAreas.lt-sm], [gdAreas.lt-md], [gdAreas.lt-lg], [gdAreas.lt-xl],
   [gdAreas.gt-xs], [gdAreas.gt-sm], [gdAreas.gt-md], [gdAreas.gt-lg]
 `;
+class GridAreasDirective extends BaseDirective2 {
+    get inline() {
+        return this._inline;
+    }
+    set inline(val) {
+        this._inline = coerceBooleanProperty(val);
+    }
+    constructor(elRef, styleUtils, styleBuilder, marshal) {
+        super(elRef, styleBuilder, styleUtils, marshal);
+        this.DIRECTIVE_KEY = 'grid-areas';
+        this._inline = false;
+        this.init();
+    }
+    // *********************************************
+    // Protected methods
+    // *********************************************
+    updateWithValue(value) {
+        this.styleCache = this.inline ? areasInlineCache : areasCache;
+        this.addStyles(value, { inline: this.inline });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAreasDirective, deps: [{ token: i0.ElementRef }, { token: i1.StyleUtils }, { token: GridAreasStyleBuiler }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridAreasDirective, isStandalone: true, selector: "\n  [gdAreas],\n  [gdAreas.xs], [gdAreas.sm], [gdAreas.md], [gdAreas.lg], [gdAreas.xl],\n  [gdAreas.lt-sm], [gdAreas.lt-md], [gdAreas.lt-lg], [gdAreas.lt-xl],\n  [gdAreas.gt-xs], [gdAreas.gt-sm], [gdAreas.gt-md], [gdAreas.gt-lg]\n", inputs: { gdAreas: "gdAreas", "gdAreas.xs": "gdAreas.xs", "gdAreas.sm": "gdAreas.sm", "gdAreas.md": "gdAreas.md", "gdAreas.lg": "gdAreas.lg", "gdAreas.xl": "gdAreas.xl", "gdAreas.lt-sm": "gdAreas.lt-sm", "gdAreas.lt-md": "gdAreas.lt-md", "gdAreas.lt-lg": "gdAreas.lt-lg", "gdAreas.lt-xl": "gdAreas.lt-xl", "gdAreas.gt-xs": "gdAreas.gt-xs", "gdAreas.gt-sm": "gdAreas.gt-sm", "gdAreas.gt-md": "gdAreas.gt-md", "gdAreas.gt-lg": "gdAreas.gt-lg", inline: ["gdInline", "inline"] }, usesInheritance: true, ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAreasDirective, decorators: [{
+            type: Directive,
+            args: [{ selector: selector$7, inputs: inputs$7 }]
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1.StyleUtils }, { type: GridAreasStyleBuiler }, { type: i1.MediaMarshaller }], propDecorators: { inline: [{
+                type: Input,
+                args: ['gdInline']
+            }] } });
+const areasCache = new Map();
+const areasInlineCache = new Map();
 /**
  * 'grid-template-areas' CSS Grid styling directive
  * Configures the names of elements within the grid
@@ -456,37 +460,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
-class GridAutoDirective extends BaseDirective2 {
-    get inline() {
-        return this._inline;
-    }
-    set inline(val) {
-        this._inline = coerceBooleanProperty(val);
-    }
-    constructor(elementRef, styleBuilder, styler, marshal) {
-        super(elementRef, styleBuilder, styler, marshal);
-        this._inline = false;
-        this.DIRECTIVE_KEY = 'grid-auto';
-        this.init();
-    }
-    // *********************************************
-    // Protected methods
-    // *********************************************
-    updateWithValue(value) {
-        this.styleCache = this.inline ? autoInlineCache : autoCache;
-        this.addStyles(value, { inline: this.inline });
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAutoDirective, deps: [{ token: i0.ElementRef }, { token: GridAutoStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridAutoDirective, isStandalone: true, inputs: { inline: ["gdInline", "inline"] }, usesInheritance: true, ngImport: i0 }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAutoDirective, decorators: [{
-            type: Directive
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridAutoStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }], propDecorators: { inline: [{
-                type: Input,
-                args: ['gdInline']
-            }] } });
-const autoCache = new Map();
-const autoInlineCache = new Map();
 const inputs$6 = [
     'gdAuto',
     'gdAuto.xs',
@@ -509,6 +482,38 @@ const selector$6 = `
   [gdAuto.lt-sm], [gdAuto.lt-md], [gdAuto.lt-lg], [gdAuto.lt-xl],
   [gdAuto.gt-xs], [gdAuto.gt-sm], [gdAuto.gt-md], [gdAuto.gt-lg]
 `;
+class GridAutoDirective extends BaseDirective2 {
+    get inline() {
+        return this._inline;
+    }
+    set inline(val) {
+        this._inline = coerceBooleanProperty(val);
+    }
+    constructor(elementRef, styleBuilder, styler, marshal) {
+        super(elementRef, styleBuilder, styler, marshal);
+        this._inline = false;
+        this.DIRECTIVE_KEY = 'grid-auto';
+        this.init();
+    }
+    // *********************************************
+    // Protected methods
+    // *********************************************
+    updateWithValue(value) {
+        this.styleCache = this.inline ? autoInlineCache : autoCache;
+        this.addStyles(value, { inline: this.inline });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAutoDirective, deps: [{ token: i0.ElementRef }, { token: GridAutoStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridAutoDirective, isStandalone: true, selector: "\n  [gdAuto],\n  [gdAuto.xs], [gdAuto.sm], [gdAuto.md], [gdAuto.lg], [gdAuto.xl],\n  [gdAuto.lt-sm], [gdAuto.lt-md], [gdAuto.lt-lg], [gdAuto.lt-xl],\n  [gdAuto.gt-xs], [gdAuto.gt-sm], [gdAuto.gt-md], [gdAuto.gt-lg]\n", inputs: { gdAuto: "gdAuto", "gdAuto.xs": "gdAuto.xs", "gdAuto.sm": "gdAuto.sm", "gdAuto.md": "gdAuto.md", "gdAuto.lg": "gdAuto.lg", "gdAuto.xl": "gdAuto.xl", "gdAuto.lt-sm": "gdAuto.lt-sm", "gdAuto.lt-md": "gdAuto.lt-md", "gdAuto.lt-lg": "gdAuto.lt-lg", "gdAuto.lt-xl": "gdAuto.lt-xl", "gdAuto.gt-xs": "gdAuto.gt-xs", "gdAuto.gt-sm": "gdAuto.gt-sm", "gdAuto.gt-md": "gdAuto.gt-md", "gdAuto.gt-lg": "gdAuto.gt-lg", inline: ["gdInline", "inline"] }, usesInheritance: true, ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAutoDirective, decorators: [{
+            type: Directive,
+            args: [{ selector: selector$6, inputs: inputs$6 }]
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridAutoStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }], propDecorators: { inline: [{
+                type: Input,
+                args: ['gdInline']
+            }] } });
+const autoCache = new Map();
+const autoInlineCache = new Map();
 /**
  * 'grid-auto-flow' CSS Grid styling directive
  * Configures the auto placement algorithm for the grid
@@ -543,20 +548,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
-class GridColumnDirective extends BaseDirective2 {
-    constructor(elementRef, styleBuilder, styler, marshal) {
-        super(elementRef, styleBuilder, styler, marshal);
-        this.DIRECTIVE_KEY = 'grid-column';
-        this.styleCache = columnCache;
-        this.init();
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridColumnDirective, deps: [{ token: i0.ElementRef }, { token: GridColumnStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridColumnDirective, isStandalone: true, usesInheritance: true, ngImport: i0 }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridColumnDirective, decorators: [{
-            type: Directive
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridColumnStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }] });
-const columnCache = new Map();
 const inputs$5 = [
     'gdColumn',
     'gdColumn.xs',
@@ -579,6 +570,21 @@ const selector$5 = `
   [gdColumn.lt-sm], [gdColumn.lt-md], [gdColumn.lt-lg], [gdColumn.lt-xl],
   [gdColumn.gt-xs], [gdColumn.gt-sm], [gdColumn.gt-md], [gdColumn.gt-lg]
 `;
+class GridColumnDirective extends BaseDirective2 {
+    constructor(elementRef, styleBuilder, styler, marshal) {
+        super(elementRef, styleBuilder, styler, marshal);
+        this.DIRECTIVE_KEY = 'grid-column';
+        this.styleCache = columnCache;
+        this.init();
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridColumnDirective, deps: [{ token: i0.ElementRef }, { token: GridColumnStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridColumnDirective, isStandalone: true, selector: "\n  [gdColumn],\n  [gdColumn.xs], [gdColumn.sm], [gdColumn.md], [gdColumn.lg], [gdColumn.xl],\n  [gdColumn.lt-sm], [gdColumn.lt-md], [gdColumn.lt-lg], [gdColumn.lt-xl],\n  [gdColumn.gt-xs], [gdColumn.gt-sm], [gdColumn.gt-md], [gdColumn.gt-lg]\n", inputs: { gdColumn: "gdColumn", "gdColumn.xs": "gdColumn.xs", "gdColumn.sm": "gdColumn.sm", "gdColumn.md": "gdColumn.md", "gdColumn.lg": "gdColumn.lg", "gdColumn.xl": "gdColumn.xl", "gdColumn.lt-sm": "gdColumn.lt-sm", "gdColumn.lt-md": "gdColumn.lt-md", "gdColumn.lt-lg": "gdColumn.lt-lg", "gdColumn.lt-xl": "gdColumn.lt-xl", "gdColumn.gt-xs": "gdColumn.gt-xs", "gdColumn.gt-sm": "gdColumn.gt-sm", "gdColumn.gt-md": "gdColumn.gt-md", "gdColumn.gt-lg": "gdColumn.gt-lg" }, usesInheritance: true, ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridColumnDirective, decorators: [{
+            type: Directive,
+            args: [{ selector: selector$5, inputs: inputs$5 }]
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridColumnStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }] });
+const columnCache = new Map();
 /**
  * 'grid-column' CSS Grid styling directive
  * Configures the name or position of an element within the grid
@@ -627,37 +633,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
-class GridColumnsDirective extends BaseDirective2 {
-    get inline() {
-        return this._inline;
-    }
-    set inline(val) {
-        this._inline = coerceBooleanProperty(val);
-    }
-    constructor(elementRef, styleBuilder, styler, marshal) {
-        super(elementRef, styleBuilder, styler, marshal);
-        this.DIRECTIVE_KEY = 'grid-columns';
-        this._inline = false;
-        this.init();
-    }
-    // *********************************************
-    // Protected methods
-    // *********************************************
-    updateWithValue(value) {
-        this.styleCache = this.inline ? columnsInlineCache : columnsCache;
-        this.addStyles(value, { inline: this.inline });
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridColumnsDirective, deps: [{ token: i0.ElementRef }, { token: GridColumnsStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridColumnsDirective, isStandalone: true, inputs: { inline: ["gdInline", "inline"] }, usesInheritance: true, ngImport: i0 }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridColumnsDirective, decorators: [{
-            type: Directive
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridColumnsStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }], propDecorators: { inline: [{
-                type: Input,
-                args: ['gdInline']
-            }] } });
-const columnsCache = new Map();
-const columnsInlineCache = new Map();
 const inputs$4 = [
     'gdColumns',
     'gdColumns.xs',
@@ -680,6 +655,38 @@ const selector$4 = `
   [gdColumns.lt-sm], [gdColumns.lt-md], [gdColumns.lt-lg], [gdColumns.lt-xl],
   [gdColumns.gt-xs], [gdColumns.gt-sm], [gdColumns.gt-md], [gdColumns.gt-lg]
 `;
+class GridColumnsDirective extends BaseDirective2 {
+    get inline() {
+        return this._inline;
+    }
+    set inline(val) {
+        this._inline = coerceBooleanProperty(val);
+    }
+    constructor(elementRef, styleBuilder, styler, marshal) {
+        super(elementRef, styleBuilder, styler, marshal);
+        this.DIRECTIVE_KEY = 'grid-columns';
+        this._inline = false;
+        this.init();
+    }
+    // *********************************************
+    // Protected methods
+    // *********************************************
+    updateWithValue(value) {
+        this.styleCache = this.inline ? columnsInlineCache : columnsCache;
+        this.addStyles(value, { inline: this.inline });
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridColumnsDirective, deps: [{ token: i0.ElementRef }, { token: GridColumnsStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridColumnsDirective, isStandalone: true, selector: "\n  [gdColumns],\n  [gdColumns.xs], [gdColumns.sm], [gdColumns.md], [gdColumns.lg], [gdColumns.xl],\n  [gdColumns.lt-sm], [gdColumns.lt-md], [gdColumns.lt-lg], [gdColumns.lt-xl],\n  [gdColumns.gt-xs], [gdColumns.gt-sm], [gdColumns.gt-md], [gdColumns.gt-lg]\n", inputs: { gdColumns: "gdColumns", "gdColumns.xs": "gdColumns.xs", "gdColumns.sm": "gdColumns.sm", "gdColumns.md": "gdColumns.md", "gdColumns.lg": "gdColumns.lg", "gdColumns.xl": "gdColumns.xl", "gdColumns.lt-sm": "gdColumns.lt-sm", "gdColumns.lt-md": "gdColumns.lt-md", "gdColumns.lt-lg": "gdColumns.lt-lg", "gdColumns.lt-xl": "gdColumns.lt-xl", "gdColumns.gt-xs": "gdColumns.gt-xs", "gdColumns.gt-sm": "gdColumns.gt-sm", "gdColumns.gt-md": "gdColumns.gt-md", "gdColumns.gt-lg": "gdColumns.gt-lg", inline: ["gdInline", "inline"] }, usesInheritance: true, ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridColumnsDirective, decorators: [{
+            type: Directive,
+            args: [{ selector: selector$4, inputs: inputs$4 }]
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridColumnsStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }], propDecorators: { inline: [{
+                type: Input,
+                args: ['gdInline']
+            }] } });
+const columnsCache = new Map();
+const columnsInlineCache = new Map();
 /**
  * 'grid-template-columns' CSS Grid styling directive
  * Configures the sizing for the columns in the grid
@@ -718,6 +725,28 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
+const inputs$3 = [
+    'gdGap',
+    'gdGap.xs',
+    'gdGap.sm',
+    'gdGap.md',
+    'gdGap.lg',
+    'gdGap.xl',
+    'gdGap.lt-sm',
+    'gdGap.lt-md',
+    'gdGap.lt-lg',
+    'gdGap.lt-xl',
+    'gdGap.gt-xs',
+    'gdGap.gt-sm',
+    'gdGap.gt-md',
+    'gdGap.gt-lg',
+];
+const selector$3 = `
+  [gdGap],
+  [gdGap.xs], [gdGap.sm], [gdGap.md], [gdGap.lg], [gdGap.xl],
+  [gdGap.lt-sm], [gdGap.lt-md], [gdGap.lt-lg], [gdGap.lt-xl],
+  [gdGap.gt-xs], [gdGap.gt-sm], [gdGap.gt-md], [gdGap.gt-lg]
+`;
 class GridGapDirective extends BaseDirective2 {
     get inline() {
         return this._inline;
@@ -749,28 +778,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             }] } });
 const gapCache = new Map();
 const gapInlineCache = new Map();
-const inputs$3 = [
-    'gdGap',
-    'gdGap.xs',
-    'gdGap.sm',
-    'gdGap.md',
-    'gdGap.lg',
-    'gdGap.xl',
-    'gdGap.lt-sm',
-    'gdGap.lt-md',
-    'gdGap.lt-lg',
-    'gdGap.lt-xl',
-    'gdGap.gt-xs',
-    'gdGap.gt-sm',
-    'gdGap.gt-md',
-    'gdGap.gt-lg',
-];
-const selector$3 = `
-  [gdGap],
-  [gdGap.xs], [gdGap.sm], [gdGap.md], [gdGap.lg], [gdGap.xl],
-  [gdGap.lt-sm], [gdGap.lt-md], [gdGap.lt-lg], [gdGap.lt-xl],
-  [gdGap.gt-xs], [gdGap.gt-sm], [gdGap.gt-md], [gdGap.gt-lg]
-`;
 /**
  * 'grid-gap' CSS Grid styling directive
  * Configures the gap between items in the grid
@@ -807,20 +814,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
-class GridAlignDirective extends BaseDirective2 {
-    constructor(elementRef, styleBuilder, styler, marshal) {
-        super(elementRef, styleBuilder, styler, marshal);
-        this.DIRECTIVE_KEY = 'grid-align';
-        this.styleCache = alignCache;
-        this.init();
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAlignDirective, deps: [{ token: i0.ElementRef }, { token: GridAlignStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridAlignDirective, isStandalone: true, usesInheritance: true, ngImport: i0 }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAlignDirective, decorators: [{
-            type: Directive
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridAlignStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }] });
-const alignCache = new Map();
 const inputs$2 = [
     'gdGridAlign',
     'gdGridAlign.xs',
@@ -843,6 +836,21 @@ const selector$2 = `
   [gdGridAlign.lt-sm], [gdGridAlign.lt-md], [gdGridAlign.lt-lg], [gdGridAlign.lt-xl],
   [gdGridAlign.gt-xs], [gdGridAlign.gt-sm], [gdGridAlign.gt-md], [gdGridAlign.gt-lg]
 `;
+class GridAlignDirective extends BaseDirective2 {
+    constructor(elementRef, styleBuilder, styler, marshal) {
+        super(elementRef, styleBuilder, styler, marshal);
+        this.DIRECTIVE_KEY = 'grid-align';
+        this.styleCache = alignCache;
+        this.init();
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAlignDirective, deps: [{ token: i0.ElementRef }, { token: GridAlignStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridAlignDirective, isStandalone: true, selector: "\n  [gdGridAlign],\n  [gdGridAlign.xs], [gdGridAlign.sm], [gdGridAlign.md], [gdGridAlign.lg],[gdGridAlign.xl],\n  [gdGridAlign.lt-sm], [gdGridAlign.lt-md], [gdGridAlign.lt-lg], [gdGridAlign.lt-xl],\n  [gdGridAlign.gt-xs], [gdGridAlign.gt-sm], [gdGridAlign.gt-md], [gdGridAlign.gt-lg]\n", inputs: { gdGridAlign: "gdGridAlign", "gdGridAlign.xs": "gdGridAlign.xs", "gdGridAlign.sm": "gdGridAlign.sm", "gdGridAlign.md": "gdGridAlign.md", "gdGridAlign.lg": "gdGridAlign.lg", "gdGridAlign.xl": "gdGridAlign.xl", "gdGridAlign.lt-sm": "gdGridAlign.lt-sm", "gdGridAlign.lt-md": "gdGridAlign.lt-md", "gdGridAlign.lt-lg": "gdGridAlign.lt-lg", "gdGridAlign.lt-xl": "gdGridAlign.lt-xl", "gdGridAlign.gt-xs": "gdGridAlign.gt-xs", "gdGridAlign.gt-sm": "gdGridAlign.gt-sm", "gdGridAlign.gt-md": "gdGridAlign.gt-md", "gdGridAlign.gt-lg": "gdGridAlign.gt-lg" }, usesInheritance: true, ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridAlignDirective, decorators: [{
+            type: Directive,
+            args: [{ selector: selector$2, inputs: inputs$2 }]
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridAlignStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }] });
+const alignCache = new Map();
 /**
  * 'align' CSS Grid styling directive for grid children
  *  Defines positioning of child elements along row and column axis in a grid container
@@ -920,20 +928,6 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
-class GridRowDirective extends BaseDirective2 {
-    constructor(elementRef, styleBuilder, styler, marshal) {
-        super(elementRef, styleBuilder, styler, marshal);
-        this.DIRECTIVE_KEY = 'grid-row';
-        this.styleCache = rowCache;
-        this.init();
-    }
-    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridRowDirective, deps: [{ token: i0.ElementRef }, { token: GridRowStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridRowDirective, isStandalone: true, usesInheritance: true, ngImport: i0 }); }
-}
-i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridRowDirective, decorators: [{
-            type: Directive
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridRowStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }] });
-const rowCache = new Map();
 const inputs$1 = [
     'gdRow',
     'gdRow.xs',
@@ -956,6 +950,21 @@ const selector$1 = `
   [gdRow.lt-sm], [gdRow.lt-md], [gdRow.lt-lg], [gdRow.lt-xl],
   [gdRow.gt-xs], [gdRow.gt-sm], [gdRow.gt-md], [gdRow.gt-lg]
 `;
+class GridRowDirective extends BaseDirective2 {
+    constructor(elementRef, styleBuilder, styler, marshal) {
+        super(elementRef, styleBuilder, styler, marshal);
+        this.DIRECTIVE_KEY = 'grid-row';
+        this.styleCache = rowCache;
+        this.init();
+    }
+    static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridRowDirective, deps: [{ token: i0.ElementRef }, { token: GridRowStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }], target: i0.ɵɵFactoryTarget.Directive }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: GridRowDirective, isStandalone: true, selector: "\n  [gdRow],\n  [gdRow.xs], [gdRow.sm], [gdRow.md], [gdRow.lg], [gdRow.xl],\n  [gdRow.lt-sm], [gdRow.lt-md], [gdRow.lt-lg], [gdRow.lt-xl],\n  [gdRow.gt-xs], [gdRow.gt-sm], [gdRow.gt-md], [gdRow.gt-lg]\n", inputs: { gdRow: "gdRow", "gdRow.xs": "gdRow.xs", "gdRow.sm": "gdRow.sm", "gdRow.md": "gdRow.md", "gdRow.lg": "gdRow.lg", "gdRow.xl": "gdRow.xl", "gdRow.lt-sm": "gdRow.lt-sm", "gdRow.lt-md": "gdRow.lt-md", "gdRow.lt-lg": "gdRow.lt-lg", "gdRow.lt-xl": "gdRow.lt-xl", "gdRow.gt-xs": "gdRow.gt-xs", "gdRow.gt-sm": "gdRow.gt-sm", "gdRow.gt-md": "gdRow.gt-md", "gdRow.gt-lg": "gdRow.gt-lg" }, usesInheritance: true, ngImport: i0 }); }
+}
+i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: GridRowDirective, decorators: [{
+            type: Directive,
+            args: [{ selector: selector$1, inputs: inputs$1 }]
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: GridRowStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }] });
+const rowCache = new Map();
 /**
  * 'grid-row' CSS Grid styling directive
  * Configures the name or position of an element within the grid
