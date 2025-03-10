@@ -64,6 +64,7 @@ class FlexAlignDirective extends BaseDirective2 {
     constructor(elRef, styleUtils, styleBuilder, marshal) {
         super(elRef, styleBuilder, styleUtils, marshal);
         this.DIRECTIVE_KEY = 'flex-align';
+        this.inputs = inputs$6;
         this.styleCache = flexAlignCache;
         this.init();
     }
@@ -193,6 +194,7 @@ class FlexOffsetDirective extends BaseDirective2 {
         super(elRef, styleBuilder, styler, marshal);
         this.directionality = directionality;
         this.DIRECTIVE_KEY = 'flex-offset';
+        this.inputs = inputs$5;
         this.init([this.directionality.change]);
         // Parent DOM `layout-gap` with affect the nested child with `flex-offset`
         if (this.parentElement) {
@@ -298,6 +300,7 @@ class FlexOrderDirective extends BaseDirective2 {
     constructor(elRef, styleUtils, styleBuilder, marshal) {
         super(elRef, styleBuilder, styleUtils, marshal);
         this.DIRECTIVE_KEY = 'flex-order';
+        this.inputs = inputs$4;
         this.styleCache = flexOrderCache;
         this.init();
     }
@@ -542,6 +545,7 @@ class FlexDirective extends BaseDirective2 {
         this.layoutConfig = layoutConfig;
         this.marshal = marshal;
         this.DIRECTIVE_KEY = 'flex';
+        this.inputs = inputs$3;
         this.direction = undefined;
         this.wrap = undefined;
         this.flexGrow = '1';
@@ -760,6 +764,7 @@ class LayoutAlignDirective extends BaseDirective2 {
     constructor(elRef, styleUtils, styleBuilder, marshal) {
         super(elRef, styleBuilder, styleUtils, marshal);
         this.DIRECTIVE_KEY = 'layout-align';
+        this.inputs = inputs$2;
         this.layout = 'row'; // default flex-direction
         this.inline = false; // default inline value
         this.init();
@@ -948,6 +953,7 @@ class LayoutGapDirective extends BaseDirective2 {
         this.styleUtils = styleUtils;
         this.layout = 'row'; // default flex-direction
         this.DIRECTIVE_KEY = 'layout-gap';
+        this.inputs = inputs$1;
         this.observerSubject = new Subject();
         const extraTriggers = [
             this.directionality.change,
@@ -1187,6 +1193,7 @@ class LayoutDirective extends BaseDirective2 {
         super(elRef, styleBuilder, styleUtils, marshal);
         this._config = _config;
         this.DIRECTIVE_KEY = 'layout';
+        this.inputs = inputs;
         this.init();
     }
     updateWithValue(input) {

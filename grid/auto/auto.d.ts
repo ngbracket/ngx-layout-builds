@@ -17,6 +17,7 @@ export declare class GridAutoDirective extends BaseDirective2 {
     set inline(val: boolean);
     protected _inline: boolean;
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     constructor(elementRef: ElementRef, styleBuilder: GridAutoStyleBuilder, styler: StyleUtils, marshal: MediaMarshaller);
     protected updateWithValue(value: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<GridAutoDirective, never>;

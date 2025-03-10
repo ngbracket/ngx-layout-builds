@@ -11,6 +11,7 @@ export declare class GridAlignColumnsStyleBuilder extends StyleBuilder {
 }
 export declare class GridAlignColumnsDirective extends BaseDirective2 {
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     get inline(): boolean;
     set inline(val: boolean);
     protected _inline: boolean;

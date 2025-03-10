@@ -8,6 +8,7 @@ export declare class StyleDirective extends BaseDirective2 implements DoCheck {
     protected sanitizer: DomSanitizer;
     private readonly ngStyleInstance;
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     protected fallbackStyles: NgStyleMap;
     protected isServer: boolean;
     constructor(elementRef: ElementRef, styler: StyleUtils, marshal: MediaMarshaller, sanitizer: DomSanitizer, differs: KeyValueDiffers, renderer2: Renderer2, ngStyleInstance: NgStyle, serverLoaded: boolean, platformId: Object);
@@ -25,7 +26,7 @@ export declare class StyleDirective extends BaseDirective2 implements DoCheck {
     /** For ChangeDetectionStrategy.onPush and ngOnChanges() updates */
     ngDoCheck(): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<StyleDirective, [null, null, null, null, null, null, { optional: true; self: true; }, null, null]>;
-    static ɵdir: i0.ɵɵDirectiveDeclaration<StyleDirective, never, never, {}, {}, never, never, true, never>;
+    static ɵdir: i0.ɵɵDirectiveDeclaration<StyleDirective, "  [ngStyle],  [ngStyle.xs], [ngStyle.sm], [ngStyle.md], [ngStyle.lg], [ngStyle.xl],  [ngStyle.lt-sm], [ngStyle.lt-md], [ngStyle.lt-lg], [ngStyle.lt-xl],  [ngStyle.gt-xs], [ngStyle.gt-sm], [ngStyle.gt-md], [ngStyle.gt-lg]", never, { "ngStyle": { "alias": "ngStyle"; "required": false; }; "ngStyle.xs": { "alias": "ngStyle.xs"; "required": false; }; "ngStyle.sm": { "alias": "ngStyle.sm"; "required": false; }; "ngStyle.md": { "alias": "ngStyle.md"; "required": false; }; "ngStyle.lg": { "alias": "ngStyle.lg"; "required": false; }; "ngStyle.xl": { "alias": "ngStyle.xl"; "required": false; }; "ngStyle.lt-sm": { "alias": "ngStyle.lt-sm"; "required": false; }; "ngStyle.lt-md": { "alias": "ngStyle.lt-md"; "required": false; }; "ngStyle.lt-lg": { "alias": "ngStyle.lt-lg"; "required": false; }; "ngStyle.lt-xl": { "alias": "ngStyle.lt-xl"; "required": false; }; "ngStyle.gt-xs": { "alias": "ngStyle.gt-xs"; "required": false; }; "ngStyle.gt-sm": { "alias": "ngStyle.gt-sm"; "required": false; }; "ngStyle.gt-md": { "alias": "ngStyle.gt-md"; "required": false; }; "ngStyle.gt-lg": { "alias": "ngStyle.gt-lg"; "required": false; }; }, {}, never, never, true, never>;
 }
 /**
  * Directive to add responsive support for ngStyle.

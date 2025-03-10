@@ -28,6 +28,7 @@ export declare class LayoutGapDirective extends BaseDirective2 implements AfterC
     protected styleUtils: StyleUtils;
     protected layout: string;
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     protected observerSubject: Subject<void>;
     /** Special accessor to query for all child 'element' nodes regardless of type, class, etc */
     protected get childrenNodes(): HTMLElement[];

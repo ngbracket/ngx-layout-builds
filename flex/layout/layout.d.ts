@@ -24,6 +24,7 @@ export declare class LayoutStyleBuilder extends StyleBuilder {
 export declare class LayoutDirective extends BaseDirective2 implements OnChanges {
     private _config;
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     constructor(elRef: ElementRef, styleUtils: StyleUtils, styleBuilder: LayoutStyleBuilder, marshal: MediaMarshaller, _config: LayoutConfigOptions);
     protected updateWithValue(input: string): void;
     static ɵfac: i0.ɵɵFactoryDeclaration<LayoutDirective, never>;

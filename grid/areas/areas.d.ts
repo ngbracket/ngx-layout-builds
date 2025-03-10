@@ -14,6 +14,7 @@ export declare class GridAreasStyleBuiler extends StyleBuilder {
 }
 export declare class GridAreasDirective extends BaseDirective2 {
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     get inline(): boolean;
     set inline(val: boolean);
     protected _inline: boolean;

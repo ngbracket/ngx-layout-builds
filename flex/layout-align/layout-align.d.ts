@@ -21,6 +21,7 @@ export declare class LayoutAlignStyleBuilder extends StyleBuilder {
  */
 export declare class LayoutAlignDirective extends BaseDirective2 {
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     protected layout: string;
     protected inline: boolean;
     constructor(elRef: ElementRef, styleUtils: StyleUtils, styleBuilder: LayoutAlignStyleBuilder, marshal: MediaMarshaller);

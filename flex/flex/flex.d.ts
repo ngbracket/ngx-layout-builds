@@ -22,6 +22,7 @@ export declare class FlexDirective extends BaseDirective2 implements OnInit {
     protected layoutConfig: LayoutConfigOptions;
     protected marshal: MediaMarshaller;
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     protected direction?: string;
     protected wrap?: boolean;
     get shrink(): string;

@@ -10,6 +10,7 @@ export declare class GridColumnStyleBuilder extends StyleBuilder {
 }
 export declare class GridColumnDirective extends BaseDirective2 {
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     constructor(elementRef: ElementRef, styleBuilder: GridColumnStyleBuilder, styler: StyleUtils, marshal: MediaMarshaller);
     protected styleCache: Map<string, StyleDefinition>;
     static ɵfac: i0.ɵɵFactoryDeclaration<GridColumnDirective, never>;

@@ -15,6 +15,7 @@ export declare class FlexOrderStyleBuilder extends StyleBuilder {
  */
 export declare class FlexOrderDirective extends BaseDirective2 implements OnChanges {
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     constructor(elRef: ElementRef, styleUtils: StyleUtils, styleBuilder: FlexOrderStyleBuilder, marshal: MediaMarshaller);
     protected styleCache: Map<string, StyleDefinition>;
     updateWithValue(input: string): void;

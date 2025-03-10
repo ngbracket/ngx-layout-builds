@@ -10,6 +10,7 @@ export declare class GridAreaStyleBuilder extends StyleBuilder {
 }
 export declare class GridAreaDirective extends BaseDirective2 {
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     constructor(elRef: ElementRef, styleUtils: StyleUtils, styleBuilder: GridAreaStyleBuilder, marshal: MediaMarshaller);
     protected styleCache: Map<string, StyleDefinition>;
     static ɵfac: i0.ɵɵFactoryDeclaration<GridAreaDirective, never>;

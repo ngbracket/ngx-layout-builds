@@ -13,6 +13,7 @@ export declare class FlexAlignStyleBuilder extends StyleBuilder {
  */
 export declare class FlexAlignDirective extends BaseDirective2 {
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     constructor(elRef: ElementRef, styleUtils: StyleUtils, styleBuilder: FlexAlignStyleBuilder, marshal: MediaMarshaller);
     protected styleCache: Map<string, StyleDefinition>;
     static ɵfac: i0.ɵɵFactoryDeclaration<FlexAlignDirective, never>;

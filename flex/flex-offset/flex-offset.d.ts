@@ -20,6 +20,7 @@ export declare class FlexOffsetStyleBuilder extends StyleBuilder {
 export declare class FlexOffsetDirective extends BaseDirective2 implements OnChanges {
     protected directionality: Directionality;
     protected DIRECTIVE_KEY: string;
+    protected inputs: string[];
     constructor(elRef: ElementRef, directionality: Directionality, styleBuilder: FlexOffsetStyleBuilder, marshal: MediaMarshaller, styler: StyleUtils);
     /**
      * Using the current fxFlexOffset value, update the inline CSS
