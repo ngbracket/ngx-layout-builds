@@ -11,7 +11,7 @@ export declare class StyleDirective extends BaseDirective2 implements DoCheck {
     protected inputs: string[];
     protected fallbackStyles: NgStyleMap;
     protected isServer: boolean;
-    constructor(elementRef: ElementRef, styler: StyleUtils, marshal: MediaMarshaller, sanitizer: DomSanitizer, differs: KeyValueDiffers, renderer2: Renderer2, ngStyleInstance: NgStyle, serverLoaded: boolean, platformId: Object);
+    constructor(elementRef: ElementRef, styler: StyleUtils, marshal: MediaMarshaller, sanitizer: DomSanitizer, differs: KeyValueDiffers, renderer2: Renderer2, ngStyleInstance: NgStyle, serverLoaded: boolean, platformId: object);
     /** Add generated styles */
     protected updateWithValue(value: any): void;
     /** Remove generated styles */
@@ -30,6 +30,8 @@ export declare class StyleDirective extends BaseDirective2 implements DoCheck {
 }
 /**
  * Directive to add responsive support for ngStyle.
+ * * @deprecated The DefaultStyleDirective will be removed in version 21.
+ * Use StyleDirective directly instead.
  *
  */
 export declare class DefaultStyleDirective extends StyleDirective implements DoCheck {

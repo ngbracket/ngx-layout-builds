@@ -16,7 +16,7 @@ export declare class FlexLayoutModule {
      * which sets the corresponding tokens accordingly
      */
     static withConfig(configOptions: LayoutConfigOptions, breakpoints?: BreakPoint | BreakPoint[]): ModuleWithProviders<FlexLayoutModule>;
-    constructor(serverModuleLoaded: boolean, platformId: Object);
+    constructor(serverModuleLoaded: boolean, platformId: object);
     static ɵfac: i0.ɵɵFactoryDeclaration<FlexLayoutModule, never>;
     static ɵmod: i0.ɵɵNgModuleDeclaration<FlexLayoutModule, never, [typeof i1.FlexModule, typeof i2.ExtendedModule, typeof i3.GridModule], [typeof i1.FlexModule, typeof i2.ExtendedModule, typeof i3.GridModule]>;
     static ɵinj: i0.ɵɵInjectorDeclaration<FlexLayoutModule>;

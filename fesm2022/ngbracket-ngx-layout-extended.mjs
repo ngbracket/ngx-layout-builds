@@ -1,13 +1,34 @@
+import * as i2 from '@angular/common';
+import { NgClass, isPlatformServer, NgStyle } from '@angular/common';
 import * as i0 from '@angular/core';
 import { Input, Optional, Self, Directive, Injectable, PLATFORM_ID, Inject, SecurityContext, NgModule } from '@angular/core';
 import * as i1 from '@ngbracket/ngx-layout/core';
 import { BaseDirective2, StyleBuilder, SERVER_TOKEN, LAYOUT_CONFIG, CoreModule } from '@ngbracket/ngx-layout/core';
-import * as i2 from '@angular/common';
-import { NgClass, isPlatformServer, NgStyle } from '@angular/common';
 import { coerceBooleanProperty } from '@angular/cdk/coercion';
 import { takeUntil } from 'rxjs/operators';
 import * as i2$1 from '@angular/platform-browser';
 
+const inputs$3 = [
+    'ngClass',
+    'ngClass.xs',
+    'ngClass.sm',
+    'ngClass.md',
+    'ngClass.lg',
+    'ngClass.xl',
+    'ngClass.lt-sm',
+    'ngClass.lt-md',
+    'ngClass.lt-lg',
+    'ngClass.lt-xl',
+    'ngClass.gt-xs',
+    'ngClass.gt-sm',
+    'ngClass.gt-md',
+    'ngClass.gt-lg',
+];
+const selector$3 = `
+  [ngClass], [ngClass.xs], [ngClass.sm], [ngClass.md], [ngClass.lg], [ngClass.xl],
+  [ngClass.lt-sm], [ngClass.lt-md], [ngClass.lt-lg], [ngClass.lt-xl],
+  [ngClass.gt-xs], [ngClass.gt-sm], [ngClass.gt-md], [ngClass.gt-lg]
+`;
 class ClassDirective extends BaseDirective2 {
     /**
      * Capture class assignments so we cache the default classes
@@ -43,10 +64,11 @@ class ClassDirective extends BaseDirective2 {
         this.ngClassInstance.ngDoCheck();
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: ClassDirective, deps: [{ token: i0.ElementRef }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }, { token: i0.Renderer2 }, { token: i2.NgClass, optional: true, self: true }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: ClassDirective, isStandalone: true, inputs: { klass: ["class", "klass"] }, usesInheritance: true, ngImport: i0 }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: ClassDirective, isStandalone: true, selector: "\n  [ngClass], [ngClass.xs], [ngClass.sm], [ngClass.md], [ngClass.lg], [ngClass.xl],\n  [ngClass.lt-sm], [ngClass.lt-md], [ngClass.lt-lg], [ngClass.lt-xl],\n  [ngClass.gt-xs], [ngClass.gt-sm], [ngClass.gt-md], [ngClass.gt-lg]\n", inputs: { ngClass: "ngClass", "ngClass.xs": "ngClass.xs", "ngClass.sm": "ngClass.sm", "ngClass.md": "ngClass.md", "ngClass.lg": "ngClass.lg", "ngClass.xl": "ngClass.xl", "ngClass.lt-sm": "ngClass.lt-sm", "ngClass.lt-md": "ngClass.lt-md", "ngClass.lt-lg": "ngClass.lt-lg", "ngClass.lt-xl": "ngClass.lt-xl", "ngClass.gt-xs": "ngClass.gt-xs", "ngClass.gt-sm": "ngClass.gt-sm", "ngClass.gt-md": "ngClass.gt-md", "ngClass.gt-lg": "ngClass.gt-lg", klass: ["class", "klass"] }, usesInheritance: true, ngImport: i0 }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: ClassDirective, decorators: [{
-            type: Directive
+            type: Directive,
+            args: [{ selector: selector$3, inputs: inputs$3 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }, { type: i0.Renderer2 }, { type: i2.NgClass, decorators: [{
                     type: Optional
                 }, {
@@ -55,31 +77,12 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
                 type: Input,
                 args: ['class']
             }] } });
-const inputs$3 = [
-    'ngClass',
-    'ngClass.xs',
-    'ngClass.sm',
-    'ngClass.md',
-    'ngClass.lg',
-    'ngClass.xl',
-    'ngClass.lt-sm',
-    'ngClass.lt-md',
-    'ngClass.lt-lg',
-    'ngClass.lt-xl',
-    'ngClass.gt-xs',
-    'ngClass.gt-sm',
-    'ngClass.gt-md',
-    'ngClass.gt-lg',
-];
-const selector$3 = `
-  [ngClass], [ngClass.xs], [ngClass.sm], [ngClass.md], [ngClass.lg], [ngClass.xl],
-  [ngClass.lt-sm], [ngClass.lt-md], [ngClass.lt-lg], [ngClass.lt-xl],
-  [ngClass.gt-xs], [ngClass.gt-sm], [ngClass.gt-md], [ngClass.gt-lg]
-`;
 /**
  * Directive to add responsive support for ngClass.
  * This maintains the core functionality of 'ngClass' and adds responsive API
  * Note: this class is a no-op when rendered on the server
+ * *  @deprecated The DefaultClassDirective will be removed in version 21.
+ * Use ClassDirective directly instead.
  */
 class DefaultClassDirective extends ClassDirective {
     constructor() {
@@ -105,6 +108,26 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
+const inputs$2 = [
+    'src.xs',
+    'src.sm',
+    'src.md',
+    'src.lg',
+    'src.xl',
+    'src.lt-sm',
+    'src.lt-md',
+    'src.lt-lg',
+    'src.lt-xl',
+    'src.gt-xs',
+    'src.gt-sm',
+    'src.gt-md',
+    'src.gt-lg',
+];
+const selector$2 = `
+  img[src.xs],    img[src.sm],    img[src.md],    img[src.lg],   img[src.xl],
+  img[src.lt-sm], img[src.lt-md], img[src.lt-lg], img[src.lt-xl],
+  img[src.gt-xs], img[src.gt-sm], img[src.gt-md], img[src.gt-lg]
+`;
 class ImgSrcDirective extends BaseDirective2 {
     set src(val) {
         this.defaultSrc = val;
@@ -141,11 +164,12 @@ class ImgSrcDirective extends BaseDirective2 {
         }
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: ImgSrcDirective, deps: [{ token: i0.ElementRef }, { token: ImgSrcStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }, { token: PLATFORM_ID }, { token: SERVER_TOKEN }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: ImgSrcDirective, isStandalone: true, inputs: { src: "src" }, usesInheritance: true, ngImport: i0 }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: ImgSrcDirective, isStandalone: true, selector: "\n  img[src.xs],    img[src.sm],    img[src.md],    img[src.lg],   img[src.xl],\n  img[src.lt-sm], img[src.lt-md], img[src.lt-lg], img[src.lt-xl],\n  img[src.gt-xs], img[src.gt-sm], img[src.gt-md], img[src.gt-lg]\n", inputs: { "src.xs": "src.xs", "src.sm": "src.sm", "src.md": "src.md", "src.lg": "src.lg", "src.xl": "src.xl", "src.lt-sm": "src.lt-sm", "src.lt-md": "src.lt-md", "src.lt-lg": "src.lt-lg", "src.lt-xl": "src.lt-xl", "src.gt-xs": "src.gt-xs", "src.gt-sm": "src.gt-sm", "src.gt-md": "src.gt-md", "src.gt-lg": "src.gt-lg", src: "src" }, usesInheritance: true, ngImport: i0 }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: ImgSrcDirective, decorators: [{
-            type: Directive
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: ImgSrcStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }, { type: Object, decorators: [{
+            type: Directive,
+            args: [{ selector: selector$2, inputs: inputs$2 }]
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: ImgSrcStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [PLATFORM_ID]
                 }] }, { type: undefined, decorators: [{
@@ -156,27 +180,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
                 args: ['src']
             }] } });
 const imgSrcCache = new Map();
-const inputs$2 = [
-    'src.xs',
-    'src.sm',
-    'src.md',
-    'src.lg',
-    'src.xl',
-    'src.lt-sm',
-    'src.lt-md',
-    'src.lt-lg',
-    'src.lt-xl',
-    'src.gt-xs',
-    'src.gt-sm',
-    'src.gt-md',
-    'src.gt-lg',
-];
-const selector$2 = `
-  img[src.xs],    img[src.sm],    img[src.md],    img[src.lg],   img[src.xl],
-  img[src.lt-sm], img[src.lt-md], img[src.lt-lg], img[src.lt-xl],
-  img[src.gt-xs], img[src.gt-sm], img[src.gt-md], img[src.gt-lg]
-`;
 /**
+ *  *  @deprecated The DefaultImgSrcDirective will be removed in version 21.
+ * Use ImgSrcDirective directly instead.
+ *
  * This directive provides a responsive API for the HTML <img> 'src' attribute
  * and will update the img.src property upon each responsive activation.
  *
@@ -214,6 +221,48 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             type: Injectable,
             args: [{ providedIn: 'root' }]
         }] });
+const inputs$1 = [
+    'fxShow',
+    'fxShow.print',
+    'fxShow.xs',
+    'fxShow.sm',
+    'fxShow.md',
+    'fxShow.lg',
+    'fxShow.xl',
+    'fxShow.lt-sm',
+    'fxShow.lt-md',
+    'fxShow.lt-lg',
+    'fxShow.lt-xl',
+    'fxShow.gt-xs',
+    'fxShow.gt-sm',
+    'fxShow.gt-md',
+    'fxShow.gt-lg',
+    'fxHide',
+    'fxHide.print',
+    'fxHide.xs',
+    'fxHide.sm',
+    'fxHide.md',
+    'fxHide.lg',
+    'fxHide.xl',
+    'fxHide.lt-sm',
+    'fxHide.lt-md',
+    'fxHide.lt-lg',
+    'fxHide.lt-xl',
+    'fxHide.gt-xs',
+    'fxHide.gt-sm',
+    'fxHide.gt-md',
+    'fxHide.gt-lg',
+];
+const selector$1 = `
+  [fxShow], [fxShow.print],
+  [fxShow.xs], [fxShow.sm], [fxShow.md], [fxShow.lg], [fxShow.xl],
+  [fxShow.lt-sm], [fxShow.lt-md], [fxShow.lt-lg], [fxShow.lt-xl],
+  [fxShow.gt-xs], [fxShow.gt-sm], [fxShow.gt-md], [fxShow.gt-lg],
+  [fxHide], [fxHide.print],
+  [fxHide.xs], [fxHide.sm], [fxHide.md], [fxHide.lg], [fxHide.xl],
+  [fxHide.lt-sm], [fxHide.lt-md], [fxHide.lt-lg], [fxHide.lt-xl],
+  [fxHide.gt-xs], [fxHide.gt-sm], [fxHide.gt-md], [fxHide.gt-lg]
+`;
 class ShowHideDirective extends BaseDirective2 {
     constructor(elementRef, styleBuilder, styler, marshal, layoutConfig, platformId, serverModuleLoaded) {
         super(elementRef, styleBuilder, styler, marshal);
@@ -320,14 +369,15 @@ class ShowHideDirective extends BaseDirective2 {
         this.marshal.triggerUpdate(this.parentElement, 'layout-gap');
     }
     static { this.ɵfac = i0.ɵɵngDeclareFactory({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: ShowHideDirective, deps: [{ token: i0.ElementRef }, { token: ShowHideStyleBuilder }, { token: i1.StyleUtils }, { token: i1.MediaMarshaller }, { token: LAYOUT_CONFIG }, { token: PLATFORM_ID }, { token: SERVER_TOKEN }], target: i0.ɵɵFactoryTarget.Directive }); }
-    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: ShowHideDirective, isStandalone: true, usesInheritance: true, usesOnChanges: true, ngImport: i0 }); }
+    static { this.ɵdir = i0.ɵɵngDeclareDirective({ minVersion: "14.0.0", version: "19.1.6", type: ShowHideDirective, isStandalone: true, selector: "\n  [fxShow], [fxShow.print],\n  [fxShow.xs], [fxShow.sm], [fxShow.md], [fxShow.lg], [fxShow.xl],\n  [fxShow.lt-sm], [fxShow.lt-md], [fxShow.lt-lg], [fxShow.lt-xl],\n  [fxShow.gt-xs], [fxShow.gt-sm], [fxShow.gt-md], [fxShow.gt-lg],\n  [fxHide], [fxHide.print],\n  [fxHide.xs], [fxHide.sm], [fxHide.md], [fxHide.lg], [fxHide.xl],\n  [fxHide.lt-sm], [fxHide.lt-md], [fxHide.lt-lg], [fxHide.lt-xl],\n  [fxHide.gt-xs], [fxHide.gt-sm], [fxHide.gt-md], [fxHide.gt-lg]\n", inputs: { fxShow: "fxShow", "fxShow.print": "fxShow.print", "fxShow.xs": "fxShow.xs", "fxShow.sm": "fxShow.sm", "fxShow.md": "fxShow.md", "fxShow.lg": "fxShow.lg", "fxShow.xl": "fxShow.xl", "fxShow.lt-sm": "fxShow.lt-sm", "fxShow.lt-md": "fxShow.lt-md", "fxShow.lt-lg": "fxShow.lt-lg", "fxShow.lt-xl": "fxShow.lt-xl", "fxShow.gt-xs": "fxShow.gt-xs", "fxShow.gt-sm": "fxShow.gt-sm", "fxShow.gt-md": "fxShow.gt-md", "fxShow.gt-lg": "fxShow.gt-lg", fxHide: "fxHide", "fxHide.print": "fxHide.print", "fxHide.xs": "fxHide.xs", "fxHide.sm": "fxHide.sm", "fxHide.md": "fxHide.md", "fxHide.lg": "fxHide.lg", "fxHide.xl": "fxHide.xl", "fxHide.lt-sm": "fxHide.lt-sm", "fxHide.lt-md": "fxHide.lt-md", "fxHide.lt-lg": "fxHide.lt-lg", "fxHide.lt-xl": "fxHide.lt-xl", "fxHide.gt-xs": "fxHide.gt-xs", "fxHide.gt-sm": "fxHide.gt-sm", "fxHide.gt-md": "fxHide.gt-md", "fxHide.gt-lg": "fxHide.gt-lg" }, usesInheritance: true, usesOnChanges: true, ngImport: i0 }); }
 }
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: ShowHideDirective, decorators: [{
-            type: Directive
+            type: Directive,
+            args: [{ selector: selector$1, inputs: inputs$1 }]
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: ShowHideStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [LAYOUT_CONFIG]
-                }] }, { type: Object, decorators: [{
+                }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [PLATFORM_ID]
                 }] }, { type: undefined, decorators: [{
@@ -335,50 +385,10 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
                     args: [SERVER_TOKEN]
                 }] }] });
 const DISPLAY_MAP = new WeakMap();
-const inputs$1 = [
-    'fxShow',
-    'fxShow.print',
-    'fxShow.xs',
-    'fxShow.sm',
-    'fxShow.md',
-    'fxShow.lg',
-    'fxShow.xl',
-    'fxShow.lt-sm',
-    'fxShow.lt-md',
-    'fxShow.lt-lg',
-    'fxShow.lt-xl',
-    'fxShow.gt-xs',
-    'fxShow.gt-sm',
-    'fxShow.gt-md',
-    'fxShow.gt-lg',
-    'fxHide',
-    'fxHide.print',
-    'fxHide.xs',
-    'fxHide.sm',
-    'fxHide.md',
-    'fxHide.lg',
-    'fxHide.xl',
-    'fxHide.lt-sm',
-    'fxHide.lt-md',
-    'fxHide.lt-lg',
-    'fxHide.lt-xl',
-    'fxHide.gt-xs',
-    'fxHide.gt-sm',
-    'fxHide.gt-md',
-    'fxHide.gt-lg',
-];
-const selector$1 = `
-  [fxShow], [fxShow.print],
-  [fxShow.xs], [fxShow.sm], [fxShow.md], [fxShow.lg], [fxShow.xl],
-  [fxShow.lt-sm], [fxShow.lt-md], [fxShow.lt-lg], [fxShow.lt-xl],
-  [fxShow.gt-xs], [fxShow.gt-sm], [fxShow.gt-md], [fxShow.gt-lg],
-  [fxHide], [fxHide.print],
-  [fxHide.xs], [fxHide.sm], [fxHide.md], [fxHide.lg], [fxHide.xl],
-  [fxHide.lt-sm], [fxHide.lt-md], [fxHide.lt-lg], [fxHide.lt-xl],
-  [fxHide.gt-xs], [fxHide.gt-sm], [fxHide.gt-md], [fxHide.gt-lg]
-`;
 /**
  * 'show' Layout API directive
+ *  @deprecated The DefaultShowHideDirective will be removed in version 21.
+ * Use ShowHideDirective directly instead.
  */
 class DefaultShowHideDirective extends ShowHideDirective {
     constructor() {
@@ -404,7 +414,7 @@ class NgStyleKeyValue {
     }
 }
 function getType(target) {
-    let what = typeof target;
+    const what = typeof target;
     if (what === 'object') {
         return target.constructor === Array
             ? 'array'
@@ -441,7 +451,7 @@ function buildMapFromList$1(styles, sanitize) {
 }
 /** Convert Set<string> or raw Object to an iterable NgStyleMap */
 function buildMapFromSet(source, sanitize) {
-    let list = [];
+    const list = [];
     if (getType(source) === 'set') {
         source.forEach((entry) => list.push(entry));
     }
@@ -459,7 +469,7 @@ function stringToKeyValue(it) {
 }
 /** Convert [ [key,value] ] -> { key : value } */
 function keyValuesToMap(map, entry) {
-    if (!!entry.key) {
+    if (entry.key) {
         map[entry.key] = entry.value;
     }
     return map;
@@ -561,12 +571,14 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
                 }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [SERVER_TOKEN]
-                }] }, { type: Object, decorators: [{
+                }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [PLATFORM_ID]
                 }] }] });
 /**
  * Directive to add responsive support for ngStyle.
+ * * @deprecated The DefaultStyleDirective will be removed in version 21.
+ * Use StyleDirective directly instead.
  *
  */
 /* @deprecated The DefaultStyleDirective will be removed in version 21.
