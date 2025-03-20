@@ -9,12 +9,12 @@ export declare class ImgSrcStyleBuilder extends StyleBuilder {
     static ɵprov: i0.ɵɵInjectableDeclaration<ImgSrcStyleBuilder>;
 }
 export declare class ImgSrcDirective extends BaseDirective2 {
-    protected platformId: object;
+    protected platformId: Object;
     protected serverModuleLoaded: boolean;
     protected DIRECTIVE_KEY: string;
     protected defaultSrc: string;
     set src(val: string);
-    constructor(elementRef: ElementRef, styleBuilder: ImgSrcStyleBuilder, styler: StyleUtils, marshal: MediaMarshaller, platformId: object, serverModuleLoaded: boolean);
+    constructor(elementRef: ElementRef, styleBuilder: ImgSrcStyleBuilder, styler: StyleUtils, marshal: MediaMarshaller, platformId: Object, serverModuleLoaded: boolean);
     /**
      * Use the [responsively] activated input value to update
      * the host img src attribute or assign a default `img.src=''`

@@ -14,14 +14,14 @@ export declare class ShowHideStyleBuilder extends StyleBuilder {
 }
 export declare class ShowHideDirective extends BaseDirective2 implements AfterViewInit, OnChanges {
     protected layoutConfig: LayoutConfigOptions;
-    protected platformId: object;
+    protected platformId: Object;
     protected serverModuleLoaded: boolean;
     protected DIRECTIVE_KEY: string;
     /** Original DOM Element CSS display style */
     protected display: string;
     protected hasLayout: boolean;
     protected hasFlexChild: boolean;
-    constructor(elementRef: ElementRef, styleBuilder: ShowHideStyleBuilder, styler: StyleUtils, marshal: MediaMarshaller, layoutConfig: LayoutConfigOptions, platformId: object, serverModuleLoaded: boolean);
+    constructor(elementRef: ElementRef, styleBuilder: ShowHideStyleBuilder, styler: StyleUtils, marshal: MediaMarshaller, layoutConfig: LayoutConfigOptions, platformId: Object, serverModuleLoaded: boolean);
     ngAfterViewInit(): void;
     /**
      * On changes to any @Input properties...
