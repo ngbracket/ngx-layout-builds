@@ -1729,6 +1729,7 @@ class MockMediaQueryList extends EventTarget {
 /**
  * Pre-configured provider for MockMatchMedia
  */
+// tslint:disable-next-line:variable-name
 const MockMatchMediaProvider = {
     provide: MatchMedia,
     useClass: MockMatchMedia,
@@ -2127,14 +2128,15 @@ function multiply(value, multiplier) {
         return value;
     }
     const transformValue = (possibleValue) => {
-        const numberValue = +(possibleValue.slice(0, -MULTIPLIER_SUFFIX.length));
+        const numberValue = +possibleValue.slice(0, -MULTIPLIER_SUFFIX.length);
         if (value.endsWith(MULTIPLIER_SUFFIX) && !isNaN(numberValue)) {
             return `${numberValue * multiplier.value}${multiplier.unit}`;
         }
         return value;
     };
-    return value.includes(' ') ?
-        value.split(' ').map(transformValue).join(' ') : transformValue(value);
+    return value.includes(' ')
+        ? value.split(' ').map(transformValue).join(' ')
+        : transformValue(value);
 }
 
 /**

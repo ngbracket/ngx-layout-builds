@@ -59,13 +59,13 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
         }], ctorParameters: () => [{ type: undefined, decorators: [{
                     type: Inject,
                     args: [SERVER_TOKEN]
-                }] }, { type: undefined, decorators: [{
+                }] }, { type: Object, decorators: [{
                     type: Inject,
                     args: [PLATFORM_ID]
                 }] }] });
 
 /** Current version of Angular Flex-Layout. */
-const VERSION = new Version('19.0.0-abe6ed2');
+const VERSION = new Version('19.0.0-b3a776a');
 
 /**
  * @module

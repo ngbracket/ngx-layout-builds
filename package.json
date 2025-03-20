@@ -1,6 +1,6 @@
 {
   "name": "@ngbracket/ngx-layout",
-  "version": "19.0.0-abe6ed2",
+  "version": "19.0.0-b3a776a",
   "exports": {
     "./mq": {
       "sass": "./core/sass/_layout-bp.scss"
@@ -61,10 +61,10 @@
     "tslib": "^2.5.0"
   },
   "peerDependencies": {
-    "@angular/cdk": ">=19.0.0-abe6ed2",
-    "@angular/core": ">=19.0.0-abe6ed2",
-    "@angular/common": ">=19.0.0-abe6ed2",
-    "@angular/platform-browser": ">=19.0.0-abe6ed2"
+    "@angular/cdk": ">=19.0.0-b3a776a",
+    "@angular/core": ">=19.0.0-b3a776a",
+    "@angular/common": ">=19.0.0-b3a776a",
+    "@angular/platform-browser": ">=19.0.0-b3a776a"
   },
   "type": "module",
   "description": "ngbracket/ngx-layout =======",

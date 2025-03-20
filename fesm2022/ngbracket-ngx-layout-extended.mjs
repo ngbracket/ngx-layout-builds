@@ -169,7 +169,7 @@ class ImgSrcDirective extends BaseDirective2 {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: ImgSrcDirective, decorators: [{
             type: Directive,
             args: [{ selector: selector$2, inputs: inputs$2 }]
-        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: ImgSrcStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }, { type: undefined, decorators: [{
+        }], ctorParameters: () => [{ type: i0.ElementRef }, { type: ImgSrcStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }, { type: Object, decorators: [{
                     type: Inject,
                     args: [PLATFORM_ID]
                 }] }, { type: undefined, decorators: [{
@@ -377,7 +377,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: ShowHideStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [LAYOUT_CONFIG]
-                }] }, { type: undefined, decorators: [{
+                }] }, { type: Object, decorators: [{
                     type: Inject,
                     args: [PLATFORM_ID]
                 }] }, { type: undefined, decorators: [{
@@ -571,7 +571,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
                 }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [SERVER_TOKEN]
-                }] }, { type: undefined, decorators: [{
+                }] }, { type: Object, decorators: [{
                     type: Inject,
                     args: [PLATFORM_ID]
                 }] }] });
