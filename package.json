@@ -1,6 +1,6 @@
 {
   "name": "@ngbracket/ngx-layout",
-  "version": "19.0.0-b3a776a",
+  "version": "19.0.0-a38254f",
   "exports": {
     "./mq": {
       "sass": "./core/sass/_layout-bp.scss"
@@ -19,13 +19,13 @@
       "types": "./_private-utils/index.d.ts",
       "default": "./fesm2022/ngbracket-ngx-layout-_private-utils.mjs"
     },
-    "./core": {
-      "types": "./core/index.d.ts",
-      "default": "./fesm2022/ngbracket-ngx-layout-core.mjs"
-    },
     "./extended": {
       "types": "./extended/index.d.ts",
       "default": "./fesm2022/ngbracket-ngx-layout-extended.mjs"
+    },
+    "./core": {
+      "types": "./core/index.d.ts",
+      "default": "./fesm2022/ngbracket-ngx-layout-core.mjs"
     },
     "./flex": {
       "types": "./flex/index.d.ts",
@@ -61,10 +61,10 @@
     "tslib": "^2.5.0"
   },
   "peerDependencies": {
-    "@angular/cdk": ">=19.0.0-b3a776a",
-    "@angular/core": ">=19.0.0-b3a776a",
-    "@angular/common": ">=19.0.0-b3a776a",
-    "@angular/platform-browser": ">=19.0.0-b3a776a"
+    "@angular/cdk": ">=19.0.0-a38254f",
+    "@angular/core": ">=19.0.0-a38254f",
+    "@angular/common": ">=19.0.0-a38254f",
+    "@angular/platform-browser": ">=19.0.0-a38254f"
   },
   "type": "module",
   "description": "ngbracket/ngx-layout =======",
