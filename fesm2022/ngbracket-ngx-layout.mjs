@@ -65,7 +65,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
                 }] }] });
 
 /** Current version of Angular Flex-Layout. */
-const VERSION = new Version('19.0.0-467c6ac');
+const VERSION = new Version('19.0.0-9c3272a');
 
 /**
  * @module
