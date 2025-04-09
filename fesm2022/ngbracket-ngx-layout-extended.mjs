@@ -205,6 +205,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
             args: [{ selector: selector$2, inputs: inputs$2 }]
         }] });
 
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 class ShowHideStyleBuilder extends StyleBuilder {
     buildStyles(show, parent) {
         const shouldShow = show === 'true';
@@ -377,7 +378,7 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
         }], ctorParameters: () => [{ type: i0.ElementRef }, { type: ShowHideStyleBuilder }, { type: i1.StyleUtils }, { type: i1.MediaMarshaller }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [LAYOUT_CONFIG]
-                }] }, { type: Object, decorators: [{
+                }] }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [PLATFORM_ID]
                 }] }, { type: undefined, decorators: [{

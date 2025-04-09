@@ -473,6 +473,8 @@ i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImpor
                     args: [BREAKPOINTS]
                 }] }] });
 
+/* eslint-disable @typescript-eslint/no-empty-function */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /**
  * MediaMonitor configures listeners to mediaQuery changes and publishes an Observable facade to
  * convert mediaQuery change callbacks to subscriber notifications. These notifications will be
@@ -583,7 +585,7 @@ class MatchMedia {
 i0.ɵɵngDeclareClassMetadata({ minVersion: "12.0.0", version: "19.1.6", ngImport: i0, type: MatchMedia, decorators: [{
             type: Injectable,
             args: [{ providedIn: 'root' }]
-        }], ctorParameters: () => [{ type: i0.NgZone }, { type: Object, decorators: [{
+        }], ctorParameters: () => [{ type: i0.NgZone }, { type: undefined, decorators: [{
                     type: Inject,
                     args: [PLATFORM_ID]
                 }] }, { type: undefined, decorators: [{

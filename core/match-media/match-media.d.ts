@@ -11,14 +11,14 @@ import * as i0 from "@angular/core";
  */
 export declare class MatchMedia implements OnDestroy {
     protected _zone: NgZone;
-    protected _platformId: Object;
+    protected _platformId: object;
     protected _document: any;
     protected _nonce?: string | null | undefined;
     /** Initialize source with 'all' so all non-responsive APIs trigger style updates */
     readonly source: BehaviorSubject<MediaChange>;
     registry: Map<string, MediaQueryList>;
     private readonly pendingRemoveListenerFns;
-    constructor(_zone: NgZone, _platformId: Object, _document: any, _nonce?: string | null | undefined);
+    constructor(_zone: NgZone, _platformId: object, _document: any, _nonce?: string | null | undefined);
     /**
      * Publish list of all current activations
      */
